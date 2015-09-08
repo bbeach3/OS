@@ -86,6 +86,9 @@ int strcmp(const char *s1, const char *s2)
   // 2) If we didn't make it to the end of both strings, the function will
   //    return the difference of the characters at the first index of
   //    indifference.
+  for( ; *s1 == *s2; s1++, s2++)
+   if(*s1 == '\0')
+    return 0;
   return ( *(unsigned char *)s1 - *(unsigned char *)s2 );
 }
 
