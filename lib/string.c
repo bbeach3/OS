@@ -29,6 +29,8 @@ char* strcpy(char *s1, const char *s2)
   return NULL; // return pointer to destination string
 }
 
+#endif
+
 /*
   Procedure..: atoi
   Description..: Convert an ASCII string to an integer
@@ -36,8 +38,40 @@ char* strcpy(char *s1, const char *s2)
 */
 int atoi(const char *s)
 {
-  return NULL; // return integer
+	int stringVal = 0;
+	int ele = 0;
+
+	while(*(s + ele) != '\0')
+	{
+		if(*(s + ele) >= '0' && *(s + ele) <= '9')
+		{
+			stringVal += (*(s + ele) - '0');
+
+			if(*(s + (ele + 1)) != '\0')
+			{
+				stringVal *= 10;
+			}
+		}
+		else
+		{
+			if(!(*(s + ele) == '-' && ele == 0))
+			{
+				return 0;
+			}
+		}
+
+		ele++;
+	}
+	
+	if(*s == '-')
+	{
+	    stringVal *= -1;
+	}
+	return stringVal; // return integer
 }
+
+#if 0
+
 /*
   Procedure..: strcmp
   Description..: String comparison

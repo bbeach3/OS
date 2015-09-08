@@ -50,8 +50,8 @@ void kmain(void)
    // 3?) Interrupt (Controller)
    klogv("Initializing the interrupt controller...");
    init_pic();
-   init_irq();
-   cli();
+   init_irq();//Irqs off by default
+   cli();//Enable interrupts by turning on interrupt requests?
 
    // 4) Virtual Memory
    klogv("Initializing virtual memory...");
