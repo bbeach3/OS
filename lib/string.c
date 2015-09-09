@@ -7,7 +7,7 @@
  * * following string functions * *
  * ****************************** */
 
-#if 0 // <-- Move this directive as you complete each function
+#if  // <-- Move this directive as you complete each function
 
 /*
   Procedure..: strlen
@@ -16,7 +16,12 @@
 */
 int strlen(const char *s)
 {
-  return NULL; // return length of string
+ 	 int length = 0;
+	 while([length]!= '\0'){
+		length++;
+	}
+	return length;
+ 
 }
 
 /*
@@ -26,7 +31,12 @@ int strlen(const char *s)
 */
 char* strcpy(char *s1, const char *s2)
 {
-  return NULL; // return pointer to destination string
+  	int length = strlen(s2);
+	int i = 0;
+	while(i; i < length; i++){
+		s1[i]=s2[i];
+	}
+	return *s1;
 }
 
 #endif
