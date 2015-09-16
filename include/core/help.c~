@@ -5,7 +5,7 @@ serial_println("This command displays the current version of MPX that we are cur
 
 shutdown_help()
 {
-serial_println("This command shuts down the MPX project. It asks for confirmation before doing so.");
+serial_println("This command shuts down the MPX project.");
 }
 
 getdate_help()
