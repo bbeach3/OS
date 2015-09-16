@@ -68,9 +68,6 @@ switch(inputInt)
  break;
  
  case 7:
- serial_println("Are you sure you want to shutdown? Use y for yes and n for no");
- //take input
- //if(y)
  shutdown();
  break;
  }
