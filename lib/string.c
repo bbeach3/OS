@@ -7,7 +7,8 @@
  * * following string functions * *
  * ****************************** */
 
-#if  // <-- Move this directive as you complete each function
+
+#if 0
 
 /*
   Procedure..: strlen
@@ -33,7 +34,7 @@ char* strcpy(char *s1, const char *s2)
 {
   	int length = strlen(s2);
 	int i = 0;
-	while(i; i < length; i++){
+	while(i = 0; i < length; i++){
 		s1[i]=s2[i];
 	}
 	return *s1;
@@ -80,8 +81,6 @@ int atoi(const char *s)
 	return stringVal; // return integer
 }
 
-#if 0
-
 /*
   Procedure..: strcmp
   Description..: String comparison
@@ -101,8 +100,6 @@ int strcmp(const char *s1, const char *s2)
     return 0;
   return ( *(unsigned char *)s1 - *(unsigned char *)s2 );
 }
-
-#endif
 
 
 

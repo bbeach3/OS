@@ -28,11 +28,9 @@ void kmain(void)
 
    // 0) Initialize Serial I/O and call mpx_init
    klogv("Starting MPX boot sequence...");
-   //Here Be Customs
    set_serial_out(COM1);
    set_serial_in(COM1);
    mpx_init(MODULE_R1);
-   //Here End Customs
    klogv("Initialized serial I/O on COM1 device...");
 
    // 1) Check that the boot was successful and correct when using grub
@@ -43,19 +41,17 @@ void kmain(void)
    
    // 2) Descriptor Tables
    klogv("Initializing descriptor tables...");
-   //Here Be Descriptor Tables
    init_gdt();
    init_idt();
 
    // 3?) Interrupt (Controller)
    klogv("Initializing the interrupt controller...");
    init_pic();
-   init_irq();//Irqs off by default
-   cli();//Enable interrupts by turning on interrupt requests?
+   init_irq();
+   cli();
 
    // 4) Virtual Memory
    klogv("Initializing virtual memory...");
-   //Intialize paging!
    init_paging();
 
    // 5) Call Commhand

@@ -28,6 +28,7 @@ void kmain(void)
 
    // 0) Initialize Serial I/O and call mpx_init
    klogv("Starting MPX boot sequence...");
+   init_serial(COM1);
    set_serial_out(COM1);
    set_serial_in(COM1);
    mpx_init(MODULE_R1);
