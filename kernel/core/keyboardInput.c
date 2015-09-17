@@ -1,17 +1,23 @@
 #include <core/serial.h>
 
-void takeInput() {
-	//size of input array, since it comes up again in the default below
-	int inputSize = 100;
-	//make array for the input
-	char inputLine[inputSize];
+/*NOTE: everyone
+After reading through my code again, I figured it would be better
+to have the method just take an established array and size as params.
+Passing a reference just makes more sense than passing the whole array
+for every command. You make a call to takeInput() and it'll update the
+array you pass in, leaving it nice and ready for use.
+*/
+void takeInput(char *inputLine, int inputSize) {
 	//make equally-long array to print to clear line
-	char clearLine[inputSize];
+	//also preps the inputLine (i.e. wipes it)
+	char blankLine[inputSize];
 	int i;
-	for(i = 0; i < 100; i++){
+	for(i = 0; i < inputSize; i++){
 		clearLine[i] = '\0';
-	//for tracking cursor
-	int curChar = 0;
+		inputLine[i] = '\0';
+	}
+	int curChar = 0; //for tracking cursor
+	int curEnd = 0; //for tracking current end of string
 	//Taking input until we're broken out.
 	while(1){
 		if(inb(COM1+5)&1) {
@@ -27,17 +33,12 @@ void takeInput() {
 			New Line: 10 
 			Everything else is DEFAULT.*/
 				case 10: //New line aka run command
-				case 13: //Carriage Return
-					/* NOTE: Whoever is handling commands
-					This is where you'll put the call to however
-					we're handling commands. It'll be something like
-					command_handler(inputLine);
-					
-					NOTE: Everyone
-					Should there be a difference?
-					*/
 					serial_print(clearLine);
 					serial_println(inputLine);
+					return; //since we're done getting the input
+				case 13: //Carriage Return
+					//as it was explained to me, a CR just needs to go to line start
+					curChar = 0;
 					break;
 				case 27: //switch between delete and arrow keys
 				/* Del and arrow keys have additional characters come in
@@ -50,14 +51,12 @@ void takeInput() {
 							switch(x){
 								case 51: //Just filler as far as we care
 								case 91: //Ditto
-									continue; //since they don't end a special
+									continue; //since they don't end a special code
 								case 65: //Up Arrow
 								case 66: //Down Arrow
-								/*NOTE: Everyone
-								If we're using a menu, do these have a job?
-								*/
+								//will implement when needed
 									special = 0;
-									break; //since it's the end of a special
+									break; 
 								case 67: //Right Arrow
 									if (curChar < inputSize-1) {
 										curChar++;
@@ -71,37 +70,44 @@ void takeInput() {
 									special = 0;
 									break;
 								case 126: //Delete
-									/*NOTE: me
-									Write this tomorrow.
-									Copy everything from curChar+2 to curChar+1
-									*/
+									//sets every char from curChar to the right to the next char
+									for(int toRemove = curChar; toRemove < inputSize-1; toRemove++){
+										inputLine[toRemove] = inputLine[toRemove+1];
+									}
 									special = 0;
+									serial_print(clearLine);
+									serial_print(inputLine);
+									curEnd--;
 									break;
 							}
 						}	
 					}
 					break;
 				case 127: //Backspace
-					/* NOTE: me
-					Rewrite this to move later chars forward if cursor
-					had been moved away from the end.
-					Could be as easy as copying everything that comes after
-					to one space earlier.
-					*/
-					inputLine[curChar] = '\0';
+					//sets every character from curChar-1 to the right to the next character.
+					for(int toRemove = curChar-1; toRemove < inputSize-1' toRemove++) {
+						inputLine[toRemove] = inputLine[toRemove+1];
+					}
 					curChar--; 
+					curEnd--;
 					serial_print(clearLine);
 					serial_print(inputLine);
 					break;
 				default: //In general, just text
-					/*NOTE: Everyone
-					If cursor isn't at end, should we overwrite or insert?
-					If insert, note on Backspace gives a possible solution.
+					/*If the input array isn't already full, inserts the new character.
+					Since the cursor may not be at the end, it does this by bumping everything
+					from the cursor onwards one place to the right, and then overwriting the
+					value at the cursor. 
 					*/
-					if(curChar < inputSize-1) {
-						inputLine[curChar] = x;
+					if(curEnd < inputSize-2) { //ensures space for the /0 at the end.
+						int toMove = curChar;
+						//since we have room, move each character from curChar right up one slot
+						for( int location = curEnd+1; location > curChar; location--) {
+							inputLine[location] = inputLine[location-1];
+						}
+						inputLine[curChar] = x; //insert new input
 						curChar++;
-						inputLine[curChar] = '\0'
+						curEnd++;
 						serial_print(clearLine);
 						serial_print(inputLine);
 					}
