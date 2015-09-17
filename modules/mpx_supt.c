@@ -1,5 +1,5 @@
 #include "mpx_supt.h"
-#include <mem/heap.h>
+#include "mem/heap.h"
 
 param params;
 int current_module = -1;
