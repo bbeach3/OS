@@ -1,7 +1,7 @@
 #ifndef _MPX_SUPT_H
 #define _MPX_SUPT_H
 
-#include </home/amstewart/Documents/mpx_spring15/include/system.h>
+#include <system.h>
 
 #define EXIT 0
 #define IDLE 1

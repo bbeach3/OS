@@ -7,9 +7,6 @@
  * * following string functions * *
  * ****************************** */
 
-
-#if 0
-
 /*
   Procedure..: strlen
   Description..: Returns the length of a string.
@@ -39,8 +36,6 @@ char* strcpy(char *s1, const char *s2)
 	}
 	return *s1;
 }
-
-#endif
 
 /*
   Procedure..: atoi
