@@ -1,4 +1,8 @@
 #include <core/serial.h>
+/** \file
+ *Contains source code controlling keyboard inputs
+ *Contains source code controlling keyboard inputs
+*/
 
 /*NOTE: everyone
 After reading through my code again, I figured it would be better
@@ -6,6 +10,14 @@ to have the method just take an established array and size as params.
 Passing a reference just makes more sense than passing the whole array
 for every command. You make a call to takeInput() and it'll update the
 array you pass in, leaving it nice and ready for use.
+*/
+
+
+/**
+\Function: takeInput
+\Description: Takes input and takes care of any special cases, such as arrow keys and backspace
+\Parameters: input line - a line of input, inputSize - the size of inputLine
+\Returns: none
 */
 void takeInput(char *inputLine, int inputSize) {
 	//make equally-long array to print to clear line
