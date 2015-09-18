@@ -1,12 +1,12 @@
-#include "./mpx_spring15/include/core/io.h"
-#include "./mpx_spring15/include/core/serial.h"
-#include "./mpx_spring15/include/string.h"
+#include "core/io.h"
+#include "core/serial.h"
+#include "string.h"
 //Modify build paths so that they only go as far as mpx_spring15
 
 #include "mpx_supt.c"
 /** \file
  *Contains the functions allowing the control of time and date settings in the MPX system
- *Contains the functions allowing us to set the systems time and      date, as well as allowing us to retrieve the time and date
+ *Contains the functions allowing us to set the systems time and date, as well as allowing us to retrieve the time and date
 */
 
 //BCD - A right-to-left binary system that stores each digit of a value in 4 binary digits
@@ -125,16 +125,39 @@ void gettime()
 /**
 \Function: setDate
 \Description: Sets the date on the system
-\Parameters: datestring[] - A string specifying the date
+\Parameters: datestring[] - A string specifying the date, datelength - The length of datestring
 \Returns: none
 */
-void setdate(char datestring[])
+void setdate(char datestring[], int datelength)
 {
 	//Will require a specified format - In this case, 'month-day-year' (MM-DD-YY)
 	cli();
 	//We need to ensure that we transform the parameter into BCD and set it equal to entry!
+	if(datelength != 9)
+	{
+		serial_println("Invalid format - Input dates as 'MM-DD-YY'");
+		return;
+	}
+
+	int ele = 0;
+
+	for(ele = 0; ele < datelength; ele++)
+	{
+		if((ele != 2 && ele != 5 && ele != 8) && (datestring[ele] < 48 || datestring[ele] > 57))
+		{
+			serial_println("Invalid format - Input dates as 'MM-DD-YY'");
+			return;
+		}
+		
+		if((ele == 2 || ele == 5) && datestring[ele] != '-')
+		{
+			serial_println("Invalid format - Input dates as 'MM-DD-YY'");
+			return;
+		}
+	}
+
 	char *parsedate = strtok(datestring, "-");
-	
+
 	unsigned char entry;
 	int curr = 0;
 	
@@ -209,15 +232,38 @@ void setdate(char datestring[])
 /**
 \Function: setTime
 \Description: Sets the time on the system
-\Parameters: timestring - A string specifying the time
+\Parameters: timestring[] - A string specifying the time, timelength - The length of timestring
 \Returns: none
 */
-void settime(char* timestring)
+void settime(char timestring[], int timelength)
 {
 	//Will require a specified format - In this case, 'hour:minute:second' (HH:MM:SS)[Military Time]
 	cli();
+	if(timelength != 9)
+	{
+		serial_println("Invalid format - Input times as 'HH:MM:SS' [Military Time]");
+		return;
+	}
+
+	int ele = 0;
+
+	for(ele = 0; ele < timelength; ele++)
+	{
+		if((ele != 2 && ele != 5 && ele != 8) && (timestring[ele] < 48 || timestring[ele] > 57))
+		{
+			serial_println("Invalid format - Input times as 'HH:MM:SS' [Military Time]");
+			return;
+		}
+		
+		if((ele == 2 || ele == 5) && timestring[ele] != ':')
+		{
+			serial_println("Invalid format - Input times as 'HH:MM:SS' [Military Time]");
+			return;
+		}
+	}
+
 	char *parsetime = strtok(timestring, ":");
-	
+
 	unsigned char entry;
 	int curr = 0;
 	

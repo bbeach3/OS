@@ -20,15 +20,15 @@ void gettime();
 /*
   Procedure..: setdate
   Description..: Modifies the stored date to the user's input.
-  Params..: datestring-The date the time should become.
+  Params..: datestring[]-The date the time should become, datelength-The length of datestring
 */
-void setdate(char datestring[]);
+void setdate(char datestring[], int datelength);
 
 /*
   Procedure..: settime
   Description..: Modifies the stored time to the user's input.
-  Params..: timestring-The time the time should become.
+  Params..: timestring[]-The time the time should become, timelength-The length of timestring
 */
-void settime(char timestring[]);
+void settime(char timestring[], int timelength);
 
 #endif
