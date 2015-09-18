@@ -22,7 +22,7 @@ array you pass in, leaving it nice and ready for use.
 void takeInput(char *inputLine, int inputSize) {
 	//make equally-long array to print to clear line
 	//also preps the inputLine (i.e. wipes it)
-	char blankLine[inputSize];
+	char clearLine[inputSize];
 	int i;
 	for(i = 0; i < inputSize; i++){
 		clearLine[i] = '\0';
@@ -30,6 +30,9 @@ void takeInput(char *inputLine, int inputSize) {
 	}
 	int curChar = 0; //for tracking cursor
 	int curEnd = 0; //for tracking current end of string
+	int toRemove = 0;
+	int location = 0;
+	int special = 0;
 	//Taking input until we're broken out.
 	while(1){
 		if(inb(COM1+5)&1) {
@@ -56,7 +59,7 @@ void takeInput(char *inputLine, int inputSize) {
 				/* Del and arrow keys have additional characters come in
 				at the same time, so we'll ID them with those. */
 					//need to track whether we hit the end or not
-					int special = 1;
+					special = 1;
 					while(special){
 						if (inb(COM1+5)&1) {
 							x = inb(COM1);
@@ -83,7 +86,7 @@ void takeInput(char *inputLine, int inputSize) {
 									break;
 								case 126: //Delete
 									//sets every char from curChar to the right to the next char
-									for(int toRemove = curChar; toRemove < inputSize-1; toRemove++){
+									for(toRemove = curChar; toRemove < inputSize-1; toRemove++){
 										inputLine[toRemove] = inputLine[toRemove+1];
 									}
 									special = 0;
@@ -97,7 +100,7 @@ void takeInput(char *inputLine, int inputSize) {
 					break;
 				case 127: //Backspace
 					//sets every character from curChar-1 to the right to the next character.
-					for(int toRemove = curChar-1; toRemove < inputSize-1' toRemove++) {
+					for(toRemove = curChar-1; toRemove < inputSize-1' toRemove++) {
 						inputLine[toRemove] = inputLine[toRemove+1];
 					}
 					curChar--; 
@@ -112,9 +115,8 @@ void takeInput(char *inputLine, int inputSize) {
 					value at the cursor. 
 					*/
 					if(curEnd < inputSize-2) { //ensures space for the /0 at the end.
-						int toMove = curChar;
 						//since we have room, move each character from curChar right up one slot
-						for( int location = curEnd+1; location > curChar; location--) {
+						for(location = curEnd+1; location > curChar; location--) {
 							inputLine[location] = inputLine[location-1];
 						}
 						inputLine[curChar] = x; //insert new input
