@@ -1,46 +1,52 @@
 #include <system.h>
 #include <string.h>
 
+/** \file 
+ *Contains source code for several useful string functions
+ *Contains the source code for strlen, strcpy,atoi and strcmp
+ */
+
 /* ****************************** *
  * ********* Your Task: ********* *
  * ******** complete the ******** *
  * * following string functions * *
  * ****************************** */
 
-/*
-  Procedure..: strlen
-  Description..: Returns the length of a string.
-  Params..: s-input string
+
+/**
+  \Procedure..: strlen
+  \Description..: Returns the length of a string.
+  \Params..: s-input string
 */
 int strlen(const char *s)
 {
- 	 int length = 0;
-	 while([length]!= '\0'){
+	int length = 0;
+	while(s[length]!= '\0'){
 		length++;
 	}
-	return length;
- 
+ 	return length; // return length of string
 }
 
-/*
-  Procedure..: strcpy
-  Description..: Copy one string to another.
-  Params..: s1-destination, s2-source
+/**
+  \Procedure..: strcpy
+  \Description..: Copy one string to another.
+  \Params..: s1-destination, s2-source
 */
 char* strcpy(char *s1, const char *s2)
 {
-  	int length = strlen(s2);
+ 	int length = strlen(s2);
 	int i = 0;
-	while(i = 0; i < length; i++){
-		s1[i]=s2[i];
+	for(i; i <=length; i++){
+		s1[i] = s2[i];
 	}
-	return *s1;
+  return *s1; // return pointer to destination string
 }
 
-/*
-  Procedure..: atoi
-  Description..: Convert an ASCII string to an integer
-  Params..: const char *s -- String
+
+/**
+  \Procedure..: atoi
+  \Description..: Convert an ASCII string to an integer
+  \Params..: const char *s -- String
 */
 int atoi(const char *s)
 {
@@ -76,10 +82,11 @@ int atoi(const char *s)
 	return stringVal; // return integer
 }
 
-/*
-  Procedure..: strcmp
-  Description..: String comparison
-  Params..: s1-string 1, s2-string 2
+
+/**
+ \Procedure..: strcmp
+ \Description..: String comparison
+ \Params..: s1-string 1, s2-string 2
 */
 int strcmp(const char *s1, const char *s2)
 {
@@ -95,6 +102,8 @@ int strcmp(const char *s1, const char *s2)
     return 0;
   return ( *(unsigned char *)s1 - *(unsigned char *)s2 );
 }
+
+
 
 
 
