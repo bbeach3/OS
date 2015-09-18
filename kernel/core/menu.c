@@ -61,25 +61,22 @@ switch(inputInt)
 
  case 2:
  version();
- //need to display menu and take in input again
  break;
 
  case 3:
- //getTime();
- //need to display menu and take in input again
+ gettime();
  break;
 
  case 4:
- //setTime();
+ settime();
  break;
 
  case 5:
- //getDate();
- //nned to display menu and take in input again
+ getdate();
  break;
 
  case 6:
- //setDate();
+ setdate();
  break;
  
  case 7:

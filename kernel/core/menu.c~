@@ -33,7 +33,7 @@ switch(inputInt)
  takeInput(*input,size);
  input2 = *input[0];
  inpputInt = atoi(input2);
- switch(inputInt2)
+ switch(inputInt)
   {
   case 1: version_help();
   break;
@@ -65,21 +65,21 @@ switch(inputInt)
  break;
 
  case 3:
- //getTime();
+ gettime();
  //need to display menu and take in input again
  break;
 
  case 4:
- //setTime();
+ settime();
  break;
 
  case 5:
- //getDate();
+ getdate();
  //nned to display menu and take in input again
  break;
 
  case 6:
- //setDate();
+ setdate();
  break;
  
  case 7:
