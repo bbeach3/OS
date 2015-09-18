@@ -1,0 +1,52 @@
+\hypertarget{time_8c}{}\section{time.\+c File Reference}
+\label{time_8c}\index{time.\+c@{time.\+c}}
+{\ttfamily \#include \char`\"{}./mpx\+\_\+spring15/include/core/io.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}./mpx\+\_\+spring15/include/core/serial.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}./mpx\+\_\+spring15/include/string.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mpx\+\_\+supt.\+c\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{time_8c_a2197fd0d3804af2685e0d3ea6365c40c}{getdate} ()
+\item 
+void \hyperlink{time_8c_ac9e53b9f4a62a88b8e8461c168e5d9a5}{gettime} ()
+\item 
+void \hyperlink{time_8c_aec4bde795690552c121276488745c918}{setdate} (char datestring\mbox{[}$\,$\mbox{]})
+\item 
+void \hyperlink{time_8c_a2e0e8dc4c66b7156fb30334e3d5f5369}{settime} (char $\ast$timestring)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Contains the functions allowing the control of time and date settings in the M\+P\+X system Contains the functions allowing us to set the systems time and date, as well as allowing us to retrieve the time and date 
+
+\subsection{Function Documentation}
+\hypertarget{time_8c_a2197fd0d3804af2685e0d3ea6365c40c}{}\index{time.\+c@{time.\+c}!getdate@{getdate}}
+\index{getdate@{getdate}!time.\+c@{time.\+c}}
+\subsubsection[{getdate()}]{\setlength{\rightskip}{0pt plus 5cm}void getdate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{time_8c_a2197fd0d3804af2685e0d3ea6365c40c}
+\+: get\+Date \+: prints out the date \+: none \+: none \hypertarget{time_8c_ac9e53b9f4a62a88b8e8461c168e5d9a5}{}\index{time.\+c@{time.\+c}!gettime@{gettime}}
+\index{gettime@{gettime}!time.\+c@{time.\+c}}
+\subsubsection[{gettime()}]{\setlength{\rightskip}{0pt plus 5cm}void gettime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{time_8c_ac9e53b9f4a62a88b8e8461c168e5d9a5}
+\+: get\+Time \+: Prints out the time \+: none \+: none \hypertarget{time_8c_aec4bde795690552c121276488745c918}{}\index{time.\+c@{time.\+c}!setdate@{setdate}}
+\index{setdate@{setdate}!time.\+c@{time.\+c}}
+\subsubsection[{setdate(char datestring[])}]{\setlength{\rightskip}{0pt plus 5cm}void setdate (
+\begin{DoxyParamCaption}
+\item[{char}]{datestring\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\label{time_8c_aec4bde795690552c121276488745c918}
+\+: set\+Date \+: Sets the date on the system \+: datestring\mbox{[}\mbox{]} -\/ A string specifying the date \+: none \hypertarget{time_8c_a2e0e8dc4c66b7156fb30334e3d5f5369}{}\index{time.\+c@{time.\+c}!settime@{settime}}
+\index{settime@{settime}!time.\+c@{time.\+c}}
+\subsubsection[{settime(char $\ast$timestring)}]{\setlength{\rightskip}{0pt plus 5cm}void settime (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{timestring}
+\end{DoxyParamCaption}
+)}\label{time_8c_a2e0e8dc4c66b7156fb30334e3d5f5369}
+\+: set\+Time \+: Sets the time on the system \+: timestring -\/ A string specifying the time \+: none 

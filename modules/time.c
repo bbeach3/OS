@@ -4,10 +4,20 @@
 //Modify build paths so that they only go as far as mpx_spring15
 
 #include "mpx_supt.c"
+/** \file
+ *Contains the functions allowing the control of time and date settings in the MPX system
+ *Contains the functions allowing us to set the systems time and      date, as well as allowing us to retrieve the time and date
+*/
 
 //BCD - A right-to-left binary system that stores each digit of a value in 4 binary digits
 //Ex. 603 = 011000000011 = 0110 0000 0011
 
+/**
+\Function: getDate
+\Description: prints out the date
+\Parameters: none
+\Returns: none
+*/
 void getdate()
 {
 	const char *date;
@@ -56,6 +66,12 @@ void getdate()
 
 }
 
+/**
+\Function: getTime
+\Description: Prints out the time
+\Parameters: none
+\Returns: none
+*/
 void gettime()
 {
 	const char* time;
@@ -106,6 +122,12 @@ void gettime()
 	}
 }
 
+/**
+\Function: setDate
+\Description: Sets the date on the system
+\Parameters: datestring[] - A string specifying the date
+\Returns: none
+*/
 void setdate(char datestring[])
 {
 	//Will require a specified format - In this case, 'month-day-year' (MM-DD-YY)
@@ -184,6 +206,12 @@ void setdate(char datestring[])
 	sti();
 }
 
+/**
+\Function: setTime
+\Description: Sets the time on the system
+\Parameters: timestring - A string specifying the time
+\Returns: none
+*/
 void settime(char* timestring)
 {
 	//Will require a specified format - In this case, 'hour:minute:second' (HH:MM:SS)[Military Time]

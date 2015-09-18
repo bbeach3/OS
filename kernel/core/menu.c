@@ -1,4 +1,14 @@
+/** \file
+ *Contains the source code for the menu
+ *Contains the source code for the menu and functions related to executing the command from the menu
+*/
 
+/**
+\Function: menu
+\Description: Prints out the menu, and allows users to enter their input and have the system 
+\Parameters: none
+\Returns: none
+*/
 void menu()
 {
 int x =1;
