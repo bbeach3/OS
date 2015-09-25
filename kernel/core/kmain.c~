@@ -16,9 +16,9 @@
 #include <core/interrupts.h>
 #include <mem/heap.h>
 #include <mem/paging.h>
-#include <core/menu.c>
 
-#include "modules/mpx_supt.h"
+#include "include/core/mpx_supt.h"
+#include "menu.c"
 
 void kmain(void)
 {
@@ -58,10 +58,7 @@ void kmain(void)
 
    // 5) Call Commhand
    klogv("Transferring control to commhand...");
-
-   //testing things
-   serial_println("Testing");
-   menu();
+menu();
 
    // 11) System Shutdown
    klogv("Starting system shutdown procedure...");

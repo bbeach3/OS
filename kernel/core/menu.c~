@@ -1,4 +1,19 @@
+/** \file
+ *Contains the source code for the menu
+ *Contains the source code for the menu and functions related to executing the command from the menu
+*/
 
+/**
+\Function: menu
+\Description: Prints out the menu, and allows users to enter their input and have the system 
+\Parameters: none
+\Returns: none
+*/
+#include "include/core/keyboardInput.h"
+#include "include/core/shutdown.c"
+#include "include/core/version.c"
+#include "include/core/help.c"
+#include "modules/time.c"
 void menu()
 {
 int x =1;
@@ -16,7 +31,7 @@ serial_println("7. Shutdown");
 int size=50;
 char *input[size];
 takeInput(*input,size);
-char input2 = *input[0];
+char *input2 = input[0];
 int inputInt = atoi(input2);
 switch(inputInt)
  {
@@ -32,7 +47,7 @@ switch(inputInt)
  
  takeInput(*input,size);
  input2 = *input[0];
- inpputInt = atoi(input2);
+ inputInt = atoi(input2);
  switch(inputInt)
   {
   case 1: version_help();
@@ -61,25 +76,22 @@ switch(inputInt)
 
  case 2:
  version();
- //need to display menu and take in input again
  break;
 
  case 3:
  gettime();
- //need to display menu and take in input again
  break;
 
  case 4:
- settime();
+ //settime();
  break;
 
  case 5:
  getdate();
- //nned to display menu and take in input again
  break;
 
  case 6:
- setdate();
+ //setdate();
  break;
  
  case 7:
