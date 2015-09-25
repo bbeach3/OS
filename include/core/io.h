@@ -1,6 +1,8 @@
 #ifndef _IO_H
 #define _IO_H
 
+#include "system.h"
+
 /*
   Procedure..: outb
   Description..: Write a byte of data to a port.

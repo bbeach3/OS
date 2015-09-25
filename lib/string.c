@@ -34,13 +34,12 @@ int strlen(const char *s)
 */
 char* strcpy(char *s1, const char *s2)
 {
-	/*
  	int length = strlen(s2);
-	int i = 0;
-	for(i; i <=length; i++){
+	int i;
+	for(i = 0; i <=length; i++){
 		s1[i] = s2[i];
 	}
-	*/
+
 //When I was compiling this part it didn't like it so I changed it and now the compiler likes it.
   char *s = s1;
   while((*s++=*s2++)!=0)

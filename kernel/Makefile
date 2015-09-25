@@ -3,7 +3,7 @@
 
 AS      = nasm
 CC      = i386-elf-gcc
-CFLAGS  = -Wall -Wextra -Werror -nostartfiles -nostdlib -nodefaultlibs -ffreestanding -g -c
+CFLAGS  = -Wall -Wextra -Werror -nostartfiles -nostdlib -nodefaultlibs -ffreestanding -g -c -std=c99
 LD      = i386-elf-ld
 LDFLAGS = 
 ASFLAGS = -f elf -g
@@ -19,7 +19,10 @@ core/serial.o\
 core/system.o\
 core/tables.o\
 mem/paging.o\
-mem/heap.o
+mem/heap.o\
+#core/menu.o\
+#modules/string.o\
+#core/
 
 .s.o:
 	$(AS) $(ASFLAGS) -o $@ $<

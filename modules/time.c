@@ -1,9 +1,5 @@
-#include "core/io.h"
-#include "core/serial.h"
-#include "string.h"
-//Modify build paths so that they only go as far as mpx_spring15
+#include "time.h"
 
-#include "mpx_supt.c"
 /** \file
  *Contains the functions allowing the control of time and date settings in the MPX system
  *Contains the functions allowing us to set the systems time and date, as well as allowing us to retrieve the time and date
@@ -23,47 +19,74 @@ void getdate()
 	const char *date;
 
 	outb(0x70, 0x08); //Month
-	const char *month = inb(0x71);
-	unsigned int finalmonth = (((month & 0b11110000) >> 4) * 10) + (month * 0b00001111);
+	const char month = inb(0x71);
 
-	date = finalmonth;
+	date = &month;
+
+	serial_println(date);
+	/*unsigned int finalmonth = ((((int)month & (int)0b11110000) >> 4) * 10) + ((int)month & (int)0b00001111);
+
+	const char inputmonth = (char)finalmonth;
+	date = &inputmonth;
+	serial_println(date);*/
+/*
+	char *finalmonth = ((((int)month & (int)0b11110000) >> 4) + '0');
+
+	serial_print(finalmonth);
+
+	*finalmonth = (((int)month & (int)0b00001111)) + '0');
+
+	serial_println(finalmonth + "-");
+
+	date = *finalmonth;
 	if(finalmonth < 10)
 	{
-		serial_println("0" + date + "-");
+		
+		serial_print("0" + finalmonth); 
+		serial_print("-");
 	}
 	else
 	{
-		serial_println(date + "-");
+		serial_print(finalmonth + "-");
 	}
-
+*/
 	outb(0x70, 0x07); //Day
-	const char *day = inb(0x71);
-	unsigned int finalday = (((day & 0b11110000) >> 4) * 10) + (day * 0b00001111);
+	const char day = inb(0x71);
+
+	date = &day;
+
+	serial_println(date);
+/*	unsigned int finalday = ((((int)day & (int)0b11110000) >> 4) * 10) + ((int)day & (int)0b00001111);
 	
-	date = finalday;
+	//date = finalday;
 	if(finalday < 10)
 	{
-		serial_println("0" + date + "-");
+		serial_print("0" + finalday);
+		serial_print("-");	
 	}
 	else
 	{
-		serial_println(date + "-");
+		serial_print(finalday + "-");
 	}
-
+*/
 	outb(0x70, 0x09); //Year
-	const char *year = inb(0x71);
-	unsigned int finalyear = (((year & 0b11110000) >> 4) * 10) + (year * 0b00001111);
+	const char year = inb(0x71);
+
+	date = &year;
+
+	serial_println(date);
+/*	unsigned int finalyear = ((((int)year & (int)0b11110000) >> 4) * 10) + ((int)year * (int)0b00001111);
 	
-	date = finalyear;
+	//date = finalyear;
 	if(finalyear < 10)
 	{
-		serial_println("0" + date);
+		serial_println("0" + finalyear);
 	}
 	else
 	{
-		serial_println(date);
+		serial_println(finalyear);
 	}
-
+*/
 }
 
 /**
@@ -77,49 +100,64 @@ void gettime()
 	const char* time;
 
 	outb(0x70, 0x04); //Hours
-	const char *hour = inb(0x71);
+	const char hour = inb(0x71);
 
-	unsigned int finalhour = (((hour & 0b11110000) >> 4) * 10) + (hour * 0b00001111);
+	time = &hour;
+
+	serial_println(time);
+/*
+	unsigned int finalhour = ((((int)hour & (int)0b11110000) >> 4) * 10) + ((int)hour * (int)0b00001111);
 	
-	time = finalhour;
+	//time = finalhour;
 	if(finalhour < 10)
 	{
-		serial_println("0" + time + ":");
+		serial_print("0" + finalhour);
+		serial_print(":");
 	}
 	else
 	{
-		serial_println(time + ":");
+		serial_print(finalhour + ":");
 	}
-
+*/
 	outb(0x70, 0x02); //Minutes
-	const char *minute = inb(0x71);
-
-	unsigned int finalminute = (((minute & 0b11110000) >> 4) * 10) + (minute * 0b00001111);
+	const char minute = inb(0x71);
 	
-	time = finalminute;
+	time = &minute;	
+
+	serial_println(time);
+/*
+	unsigned int finalminute = ((((int)minute & (int)0b11110000) >> 4) * 10) + ((int)minute * (int)0b00001111);
+	
+	//time = finalminute;
 	if(finalminute < 10)
 	{
-		serial_println("0" + time + ":");
+		serial_print("0" + finalminute);
+		serial_print(":");
 	}
 	else
 	{
-		serial_println(time + ":");
+		serial_print(finalminute + ":");
 	}
-
+*/
 	outb(0x07, 0x00); //Seconds
-	const char *second = inb(0x71);
-
-	unsigned int finalsecond = (((second & 0b11110000) >> 4) * 10) + (second * 0b00001111);
+	const char second = inb(0x71);
 	
-	time = finalsecond;
+	time = &second;
+
+	serial_println(time);
+/*
+	unsigned int finalsecond = ((((int)second & (int)0b11110000) >> 4) * 10) + ((int)second * (int)0b00001111);
+	
+	//time = finalsecond;
 	if(finalsecond < 10)
 	{
-		serial_println("0" + time);
+		serial_println("0" + finalsecond);
 	}
 	else
 	{
-		serial_println(time);
+		serial_println(finalsecond);
 	}
+*/
 }
 
 /**
@@ -178,7 +216,8 @@ void setdate(char datestring[], int datelength)
 				break;
 		}
 		//Creating the BCD values
-		for(int i = 0; i < strlen(parsedate), i++)
+		int i;
+		for(i = 0; i < strlen(parsedate); i++)
 		{
 			switch (parsedate[i])
 			{
@@ -213,8 +252,8 @@ void setdate(char datestring[], int datelength)
 					entry = entry | 0b00001001;
 					break;
 			}
-			
-			if(j == 0)
+
+			if(i == 0)
 			{
 				entry = entry << 4;
 			}	
@@ -246,7 +285,6 @@ void settime(char timestring[], int timelength)
 	}
 
 	int ele = 0;
-
 	for(ele = 0; ele < timelength; ele++)
 	{
 		if((ele != 2 && ele != 5 && ele != 8) && (timestring[ele] < 48 || timestring[ele] > 57))
@@ -285,7 +323,8 @@ void settime(char timestring[], int timelength)
 		}
 
 		//Setting the BCD values
-		for(int i = 0; i < strlen(parsetime), i++)
+		int i;
+		for(i = 0; i < strlen(parsetime); i++)
 		{
 			switch (parsetime[i])
 			{
@@ -321,7 +360,7 @@ void settime(char timestring[], int timelength)
 					break;
 			}
 			
-			if(j == 0)
+			if(i == 0)
 			{
 				entry = entry << 4;
 			}	

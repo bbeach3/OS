@@ -3,7 +3,7 @@
 
 AS      = nasm
 CC      = i386-elf-gcc
-CFLAGS  = -Wall -Wextra -Werror -nostartfiles -nostdlib -nodefaultlibs -ffreestanding -g -c
+CFLAGS  = -Wall -Wextra -Werror -nostartfiles -nostdlib -nodefaultlibs -ffreestanding -g -c -std=c99
 LD      = i386-elf-ld
 LDFLAGS = 
 ASFLAGS = -f elf -g
@@ -11,7 +11,10 @@ ASFLAGS = -f elf -g
 # add new files as you create them.
 # I'll start you off with just mpx_supt.o
 OBJFILES =\
-mpx_supt.o
+mpx_supt.o\
+time.o
+#keyboardInput.o\
+#menu.o
 
 .c.s:
 	$(CC) $(CFLAGS) -S -o $@ $<
