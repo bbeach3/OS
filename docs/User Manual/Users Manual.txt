@@ -1,0 +1,24 @@
+USERS GUIDE TO THE MPX-G0 SYSTEM
+
+Upon launching the MPG-G0 system, you will be presented with the main menu, where you will be presented with 7 options. These options are as follows : (1)help, (2)display version number, (3)get time, (4)set time, (5)get date, (6)set date, and (7)shutdown. To choice an option, simply type in the corresponding number and press enter. 
+
+HELP
+When help is selected, the user will be presented with a menu asking them to choose what they need help with. Options one through six are, respectively, get time, set time, get date, set date and shutdown, if any of these are selected, text will be presented providing an explanation for using these functions. Seven is "go back", which will return the user to the main menu.
+
+Display Version Number
+When this option is selected, the version number of MPX-G0 will be printed out
+
+Get time
+When selected, the current time will be printed out in the following format: HH:MM:SS, using a 24-hour clock
+
+Set time
+When selected, the user will be promted to enter the current time in the following format: HH:MM:SS, using a 24-hour clock
+
+Get date
+When selected, the current date will be printed out in the following format: MM-DD-YY
+
+Set date
+When Selected, the user will be prompted to enter the current date in the following format: MM-DD-YY
+
+Shutdown
+When this option is selected, the MPX-G0 system will shut down.
