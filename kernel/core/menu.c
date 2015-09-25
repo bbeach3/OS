@@ -9,6 +9,11 @@
 \Parameters: none
 \Returns: none
 */
+#include "include/core/keyboardInput.h"
+#include "include/core/shutdown.c"
+#include "include/core/version.c"
+#include "include/core/help.c"
+#include "modules/time.c"
 void menu()
 {
 int x =1;
@@ -26,7 +31,7 @@ serial_println("7. Shutdown");
 int size=50;
 char *input[size];
 takeInput(*input,size);
-char input2 = *input[0];
+char *input2 = input[0];
 int inputInt = atoi(input2);
 switch(inputInt)
  {
@@ -41,8 +46,8 @@ switch(inputInt)
  serial_println("7. Go back");
  
  takeInput(*input,size);
- input2 = *input[0];
- inpputInt = atoi(input2);
+ input2 = input[0];
+ inputInt = atoi(input2);
  switch(inputInt)
   {
   case 1: version_help();
@@ -78,7 +83,7 @@ switch(inputInt)
  break;
 
  case 4:
- settime();
+ //settime();
  break;
 
  case 5:
@@ -86,7 +91,7 @@ switch(inputInt)
  break;
 
  case 6:
- setdate();
+ //setdate();
  break;
  
  case 7:

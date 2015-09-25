@@ -9,7 +9,7 @@
 \Parameters: none
 \Returns: none
 */
-version_help()
+void version_help()
 {
 serial_println("This command displays the current version of MPX that we are currently on.");
 }
@@ -21,7 +21,7 @@ serial_println("This command displays the current version of MPX that we are cur
 \Parameters: none
 \Returns: none
 */
-shutdown_help()
+void shutdown_help()
 {
 serial_println("This command shuts down the MPX project. It asks for confirmation before doing so.");
 }
@@ -33,7 +33,7 @@ serial_println("This command shuts down the MPX project. It asks for confirmatio
 \Parameters: none
 \Returns: none
 */
-getdate_help()
+void getdate_help()
 {
 serial_println("This command displays the current date.");
 }
@@ -45,7 +45,7 @@ serial_println("This command displays the current date.");
 \Parameters: none
 \Returns: none
 */
-setdate_help()
+void setdate_help()
 {
 serial_println("This command allows you to set the date.");
 }
@@ -57,7 +57,7 @@ serial_println("This command allows you to set the date.");
 \Parameters: none
 \Returns: none
 */
-gettime_help()
+void gettime_help()
 {
 serial_println("This command displays the current time.");
 }
@@ -68,7 +68,7 @@ serial_println("This command displays the current time.");
 \Parameters: none
 \Returns: none
 */
-settime_help()
+void settime_help()
 {
 serial_println("This command allows you to set the time.");
 }

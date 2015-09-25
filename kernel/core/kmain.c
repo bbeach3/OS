@@ -18,6 +18,7 @@
 #include <mem/paging.h>
 
 #include "modules/mpx_supt.h"
+#include "menu.c"
 
 void kmain(void)
 {
@@ -57,7 +58,7 @@ void kmain(void)
 
    // 5) Call Commhand
    klogv("Transferring control to commhand...");
-
+menu();
 
    // 11) System Shutdown
    klogv("Starting system shutdown procedure...");
