@@ -2,7 +2,7 @@
  *Contains the source code for the function to shut down the system
  *Contains the source code for the function to shut down the system
 */
-
+//#include "kernel/core/keyboardInput.c"
 
 /**
 \Function: shutdown
@@ -10,13 +10,13 @@
 \Parameters: none
 \Returns: none
 */
-shutdown()
+void shutdown()
 {
 serial_println("Are you sure you want to shut down?");
-int size = 3;
-char *input[size];
-takeInput(*input,size);
-if(*input[0]=='y')
+//int size = 3;
+//char *input[size];
+//takeInp(*input,size);
+//if(*input[0]=='y')
 //return to kmain()
 
 }

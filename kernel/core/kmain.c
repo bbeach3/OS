@@ -17,9 +17,8 @@
 #include <mem/heap.h>
 #include <mem/paging.h>
 
-#include "modules/menu.h"
-#include "modules/time.h"
 #include "modules/mpx_supt.h"
+#include "menu.c"
 
 void kmain(void)
 {
@@ -59,10 +58,9 @@ void kmain(void)
 
    // 5) Call Commhand
    klogv("Transferring control to commhand...");
-   //menu();
-   settime("12:34:56", 9);
-   gettime();
-
+menu();//a
+//shutdown();
+//version();
    // 11) System Shutdown
    klogv("Starting system shutdown procedure...");
    

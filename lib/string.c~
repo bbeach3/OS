@@ -34,12 +34,17 @@ int strlen(const char *s)
 */
 char* strcpy(char *s1, const char *s2)
 {
+	/*
  	int length = strlen(s2);
-	int i;
-	for(i = 0; i <=length; i++){
+	int i = 0;
+	for(i; i <=length; i++){
 		s1[i] = s2[i];
 	}
-  return *s1; // return pointer to destination string
+	*/
+  char *s = s1;
+  while((*s++=*s2++)!=0)
+  ;
+  return s1; // return pointer to destination string
 }
 
 
