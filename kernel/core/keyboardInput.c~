@@ -25,7 +25,7 @@ void takeInput(char *inputLine, int inputSize) {
 	char clearLine[inputSize];
 	int i;
 	for(i = 0; i < inputSize; i++){
-		clearLine[i] = '\0';
+		clearLine[i] = ' ';
 		inputLine[i] = '\0';
 	}
 	int curChar = 0; //for tracking cursor
@@ -47,12 +47,18 @@ void takeInput(char *inputLine, int inputSize) {
 			Carriage Return: 13
 			New Line: 10 
 			Everything else is DEFAULT.*/
-				case 10: //New line aka run command
+				case 13: //SHOULD BE New line aka run command
 					serial_print(clearLine);
 					serial_println(inputLine);
 					return; //since we're done getting the input
-				case 13: //Carriage Return
+				case 10: //SHOULD BE Carriage Return
 					//as it was explained to me, a CR just needs to go to line start
+					/* For some reason I don't understand, pressing ENTER
+					and pressing CTRL+ENTER are going to the opposite places.
+					For now, I've just switched the 10 and 13 above, but we should
+					definitely talk to him.
+
+					Is it possible ENTER is both /r and /n????? */
 					curChar = 0;
 					break;
 				case 27: //switch between delete and arrow keys
@@ -100,7 +106,7 @@ void takeInput(char *inputLine, int inputSize) {
 					break;
 				case 127: //Backspace
 					//sets every character from curChar-1 to the right to the next character.
-					for(toRemove = curChar-1; toRemove < inputSize-1' toRemove++) {
+					for(toRemove = curChar-1; toRemove < inputSize-1; toRemove++) {
 						inputLine[toRemove] = inputLine[toRemove+1];
 					}
 					curChar--; 
