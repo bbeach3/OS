@@ -53,12 +53,12 @@ void kmain(void)
    cli();
  
    // 4) Virtual Memory
-   klogv("Initializing virtual memory..."); 
+   klogv("Initializing virtual memory...");
    init_paging();
 
    // 5) Call Commhand
    klogv("Transferring control to commhand...");
-menu();//a
+menu();//i
 //shutdown();
 //version();
    // 11) System Shutdown

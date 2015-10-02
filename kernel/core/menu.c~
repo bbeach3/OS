@@ -16,8 +16,8 @@
 #include "modules/time.c"
 void menu()
 {
-
-while(0);
+int x=1;
+while(x==1)
 {
 serial_println("Welcome to the MPX Project for group 0. What do you want to do?");
 serial_println("1. Help");
@@ -28,7 +28,7 @@ serial_println("5. Get date");
 serial_println("6. Set date");
 serial_println("7. Shutdown");
 
-int size=50;
+int size=20;
 char *input[size];
 takeInput(*input,size);
 char *input2 = input[0];
@@ -45,7 +45,7 @@ switch(inputInt)
  serial_println("6. Shutdown");
  serial_println("7. Go back");
  
- //takeInput(*input,size);
+ takeInput(*input,size);
  input2 = input[0];
  inputInt = atoi(input2);
  switch(inputInt)
@@ -95,7 +95,8 @@ switch(inputInt)
  break;
  
  case 7:
- shutdown();
+// shutdown();
+x=0;
  break;
  }
 }
