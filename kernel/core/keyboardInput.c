@@ -12,6 +12,25 @@ for every command. You make a call to takeInput() and it'll update the
 array you pass in, leaving it nice and ready for use.
 */
 
+/**
+\Function resetLine
+\Description: clears the input currently displayed on the line
+\Parameters: curEnd - length of current input
+\Returns: none
+*/
+void resetLine(int curEnd){
+	//according to the internet, this sends the special (hence the 27) command to go back
+	//for reasons I don't understand, the 2 HAS to be '2'. Otherwise, it breaks. This cost me a lotta time.
+	char resetLine[] = {27, '[', '2', 'K', '\0'};
+	serial_print(resetLine);
+	//and this one sends the command to move back a space, which stops a buildup of spaces from occuring
+	char spaceKiller[] = {27, '[', '1', 'D', '\0'};
+	//each "print" of it only removes one space, and the spaces seem based on the length of the input string
+	int i;
+	for (i = 0; i < curEnd; i++){
+		serial_print(spaceKiller);
+	}
+}
 
 /**
 \Function: takeInput
@@ -22,10 +41,8 @@ array you pass in, leaving it nice and ready for use.
 void takeInput(char *inputLine, int inputSize) {
 	//make equally-long array to print to clear line
 	//also preps the inputLine (i.e. wipes it)
-	char clearLine[inputSize];
 	int i;
 	for(i = 0; i < inputSize; i++){
-		clearLine[i] = ' ';
 		inputLine[i] = '\0';
 	}
 	int curChar = 0; //for tracking cursor
@@ -48,7 +65,7 @@ void takeInput(char *inputLine, int inputSize) {
 			New Line: 10 
 			Everything else is DEFAULT.*/
 				case 13: //SHOULD BE New line aka run command
-					serial_print(clearLine);
+					resetLine(curEnd);
 					serial_println(inputLine);
 					return; //since we're done getting the input
 				case 10: //SHOULD BE Carriage Return
@@ -92,13 +109,15 @@ void takeInput(char *inputLine, int inputSize) {
 									break;
 								case 126: //Delete
 									//sets every char from curChar to the right to the next char
-									for(toRemove = curChar; toRemove < inputSize-1; toRemove++){
-										inputLine[toRemove] = inputLine[toRemove+1];
+									if(inputLine[curChar+1] != '\0'){
+										for(toRemove = curChar; toRemove < inputSize-1; toRemove++){
+											inputLine[toRemove] = inputLine[toRemove+1];
+										}
+										special = 0;
+										resetLine(curEnd);
+										serial_print(inputLine);
+										curEnd--;
 									}
-									special = 0;
-									serial_print(clearLine);
-									serial_print(inputLine);
-									curEnd--;
 									break;
 							}
 						}	
@@ -106,13 +125,16 @@ void takeInput(char *inputLine, int inputSize) {
 					break;
 				case 127: //Backspace
 					//sets every character from curChar-1 to the right to the next character.
-					for(toRemove = curChar-1; toRemove < inputSize-1; toRemove++) {
-						inputLine[toRemove] = inputLine[toRemove+1];
+					//making sure there's something to delete
+					if(curEnd > 0){
+						for(toRemove = curChar-1; toRemove < inputSize-1; toRemove++) {
+							inputLine[toRemove] = inputLine[toRemove+1];
+						}
+						curChar--; 
+						curEnd--;
+						resetLine(curEnd+1);
+						serial_print(inputLine);
 					}
-					curChar--; 
-					curEnd--;
-					serial_print(clearLine);
-					serial_print(inputLine);
 					break;
 				default: //In general, just text
 					/*If the input array isn't already full, inserts the new character.
@@ -128,7 +150,7 @@ void takeInput(char *inputLine, int inputSize) {
 						inputLine[curChar] = x; //insert new input
 						curChar++;
 						curEnd++;
-						serial_print(clearLine);
+						resetLine(curEnd);
 						serial_print(inputLine);
 					}
 					break;
