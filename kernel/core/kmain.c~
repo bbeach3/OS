@@ -1,9 +1,9 @@
 /*
-  ----- kmain.c -----
+  ----- kmain.c ----- 
 
   Description..: Kernel main. The first function called after
       the bootloader. Initialization of hardware, system
-      structures, devices, and initial processes happens here.
+      structures, devices, and initial processes happens here.   
 */ 
  
 #include <stdint.h>
@@ -44,25 +44,25 @@ void kmain(void)
    // 2) Descriptor Tables
    klogv("Initializing descriptor tables...");
    init_gdt();
-   init_idt();
-
-   // 3?) Interrupt (Controller) 
-   klogv("Initializing the interrupt controller...");
+   init_idt();  
+  
+   // 3?) Interrupt (Controller)  
+   klogv("Initializing the interrupt controller..."); 
    init_pic();
    init_irq(); 
    cli();
  
    // 4) Virtual Memory
-   klogv("Initializing virtual memory...");
+   klogv("Initializing virtual memory...");   
    init_paging();
-
-   // 5) Call Commhand
+ 
+   // 5) Call Commhand 
    klogv("Transferring control to commhand...");
-menu();//i
-//shutdown();
+menu();//j
+//shutdown();  
 //version();
    // 11) System Shutdown
-   klogv("Starting system shutdown procedure...");
+   klogv("Starting system shutdown procedure...");  
    
    /* Shutdown Procedure */
    klogv("Shutdown complete. You may now turn off the machine. (QEMU: C-a x)");
