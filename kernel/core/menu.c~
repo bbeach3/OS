@@ -28,7 +28,7 @@ serial_println("5. Get date");
 serial_println("6. Set date");
 serial_println("7. Shutdown");
 
-int size=20;
+int size=10;
 char *input[size];
 takeInput(*input,size);
 char *input2 = input[0];
@@ -68,7 +68,7 @@ switch(inputInt)
   case 6: shutdown_help();
   break;
 
-  case 7: //I don't know how to go back
+  case 7:
   break;
   }
  
@@ -95,8 +95,11 @@ switch(inputInt)
  break;
  
  case 7:
-// shutdown();
-x=0;
+ serial_println("Are you sure you want to shut down? Use y/n.");
+ takeInput(*input,size);
+ char input3 = *input[0];
+ if(input3=='y')
+ x=0;
  break;
  }
 }

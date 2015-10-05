@@ -95,8 +95,11 @@ switch(inputInt)
  break;
  
  case 7:
-// shutdown();
-x=0;
+ serial_println("Are you sure you want to shut down? Use y/n.");
+ takeInput(*input,size);
+ char input3 = *input[0];
+ if(input3=='y')
+ x=0;
  break;
  }
 }
