@@ -26,9 +26,10 @@ serial_println("3. Get time");
 serial_println("4. Set time");
 serial_println("5. Get date");
 serial_println("6. Set date");
-serial_println("7. Shutdown");
+serial_println("7. PCB options");
+serial_println("8. Shutdown");
 
-int size=10;
+int size=20;
 char *input[size];
 takeInput(*input,size);
 char *input2 = input[0];
@@ -95,6 +96,91 @@ switch(inputInt)
  break;
  
  case 7:
+ //PCB menu
+ serial_println("What PCB-related command would you like?");
+ serial_println("1. Suspend");
+ serial_println("2. Resume");
+ serial_println("3. Set Priority");
+ serial_println("4. Show PCB");
+ serial_println("5. Show all Processes");
+ serial_println("6. Show Ready Processes");
+ serial_println("7. Show Blocked Processes");
+ serial_println("8. Temporary Commands");
+ serial_println("9. Go Back");
+ 
+ takeInput(*input,size);
+ input2 = input[0];
+ inputInt = atoi(input2);
+ switch(inputInt)
+  {
+  case 1:
+  serial_println("Suspend goes here");
+  break;
+
+  case 2:
+  serial_println("Resume goes here");
+  break;
+
+  case 3:
+  serial_println("Set Priority goes here");
+  break;
+
+  case 4:
+  serial_println("Show PCB goes here");
+  break;
+
+  case 5:
+  serial_println("Show all Processes goes here");
+  break;
+
+  case 6:
+  serial_println("Show Ready Processes goes here");
+  break;
+
+  case 7:
+  serial_println("Show Blocked Processes goes here");
+  break;
+  
+  case 8:
+  	serial_println("What temporary PCB-related command would you like?");
+ 	serial_println("1. Create PCB");
+ 	serial_println("2. Delete PCB");
+ 	serial_println("3. Block");
+ 	serial_println("4. Unblock");
+ 	serial_println("5. Go Back");
+ 
+ 	takeInput(*input,size);
+ 	input2 = input[0];
+ 	inputInt = atoi(input2);
+ 	switch(inputInt)
+ 	 {
+ 	 case 1:
+ 	 serial_println("Create PCB goes here");
+ 	 break;
+	
+ 	 case 2:
+ 	 serial_println("Delete PCB goes here");
+ 	 break;
+	
+	 case 3:
+	 serial_println("Block goes here");
+	 break;
+	
+	 case 4:
+  	 serial_println("Unblock goes here");
+ 	 break;
+
+  	 case 5:
+  	 break;
+  	}
+  break;
+
+  case 9:
+  break;
+  }
+ break;
+ 
+ case 8:
  serial_println("Are you sure you want to shut down? Use y/n.");
  takeInput(*input,size);
  char input3 = *input[0];
