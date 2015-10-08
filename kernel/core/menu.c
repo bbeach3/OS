@@ -182,11 +182,26 @@ switch(inputInt)
  	 break;
 	
 	 case 3:
-	 serial_println("Block goes here");
+	 //serial_println("Block goes here");
+	 
+	 serial_println("What do you want to block?");
+	 takeInput(*input,size);
+	 removePCB(findPCB(*input));
+	 pcb *changePCB = findPCB(*input);
+	 changePCB->state=0;
+	 insertBlocked(findPCB(*input));
+	 	 
 	 break;
 	
 	 case 4:
-  	 serial_println("Unblock goes here");
+  	// serial_println("Unblock goes here");
+
+	 serial_println("What do you want to unblock?");
+	 takeInput(*input,size);
+	 removePCB(findPCB(*input));
+	 pcb *changedPCB = findPCB(*input);
+	 changedPCB->state = 1;
+	 insertReady(findPCB(*input));
  	 break;
 
 	//if this part of the menu wasn't temporary, I'd fix this so it only went back one step.
