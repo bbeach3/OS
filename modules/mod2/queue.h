@@ -1,7 +1,7 @@
-#ifndef _QUENE_H
-#define _QUENE_H
+#ifndef _QUEUE_H
+#define _QUEUE_H
 
-struct quene
+struct queue
 {
 	int count;
 	pcb *head;

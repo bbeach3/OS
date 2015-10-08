@@ -32,7 +32,7 @@ void kmain(void)
    init_serial(COM1);
    set_serial_out(COM1);
    set_serial_in(COM1);
-   mpx_init(MODULE_R1);
+   mpx_init(MODULE_R2);
    klogv("Initialized serial I/O on COM1 device...");
 
    // 1) Check that the boot was successful and correct when using grub
