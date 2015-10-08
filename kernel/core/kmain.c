@@ -1,4 +1,4 @@
-/*
+/* 
   ----- kmain.c ----- 
 
   Description..: Kernel main. The first function called after
@@ -11,16 +11,16 @@
 #include <system.h>
 
 #include <core/io.h>
-#include <core/serial.h>
+#include <core/serial.h> 
 #include <core/tables.h>
 #include <core/interrupts.h>
 #include <mem/heap.h>
 #include <mem/paging.h>
  
-#include "modules/mpx_supt.h"
-#include "menu.c"
-
-void kmain(void) 
+#include "modules/mpx_supt.h" 
+#include "menu.c" 
+ 
+void kmain(void)
 {
    extern uint32_t magic;
    // Uncomment if you want to access the multiboot header
@@ -30,9 +30,9 @@ void kmain(void)
    // 0) Initialize Serial I/O and call mpx_init
    klogv("Starting MPX boot sequence...");
    init_serial(COM1);
-   set_serial_out(COM1);
+   set_serial_out(COM1); 
    set_serial_in(COM1);
-   mpx_init(MODULE_R2);
+   mpx_init(MODULE_R2); 
    klogv("Initialized serial I/O on COM1 device...");
 
    // 1) Check that the boot was successful and correct when using grub

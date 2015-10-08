@@ -125,7 +125,15 @@ switch(inputInt)
   break;
 
   case 3:
-  serial_println("Set Priority goes here");
+  serial_println("As proof of concept, set any priority to 9 (high)");
+  serial_println("Later, we'll ask for their choice");
+  struct pcb *temp = (pcb *)sys_alloc_mem(sizeof(pcb));
+  serial_println("Give name to change. This is temporary text");
+  takeInput(*input, size);
+  temp = findPCB(*input);
+	//note: alert if that pcb doesn't exist.
+  temp->priority = 9;
+	//note: remember to resort queue. Simple: remove, then insert.
   break;
 
   case 4:
@@ -141,11 +149,8 @@ switch(inputInt)
 
   case 6:
   serial_println("Show Ready Processes goes here");
-  /**struct pcb *temp = readyQueue->head;
-  while(temp != NULL){
-  	displayPCB(temp);
-  	temp = temp->next;
-  } */
+  displayReady();
+
   break;
 
   case 7:
@@ -160,7 +165,7 @@ switch(inputInt)
  	serial_println("4. Unblock");
  	serial_println("5. Go Back");
  
- 	takeInput(*input,size);
+ 	takeInput(*input,size); 
  	input2 = input[0];
  	inputInt = atoi(input2);
  	switch(inputInt)
@@ -170,9 +175,10 @@ switch(inputInt)
  	 //using input here is temporary probably
  	 takeInput(*input, size);
  	 input2 = input[0];
+	 inputInt = atoi(input2);
  	 serial_println("give name");
  	 takeInput(*input, size);
- 	 insertPCB(setupPCB(*input,1,*input2));
+ 	 insertPCB(setupPCB(*input,1,inputInt));
  	 break;
 	
  	 case 2:
