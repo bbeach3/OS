@@ -119,6 +119,12 @@ void insertPCB(pcb *newpcb)
 	}
 }
 
+/**
+\Function insertReady
+\Description: inserts given PCB into ready queue in proper place
+\Parameters: newpcb - pointer to PCB to insert
+\Returns: none
+*/
 void insertReady(pcb *newpcb){
 	//check for empty
 	if(readyQueue->head == NULL){
@@ -129,6 +135,21 @@ void insertReady(pcb *newpcb){
 		return;
 	}
 	struct pcb *temp = readyQueue->head;
+	if(temp->next == NULL){ //head is only pcb
+		if(newpcb->priority > temp->priority){ //newpcb is higher priority
+			readyQueue->head = newpcb;
+			newpcb->next = temp;
+			temp->prev = newpcb;		
+			readyQueue->count++;
+			return;
+		} else { //old head is higher priority or equal
+			readyQueue->tail = newpcb;
+			newpcb->prev = temp;
+			temp->next = newpcb;
+			readyQueue->count++;
+			return;
+		}
+	}
 	while(temp->next != NULL){
 		//since we look ahead, if statement triggers only at the end of a priority level
 		if(newpcb->priority > temp->next->priority){
@@ -149,6 +170,12 @@ void insertReady(pcb *newpcb){
 	return;
 }
 
+/**
+\Function insertBlocked
+\Description: inserts given PCB into blocked queue in proper place
+\Parameters: newpcb - pointer to PCB to insert
+\Returns: none
+*/
 void insertBlocked(pcb *newpcb){
 	if(blockedQueue->head == NULL){
 		blockedQueue->count = 1;
@@ -205,6 +232,12 @@ int removePCB(pcb *oldpcb)
 return 1; //success code
 }
 
+/**
+\Function displayReady
+\Description: displays all PCBs in ready queue in order.
+\Parameters: none
+\Returns: none
+*/
 void displayReady(){
 	struct pcb *temp = readyQueue->head;
 	while(temp != NULL){
@@ -213,6 +246,12 @@ void displayReady(){
 	}
 }
 
+/**
+\Function displayPCB
+\Description: prints important contents of PCB
+\Parameters: apcb - pointer to PCB to display
+\Returns: none
+*/
 void displayPCB(pcb *apcb){
 	if(apcb == NULL){
 	serial_println("Not found");
@@ -242,13 +281,26 @@ void displayPCB(pcb *apcb){
 	serial_println("Suspended");
 	}
 	serial_println("Priority:");
-	//these are temporary. Print actual values later.
-	if(apcb->priority < 4) {
-	serial_println("Low");
-	} else if(apcb->priority >6) {
-	serial_println("High");
-	} else {
-	serial_println("Medium");
+	//We really need to make sprintf. This is a hassle.
+	if(apcb->priority == 0) {
+	serial_println("0");
+	} else if(apcb->priority == 1) {
+	serial_println("1");
+	} else if(apcb->priority == 2) {
+	serial_println("2");
+	} else if(apcb->priority == 3) {
+	serial_println("3");
+	} else if(apcb->priority == 4) {
+	serial_println("4");
+	} else if(apcb->priority == 5) {
+	serial_println("5");
+	} else if(apcb->priority == 6) {
+	serial_println("6");
+	} else if(apcb->priority == 7) {
+	serial_println("7");
+	} else if(apcb->priority == 8) {
+	serial_println("8");
+	} else if(apcb->priority == 9) {
+	serial_println("9");
 	}
-
 }

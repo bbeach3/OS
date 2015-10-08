@@ -188,6 +188,10 @@ switch(inputInt)
  	 takeInput(*input, size);
  	 input2 = input[0];
 	 inputInt = atoi(input2);
+	 if(inputInt<0||inputInt>9) {
+	 serial_println("Error, this must be between 0 and 9");
+	 break;
+	 }
  	 serial_println("give name");
  	 takeInput(*input, size);
 	 struct pcb *temp = setupPCB(*input,1,inputInt);
