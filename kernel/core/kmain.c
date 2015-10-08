@@ -58,7 +58,7 @@ void kmain(void)
  
    // 5) Call Commhand 
    klogv("Transferring control to commhand...");
-menu();//g
+menu();//g 
 
 
    // 11) System Shutdown
