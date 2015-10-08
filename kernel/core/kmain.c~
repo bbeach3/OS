@@ -1,6 +1,6 @@
- /*
+/*
   ----- kmain.c ----- 
-
+ 
   Description..: Kernel main. The first function called after
       the bootloader. Initialization of hardware, system
       structures, devices, and initial processes happens here.   
