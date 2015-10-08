@@ -117,11 +117,19 @@ switch(inputInt)
  switch(inputInt)
   {
   case 1:
-  serial_println("Suspend goes here");
+  //serial_println("Suspend goes here");
+  serial_println("What do you want to suspend?");
+  takeInput(*input,size);
+  pcb *suspendedPCB = findPCB(*input);
+  suspendedPCB->suspension=0;
   break;
 
   case 2:
   serial_println("Resume goes here");
+  serial_println("What do you want to resume?");
+  takeInput(*input,size);
+  pcb *resumedPCB = findPCB(*input);
+  resumedPCB->suspension =1;
   break;
 
   case 3:
