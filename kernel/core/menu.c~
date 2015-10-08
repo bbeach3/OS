@@ -125,15 +125,28 @@ switch(inputInt)
   break;
 
   case 2:
-  serial_println("Resume goes here");
-  serial-println("What do you want to resume?");
+  //serial_println("Resume goes here");
+  serial_println("What do you want to resume?");
   takeInput(*input,size);
   pcb *resumedPCB = findPCB(*input);
   resumedPCB->suspension =1;
   break;
 
   case 3:
-  serial_println("Set Priority goes here");
+  //serial_println("Set Priority goes here");
+  serial_println("What do you want to change the priority of?");
+  takeInput(*input,size);
+  pcb *priorityPCB = findPCB(*input);
+  serial_println("What do you want to change the priority to?");
+  takeInput(*input,size);
+  input2 = input[0];
+  inputInt = atoi(input2);
+  if(inputInt<0||inputInt>9)
+  serial_println("Error, this must be between 0 and 9");
+  else
+  {
+  priorityPCB->priority=inputInt;
+  }
   break;
 
   case 4:
@@ -178,9 +191,10 @@ switch(inputInt)
  	 //using input here is temporary probably
  	 takeInput(*input, size);
  	 input2 = input[0];
+	 inputInt = atoi(input2);
  	 serial_println("give name");
  	 takeInput(*input, size);
- 	 insertPCB(setupPCB(*input,1,*input2));
+ 	 insertPCB(setupPCB(*input,1,*inputInt));
  	 break;
 	
  	 case 2:
