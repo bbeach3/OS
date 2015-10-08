@@ -1,5 +1,5 @@
-#ifndef _QUEUE_H
-#define _QUEUE_H
+#ifndef _QUENE_H
+#define _QUENE_H
 
 typedef struct queue queue;
 
