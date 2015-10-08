@@ -23,7 +23,7 @@ int queuesExist = 0;
 */
 pcb *allocatePCB()
 {
-//note: figure out what errors can happen, make codes for them.
+//note: figure out what errors can happen, make codes for them
 	if(queuesExist == 0){
 	readyQueue = sys_alloc_mem(sizeof(queue));
 	blockedQueue = sys_alloc_mem(sizeof(queue));
@@ -101,7 +101,7 @@ pcb *findPCB(char *pcbname)
 */
 void insertPCB(pcb *newpcb)
 {
-	if(newpcb->state == 0){
+	if(newpcb->state == 1){
 		insertReady(newpcb);
 	} else {
 		insertBlocked(newpcb);
@@ -110,13 +110,16 @@ void insertPCB(pcb *newpcb)
 
 void insertReady(pcb *newpcb){
 	//check for empty
+	serial_println("If this isn't there, demons.");
 	if(readyQueue->head == NULL){
+		serial_println("make a head");
 		//insert first pcb
 		readyQueue->count = 1;
 		readyQueue->head = newpcb;
 		readyQueue->tail = newpcb;
 		return;
 	}
+	serial_println("didn't make a head");
 	struct pcb *temp = readyQueue->head;
 	while(temp->next != NULL){
 		//since we look ahead, if statement triggers only at the end of a priority level
@@ -180,7 +183,7 @@ int removePCB(pcb *oldpcb)
 		} else {
 			oldpcb->prev->next = oldpcb->next;
 		}
-		if(oldpcb->next == NULL){
+		if(oldpcb->next == NULL){ 
 			blockedQueue->tail = oldpcb->prev;
 		} else {
 			oldpcb->next->prev = oldpcb->prev;
@@ -189,6 +192,17 @@ int removePCB(pcb *oldpcb)
 	}
 	freePCB(oldpcb);
 return 0;
+}
+
+void displayReady(){
+	struct pcb *temp = readyQueue->head;
+	if(temp == NULL){
+		serial_println("I am headless.");
+	}
+	while(temp != NULL){
+		displayPCB(temp);
+		temp = temp->next;
+	}
 }
 
 void displayPCB(pcb *apcb){
@@ -220,12 +234,11 @@ void displayPCB(pcb *apcb){
 	serial_println("Suspended");
 	}
 	serial_println("Priority:");
-	int prio = apcb->priority;
 	//these are temporary. Print actual values later.
-	if(prio > 6) {
-	serial_println("High");
-	} else if(prio < 4) {
+	if(apcb->priority < 4) {
 	serial_println("Low");
+	} else if(apcb->priority >6) {
+	serial_println("High");
 	} else {
 	serial_println("Medium");
 	}
