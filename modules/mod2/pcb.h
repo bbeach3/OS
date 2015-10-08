@@ -34,9 +34,10 @@ void insertReady(pcb *newpcb);
 
 void insertBlocked(pcb *newpcb);
 
-//Returns success or error code - See aboce
+//Returns success or error code - See above
 int removePCB(pcb *oldpcb);
 
 void displayPCB(pcb *apcb);
+void displayReady();
 
 #endif

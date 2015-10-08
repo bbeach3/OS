@@ -162,11 +162,8 @@ switch(inputInt)
 
   case 6:
   serial_println("Show Ready Processes goes here");
-  /**struct pcb *temp = readyQueue->head;
-  while(temp != NULL){
-  	displayPCB(temp);
-  	temp = temp->next;
-  } */
+  displayReady();
+
   break;
 
   case 7:
