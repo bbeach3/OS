@@ -14,6 +14,9 @@
 #include "include/core/version.c"
 #include "include/core/help.c"
 #include "modules/time.c"
+#include "modules/mod2/pcb.h"
+#include "modules/mod2/queue.h"
+
 void menu()
 {
 int x=1;
@@ -126,15 +129,23 @@ switch(inputInt)
   break;
 
   case 4:
-  serial_println("Show PCB goes here");
+  serial_println("Give name to find. This is temporary text");
+  takeInput(*input, size);
+  displayPCB(findPCB(*input));
   break;
 
   case 5:
   serial_println("Show all Processes goes here");
+  
   break;
 
   case 6:
   serial_println("Show Ready Processes goes here");
+  struct pcb *temp = readyQueue->head;
+  while(temp != NULL){
+  	displayPCB(temp);
+  	temp = temp->next;
+  }
   break;
 
   case 7:
@@ -155,11 +166,19 @@ switch(inputInt)
  	switch(inputInt)
  	 {
  	 case 1:
- 	 serial_println("Create PCB goes here");
+ 	 serial_println("Give priority");
+ 	 //using input here is temporary probably
+ 	 takeInput(*input, size);
+ 	 input2 = input[0];
+ 	 serial_println("give name");
+ 	 takeInput(*input, size);
+ 	 insertPCB(setupPCB(*input,1,*input2));
  	 break;
 	
  	 case 2:
- 	 serial_println("Delete PCB goes here");
+ 	 serial_println("Give name.");
+ 	 takeInput(*input, size);
+ 	 removePCB(findPCB(*input));
  	 break;
 	
 	 case 3:
@@ -170,6 +189,7 @@ switch(inputInt)
   	 serial_println("Unblock goes here");
  	 break;
 
+	//if this part of the menu wasn't temporary, I'd fix this so it only went back one step.
   	 case 5:
   	 break;
   	}

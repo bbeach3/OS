@@ -1,6 +1,8 @@
-#include "mpx_supt.h"
 #include "pcb.h"
 #include "queue.h"
+#include "../mpx_supt.h"
+#include <string.h>
+#include <core/serial.h>
 
 /*TO DO FOR MODULE 2:
 	-Fine-tune/bugfix any and all methods located in pcb.c
@@ -10,97 +12,222 @@
 	-Implement selectability of said methods into menu.c
 	-Update the manuals and documentation for any new files or new methods in 		existing files
 */
-struct queue *readyqueue = sys_alloc_mem(sizeof(struct queue));
-struct queue *blockedqueue = sys_alloc_mem(sizeof(struct queue)); 
-
-struct pcb *allocatePCB()
+struct queue *readyQueue;
+struct queue *blockedQueue;
+int queuesExist = 0;
+/**
+\Function allocatePCB
+\Description: allocates memory for new PCB
+\Parameters: None
+\Returns: PCB Pointer, or Null if an error occurs
+*/
+pcb *allocatePCB()
 {
-	struct pcb *newPCB = sys_alloc_mem(sizeof(struct pcb));
-
-	if(newPCB != NULL)
-	{
-		return newPCB;
+//note: figure out what errors can happen, make codes for them.
+	if(queuesExist == 0){
+	readyQueue = sys_alloc_mem(sizeof(queue));
+	blockedQueue = sys_alloc_mem(sizeof(queue));
+	queuesExist = 1;
 	}
-	else
-	{
-		return NULL;
-	}
+	pcb *toPCB;
+	toPCB = (pcb *)sys_alloc_mem(sizeof(pcb));
+	return toPCB;
 }
 
-int freePCB(struct pcb *oldpcb)
+/**
+\Function freePCB
+\Description: releases memory associated with PCB
+\Parameters: oldpcb - pointer to pcb to release
+\Returns: Success or error code
+*/
+int freePCB(pcb *oldpcb)
 {
-	sys_free_mem(oldpcb->name);
-	sys_free_mem(oldpcb->proctype);
-	sys_free_mem(oldpcb->priority);
-	return sys_free_mem(oldpcb);
+//note: figure out what errors can happen, make codes for them
+	sys_free_mem(oldpcb);
+	return 1;
 }
 
-struct pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
+/**
+\Function setupPCB
+\Description: initializes a PCB
+\Parameters: pcbname - name to use, pcbproc - class of process to use, pcbprior - priority to use
+\Returns: PCB pointer, or null for error
+*/
+pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 {
-	struct pcb *blankPCB = allocatePCB();
-
-	if(blankPCB == NULL)
-	{
-		return NULL;
-	}
-
-	blankPCB->name = pcbname;
-	blankPCB->proctype = pcbproc;
-	blankPCB->priority = pcbprior;
-
-	//There has to be more/other ways or errorchecking here, but here's a start
-	if(blankPCB->name == NULL || blankPCB.prototype == NULL || blankPCB.priority == NULL)
-	{
-		return NULL;
-	}
+	//note: do name uniqueness check in here, throw error if too long, non-unique
+	pcb *newpcb = allocatePCB();
+	strcpy(newpcb->name, pcbname);
+	newpcb->proctype = pcbproc;
+	newpcb->priority = pcbprior;
+	//set to ready and unsuspended
+	newpcb->state = 1;
+	newpcb->suspension = 1;
+	newpcb->next = NULL;
+	newpcb->prev = NULL;
+	return newpcb;
 }
 
-struct pcb *findPCB(char *pcbname)
-{
-	struct pcb *pcbpointer;
-
-	pcbpointer = readyqueue->head;
-	while(pcbpointer != NULL)
-	{
-		if(strcmp(pcbname, pcbpointer->pcbname) == 0)
-		{
-			return pcbpointer;
+/**
+\Function findPCB
+\Description: searches both queues for the PCB with the given name
+\Parameters: pcbname - name to look for
+\Returns: PCB pointer, or null if not found
+*/
+pcb *findPCB(char *pcbname)
+{	
+	struct pcb *temp = readyQueue->head;
+	while(temp != NULL){
+		if(strcmp(temp->name, pcbname) == 0){
+			return temp;
 		}
-
-		pcbpointer = pcbpointer->head;
-			
+		temp = temp->next;
 	}
-
-	pcbpointer = blockedqueue->head;
-
-	while(pcbpointer != NULL)
-	{
-		if(strcmp(pcbname, pcbpointer->pcbname) == 0)
-		{
-			return pcbpointer;
+	temp = blockedQueue->head;
+	while(temp != NULL){
+		if(strcmp(temp->name, pcbname) == 0){
+			return temp;
 		}
-
-		pcbpointer = pcbpointer->head;
+		temp = temp->next;
 	}
-
 	return NULL;
-	//Cycles through both queues, and returns a pcb pointer if it finds a match - If not, it'll return null at the end of the queue
 }
 
-void insertPCB(struct pcb *newpcb)
+/**
+\Function insertPCB
+\Description: inserts given PCB into proper queue
+\Parameters: newpcb - pointer to PCB to insert
+\Returns: none
+*/
+void insertPCB(pcb *newpcb)
 {
-	//Big issue here is determining whether we need to insert this into the readyqueue or the blockedqueue - From there, it's relatively simple to insert into the blockedqueue (Just plug it onto tail->next and have newpcb attach back to tail) and only marginally moreso into the readyqueue (Search queue via priority, locate where the first pcb that has a lower priority than newpcb, then place newpcb after the pcb we found)
+	if(newpcb->state == 0){
+		insertReady(newpcb);
+	} else {
+		insertBlocked(newpcb);
+	}
 }
 
-int removePCB(struct pcb *oldpcb)
-{
-	struct pcb *foundpcb = findPCB(oldpcb->name);
+void insertReady(pcb *newpcb){
+	//check for empty
+	if(readyQueue->head == NULL){
+		//insert first pcb
+		readyQueue->count = 1;
+		readyQueue->head = newpcb;
+		readyQueue->tail = newpcb;
+		return;
+	}
+	struct pcb *temp = readyQueue->head;
+	while(temp->next != NULL){
+		//since we look ahead, if statement triggers only at the end of a priority level
+		if(newpcb->priority > temp->next->priority){
+			newpcb->prev = temp;
+			newpcb->next = temp->next;
+			temp->next->prev = newpcb;
+			temp->next = newpcb;
+			readyQueue->count++;
+			return;
+		}
+		temp = temp->next;
+	}
+	//if we get here, we're at the end.
+	readyQueue->tail = newpcb;
+	newpcb->prev = temp;
+	temp->next = newpcb;
+	readyQueue->count++;
+	return;
+}
 
-	if(foundpcb == NULL)
-	{
-		//Return an error code stating that the PCB in question does not exist
+void insertBlocked(pcb *newpcb){
+	if(blockedQueue->head == NULL){
+		blockedQueue->count = 1;
+		blockedQueue->head = newpcb;
+		blockedQueue->tail = newpcb;
+		return;
+	}
+	//just FIFO, so we put it at the end of the queue
+	struct pcb *temp = blockedQueue->tail;
+	newpcb->prev = temp;
+	temp->next = newpcb;
+	blockedQueue->tail = newpcb;
+	blockedQueue->count++;
+	return;
+}
+
+/**
+\Function removePCB
+\Description: removes given PCB from queues
+\Parameters: oldpcb - pointer to PCB to remove
+\Returns: Success or Error code
+*/
+int removePCB(pcb *oldpcb)
+{
+	if(oldpcb->state == 1){
+		if(oldpcb->prev == NULL){
+			readyQueue->head = oldpcb->next;
+		} else {
+			oldpcb->prev->next = oldpcb->next;
+		}
+		if(oldpcb->next == NULL){
+			readyQueue->tail = oldpcb->prev;
+		} else {
+			oldpcb->next->prev = oldpcb->prev;
+		}
+		readyQueue->count--;
+	} else if(oldpcb->state == 0){
+		if(oldpcb->prev == NULL){
+			blockedQueue->head = oldpcb->next;
+		} else {
+			oldpcb->prev->next = oldpcb->next;
+		}
+		if(oldpcb->next == NULL){
+			blockedQueue->tail = oldpcb->prev;
+		} else {
+			oldpcb->next->prev = oldpcb->prev;
+		}
+		blockedQueue->count--;
+	}
+	freePCB(oldpcb);
+return 0;
+}
+
+void displayPCB(pcb *apcb){
+	if(apcb == NULL){
+	serial_println("Not found");
+	return;
+	}
+	serial_println("Name:");
+	char* name = sys_alloc_mem(*apcb->name); 
+	strcpy(name, apcb->name);
+	serial_println(name);
+	serial_println("Class:");
+	if (apcb->proctype == 1){
+	serial_println("App");
+	} else {
+	serial_println("System");
+	}
+	serial_println("State:");
+	if(apcb->state == 1){
+	serial_println("Ready");
+	} else {
+	serial_println("Blocked");
+	}
+	//note: add running
+	serial_println("Suspended?");
+	if(apcb->suspension == 1){
+	serial_println("Not suspended");
+	} else {
+	serial_println("Suspended");
+	}
+	serial_println("Priority:");
+	int prio = apcb->priority;
+	//these are temporary. Print actual values later.
+	if(prio > 6) {
+	serial_println("High");
+	} else if(prio < 4) {
+	serial_println("Low");
+	} else {
+	serial_println("Medium");
 	}
 
-	(foundpcb->prev)->next = foundpcb->next;
-	(foundpcb->next)->prev = foundpcb->prev;
 }
