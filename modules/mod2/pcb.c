@@ -23,7 +23,9 @@ int queuesExist = 0;
 */
 pcb *allocatePCB()
 {
-//note: figure out what errors can happen, make codes for them.
+/* I'm not sure how to implement the "return Null on error" part right now.
+Whenever we deal with memory ourselves, we'll need to come back to this.
+*/
 	if(queuesExist == 0){
 	readyQueue = sys_alloc_mem(sizeof(queue));
 	blockedQueue = sys_alloc_mem(sizeof(queue));
@@ -42,7 +44,9 @@ pcb *allocatePCB()
 */
 int freePCB(pcb *oldpcb)
 {
-//note: figure out what errors can happen, make codes for them
+	if(oldpcb == NULL){
+		return 0; //error code
+	}
 	sys_free_mem(oldpcb);
 	return 1;
 }
@@ -55,7 +59,14 @@ int freePCB(pcb *oldpcb)
 */
 pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 {
-	//note: do name uniqueness check in here, throw error if too long, non-unique
+	//note: length check
+	int length = strlen(pcbname);
+	if(length > 8){
+	return NULL;
+	}
+	if(findPCB(pcbname) != NULL){
+	return NULL;	
+	}
 	pcb *newpcb = allocatePCB();
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
@@ -111,7 +122,6 @@ void insertPCB(pcb *newpcb)
 void insertReady(pcb *newpcb){
 	//check for empty
 	if(readyQueue->head == NULL){
-		serial_println("make a head");
 		//insert first pcb
 		readyQueue->count = 1;
 		readyQueue->head = newpcb;
@@ -163,6 +173,9 @@ void insertBlocked(pcb *newpcb){
 */
 int removePCB(pcb *oldpcb)
 {
+	if(oldpcb == NULL){
+	return 0; //error code
+	}
 	if(oldpcb->state == 1){
 		if(oldpcb->prev == NULL){
 			readyQueue->head = oldpcb->next;
@@ -189,14 +202,11 @@ int removePCB(pcb *oldpcb)
 		blockedQueue->count--;
 	}
 	freePCB(oldpcb);
-return 0;
+return 1; //success code
 }
 
 void displayReady(){
 	struct pcb *temp = readyQueue->head;
-	if(temp == NULL){
-		serial_println("I am headless.");
-	}
 	while(temp != NULL){
 		displayPCB(temp);
 		temp = temp->next;

@@ -150,7 +150,7 @@ switch(inputInt)
   break;
 
   case 4:
-  serial_println("Give name to find. This is temporary text");
+  serial_println("Please input name of wanted PCB.");
   takeInput(*input, size);
   displayPCB(findPCB(*input));
   break;
@@ -185,19 +185,25 @@ switch(inputInt)
  	 {
  	 case 1:
  	 serial_println("Give priority");
- 	 //using input here is temporary probably
  	 takeInput(*input, size);
  	 input2 = input[0];
 	 inputInt = atoi(input2);
  	 serial_println("give name");
  	 takeInput(*input, size);
- 	 insertPCB(setupPCB(*input,1,inputInt));
+	 struct pcb *temp = setupPCB(*input,1,inputInt);
+	 if(temp == NULL){
+	 serial_println("Invalid name - please use a unique name under 8 characters.");
+	 } else {
+	 insertPCB(temp);
+	 }
  	 break;
 	
  	 case 2:
  	 serial_println("Give name.");
  	 takeInput(*input, size);
- 	 removePCB(findPCB(*input));
+	 if((removePCB(findPCB(*input))) == 0){
+	 serial_println("PCB not deleted - could not be found");
+	 }
  	 break;
 	
 	 case 3:
