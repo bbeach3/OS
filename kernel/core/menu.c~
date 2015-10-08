@@ -201,11 +201,9 @@ switch(inputInt)
  	 case 2:
  	 serial_println("Give name.");
  	 takeInput(*input, size);
-	 struct pcb *temp = findPCB(*input);
-	 if(temp ==NULL){
-	 serial_println("PCB not deleted - could not be found.");
+	 if((removePCB(findPCB(*input))) == 0){
+	 serial_println("PCB not deleted - could not be found");
 	 }
- 	 removePCB(findPCB(*input));
  	 break;
 	
 	 case 3:
