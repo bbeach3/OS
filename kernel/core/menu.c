@@ -47,7 +47,8 @@ switch(inputInt)
  serial_println("4. Get date");
  serial_println("5. Set date");
  serial_println("6. Shutdown");
- serial_println("7. Go back");
+ serial_println("7. PCB Commands");
+ serial_println("8. Go back");
  
  takeInput(*input,size);
  input2 = input[0];
@@ -73,6 +74,76 @@ switch(inputInt)
   break;
 
   case 7:
+   serial_println("What PCB-related command would you like help with?");
+   serial_println("1. Suspend");
+   serial_println("2. Resume");
+   serial_println("3. Set Priority");
+   serial_println("4. Show PCB");
+   serial_println("5. Show all Processes");
+   serial_println("6. Show Ready Processes");
+   serial_println("7. Show Blocked Processes");
+   serial_println("8. Temporary Commands");
+   serial_println("9. Go Back");
+
+   takeInput(*input,size);
+   input2 = input[0];
+   inputInt = atoi(input2);
+   switch(inputInt)
+   {
+	case 1: suspend_help();
+	break;
+	
+	case 2: resume_help();
+	break;
+
+	case 3: setpriority_help();
+	break;
+
+	case 4: pcbprint_help();
+	break;
+
+	case 5: processdisplay_help();
+	break;
+
+	case 6: readydisplay_help();
+	break;
+
+	case 7: blockdisplay_help();
+	break;
+
+	case 8:
+	  serial_println("What temporary PCB-related command would you like help with?");
+ 	  serial_println("1. Create PCB");
+ 	  serial_println("2. Delete PCB");
+ 	  serial_println("3. Block");
+ 	  serial_println("4. Unblock");
+ 	  serial_println("5. Go Back");
+  
+ 	  takeInput(*input,size);
+ 	  input2 = input[0];
+ 	  inputInt = atoi(input2);
+ 	  switch(inputInt)
+	  {
+		case 1: createpcb_help();
+		break;
+
+		case 2: deletepcb_help();
+		break;
+
+		case 3: block_help();
+		break;
+
+		case 4: unblock_help();
+		break;
+	  }
+	break;
+
+	case 9:
+	break;
+   }
+  break;
+
+  case 8:
   break;
   }
  
