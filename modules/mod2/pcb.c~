@@ -129,6 +129,19 @@ void insertReady(pcb *newpcb){
 		return;
 	}
 	struct pcb *temp = readyQueue->head;
+	if(temp->next == NULL){ //head is only pcb
+		if(newpcb->priority > temp->priority){ //newpcb is higher priority
+			readyQueue->head = newpcb;
+			newpcb->next = temp;
+			temp->prev = newpcb;		
+			return;
+		} else { //old head is higher priority or equal
+			readyQueue->tail = newpcb;
+			newpcb->prev = temp;
+			temp->next = newpcb;
+			return;
+		}
+	}
 	while(temp->next != NULL){
 		//since we look ahead, if statement triggers only at the end of a priority level
 		if(newpcb->priority > temp->next->priority){
@@ -207,9 +220,6 @@ return 1; //success code
 
 void displayReady(){
 	struct pcb *temp = readyQueue->head;
-	if(temp == NULL){
-		serial_println("I am headless.");
-	}
 	while(temp != NULL){
 		displayPCB(temp);
 		temp = temp->next;
