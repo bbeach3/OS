@@ -9,7 +9,7 @@
 \Parameters: none
 \Returns: none
 */
-version_help()
+void version_help()
 {
 serial_println("This command displays the current version of MPX that we are currently on.");
 }
@@ -21,7 +21,7 @@ serial_println("This command displays the current version of MPX that we are cur
 \Parameters: none
 \Returns: none
 */
-shutdown_help()
+void shutdown_help()
 {
 serial_println("This command shuts down the MPX project. It asks for confirmation before doing so.");
 }
@@ -33,7 +33,7 @@ serial_println("This command shuts down the MPX project. It asks for confirmatio
 \Parameters: none
 \Returns: none
 */
-getdate_help()
+void getdate_help()
 {
 serial_println("This command displays the current date.");
 }
@@ -45,7 +45,7 @@ serial_println("This command displays the current date.");
 \Parameters: none
 \Returns: none
 */
-setdate_help()
+void setdate_help()
 {
 serial_println("This command allows you to set the date.");
 }
@@ -57,7 +57,7 @@ serial_println("This command allows you to set the date.");
 \Parameters: none
 \Returns: none
 */
-gettime_help()
+void gettime_help()
 {
 serial_println("This command displays the current time.");
 }
@@ -68,7 +68,86 @@ serial_println("This command displays the current time.");
 \Parameters: none
 \Returns: none
 */
-settime_help()
+void settime_help()
 {
 serial_println("This command allows you to set the time.");
 }
+
+/**
+\Function: suspend_help
+\Description: prints out help for the suspend option
+\Parameters: none
+\Returns: none
+*/
+void suspend_help()
+{
+serial_println("This command allows you to place a PCB in a suspended state.");
+}
+
+/**
+\Function: resume_help
+\Description: prints out help for the resume option
+\Parameters: none
+\Returns: none
+*/
+void resume_help()
+{
+serial_println("This command allows you to place a PCB in an unsuspended state.");
+}
+
+/**
+\Function: setpriority_help
+\Description: prints out help for the 'Set priority' option
+\Parameters: none
+\Returns: none
+*/
+void setpriority_help()
+{
+serial_println("This command allows you to set a PCB's priority.");
+}
+
+/**
+\Function: pcbprint_help
+\Description: prints out help for the 'Show PCD' option
+\Parameters: none
+\Returns: none
+*/
+void pcbprint_help()
+{
+serial_println("This command allows you to display a specified PCB and its details.");
+}
+
+/**
+\Function: processdisplay_help
+\Description: prints out help for the 'Display all processes' option
+\Parameters: none
+\Returns: none
+*/
+void processdisplay_help()
+{
+serial_println("This command allows you to show all the processes that currently exist.");
+}
+
+/**
+\Function: readydisplay_help
+\Description: prints out help for the 'Display ready processes' option
+\Parameters: none
+\Returns: none
+*/
+void readydisplay_help()
+{
+serial_println("This command allows you to show all the ready processes that currently exist.");
+}
+
+/**
+\Function: blockdislay_help
+\Description: prints out help for the 'Display blocked processes' option
+\Parameters: none
+\Returns: none
+*/
+void blockdisplay_help()
+{
+serial_println("This command allows you to show all the blocke processes that currently eist.");
+}
+
+
