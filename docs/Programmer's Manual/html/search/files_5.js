@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['paging_2ec',['paging.c',['../paging_8c.html',1,'']]],
-  ['paging_2eh',['paging.h',['../paging_8h.html',1,'']]]
+  ['version_2ec',['version.c',['../version_8c.html',1,'']]]
 ];

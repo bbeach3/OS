@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['cdir',['cdir',['../paging_8c.html#af7da380833e92d5c7d3c3db41484713b',1,'paging.c']]],
-  ['curr_5fheap',['curr_heap',['../heap_8c.html#afaac4d3fb801ecbd3c6fe3c995d5cf82',1,'heap.c']]],
-  ['current_5fmodule',['current_module',['../mpx__supt_8c.html#a3d19c725b7f9f45e9da97a79ca6a4737',1,'mpx_supt.c']]]
+  ['prev',['prev',['../structpcb.html#adadd77e362b8f42011af0ad203cb41f6',1,'pcb']]],
+  ['priority',['priority',['../structpcb.html#acec9ce2df15222151ad66fcb1d74eb9f',1,'pcb']]],
+  ['proctype',['proctype',['../structpcb.html#a88ef23b2fedc1323a7deec0f1814be51',1,'pcb']]]
 ];

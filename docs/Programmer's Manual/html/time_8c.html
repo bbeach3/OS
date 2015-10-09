@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>MPX-Fall2015-Group0: time.c File Reference</title>
+<title>MPX-G0: C:/Users/Nathan/Desktop/Media/Projects/School/CS450/mpx-fall2015-group0/modules/time.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,8 +23,8 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MPX-Fall2015-Group0
-   &#160;<span id="projectnumber">R1</span>
+   <div id="projectname">MPX-G0
+   &#160;<span id="projectnumber">R2</span>
    </div>
   </td>
  </tr>
@@ -91,10 +91,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">time.c File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;./mpx_spring15/include/core/io.h&quot;</code><br />
-<code>#include &quot;./mpx_spring15/include/core/serial.h&quot;</code><br />
-<code>#include &quot;./mpx_spring15/include/string.h&quot;</code><br />
-<code>#include &quot;<a class="el" href="mpx__supt_8c.html">mpx_supt.c</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;time.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -102,10 +99,10 @@ Functions</h2></td></tr>
 <tr class="separator:a2197fd0d3804af2685e0d3ea6365c40c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9e53b9f4a62a88b8e8461c168e5d9a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#ac9e53b9f4a62a88b8e8461c168e5d9a5">gettime</a> ()</td></tr>
 <tr class="separator:ac9e53b9f4a62a88b8e8461c168e5d9a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec4bde795690552c121276488745c918"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#aec4bde795690552c121276488745c918">setdate</a> (char datestring[])</td></tr>
-<tr class="separator:aec4bde795690552c121276488745c918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e0e8dc4c66b7156fb30334e3d5f5369"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a2e0e8dc4c66b7156fb30334e3d5f5369">settime</a> (char *timestring)</td></tr>
-<tr class="separator:a2e0e8dc4c66b7156fb30334e3d5f5369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a904fe4a826bc545ea2cf3d561c6162cb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a904fe4a826bc545ea2cf3d561c6162cb">setdate</a> (char datestring[], int datelength)</td></tr>
+<tr class="separator:a904fe4a826bc545ea2cf3d561c6162cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17b4220ea702703600c6891d02ca59e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="time_8c.html#a17b4220ea702703600c6891d02ca59e7">settime</a> (char timestring[], int timelength)</td></tr>
+<tr class="separator:a17b4220ea702703600c6891d02ca59e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains the functions allowing the control of time and date settings in the MPX system Contains the functions allowing us to set the systems time and date, as well as allowing us to retrieve the time and date </p>
@@ -142,7 +139,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="aec4bde795690552c121276488745c918"></a>
+<a class="anchor" id="a904fe4a826bc545ea2cf3d561c6162cb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -150,29 +147,49 @@ Functions</h2></td></tr>
           <td class="memname">void setdate </td>
           <td>(</td>
           <td class="paramtype">char&#160;</td>
-          <td class="paramname"><em>datestring</em>[]</td><td>)</td>
+          <td class="paramname"><em>datestring</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>datelength</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>: setDate : Sets the date on the system : datestring[] - A string specifying the date : none </p>
+<p>: setDate : Sets the date on the system : datestring[] - A string specifying the date, datelength - The length of datestring : none </p>
 
 </div>
 </div>
-<a class="anchor" id="a2e0e8dc4c66b7156fb30334e3d5f5369"></a>
+<a class="anchor" id="a17b4220ea702703600c6891d02ca59e7"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void settime </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>timestring</em></td><td>)</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>timestring</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>timelength</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>: setTime : Sets the time on the system : timestring - A string specifying the time : none </p>
+<p>: setTime : Sets the time on the system : timestring[] - A string specifying the time, timelength - The length of timestring : none </p>
 
 </div>
 </div>
