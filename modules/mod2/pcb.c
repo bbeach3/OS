@@ -61,7 +61,7 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 {
 	//note: length check
 	int length = strlen(pcbname);
-	if(length > 8){
+	if(length > 9){
 	return NULL;
 	}
 	if(findPCB(pcbname) != NULL){
@@ -89,7 +89,7 @@ pcb *findPCB(char *pcbname)
 {	
 	struct pcb *temp = readyQueue->head;
 	while(temp != NULL){
-		if(strcmp(temp->name, pcbname) == 0){
+		if(strcmp(temp->name, pcbname) == 0){ 
 			return temp;
 		}
 		temp = temp->next;
@@ -227,7 +227,10 @@ int removePCB(pcb *oldpcb)
 			oldpcb->next->prev = oldpcb->prev;
 		}
 		blockedQueue->count--;
+		
 	}
+	oldpcb->next = NULL;
+	oldpcb->prev = NULL;
 	freePCB(oldpcb);
 return 1; //success code
 }
@@ -239,7 +242,23 @@ return 1; //success code
 \Returns: none
 */
 void displayReady(){
+	serial_println("Ready Queue:");
 	struct pcb *temp = readyQueue->head;
+	while(temp != NULL){
+		displayPCB(temp);
+		temp = temp->next;
+	}
+}
+
+/**
+\Function displayBlocked
+\Description: displays all PCBs in blocked queue in order.
+\Parameters: none
+\Returns: none
+*/
+void displayBlocked(){
+	serial_println("Blocked Queue:");
+	struct pcb *temp = blockedQueue->head;
 	while(temp != NULL){
 		displayPCB(temp);
 		temp = temp->next;
@@ -303,4 +322,5 @@ void displayPCB(pcb *apcb){
 	} else if(apcb->priority == 9) {
 	serial_println("9");
 	}
+	serial_println(" ");
 }
