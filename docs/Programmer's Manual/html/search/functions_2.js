@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['bounds',['bounds',['../interrupts_8c.html#a96724d36ad85f9a02231d8e6fe0434df',1,'interrupts.c']]],
-  ['breakpoint',['breakpoint',['../interrupts_8c.html#a874043e2396dd8ce20ec7af3ea1e2a86',1,'interrupts.c']]]
+  ['createpcb_5fhelp',['createpcb_help',['../help_8c.html#ad92a81a21321cbc9c89552c611383cd9',1,'help.c']]]
 ];

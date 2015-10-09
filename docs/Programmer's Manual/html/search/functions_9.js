@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['load_5fpage_5fdir',['load_page_dir',['../paging_8h.html#a3affceba4cd194e1c516404c14abbe7c',1,'load_page_dir(page_dir *new_page_dir):&#160;paging.c'],['../paging_8c.html#a31e6c585cbda542534f1b0fc83e40689',1,'load_page_dir(page_dir *new_dir):&#160;paging.c']]]
+  ['takeinput',['takeInput',['../keyboard_input_8c.html#a87766e20708d77f4468393bf4f866f60',1,'keyboardInput.c']]]
 ];
