@@ -4,9 +4,9 @@
 typedef struct queue queue;
 
 struct queue{
-	int count;
-	pcb *head;
-	pcb *tail;
+	int count; //!<number of PCBs in the queue
+	pcb *head; //!<pointer to first PCB of queue
+	pcb *tail; //!<pointer to last PCB of queue
 };
 
 #endif

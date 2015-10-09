@@ -7,16 +7,16 @@
 typedef struct pcb pcb;
 
 struct pcb{
-	char name[9];
-	unsigned int proctype;
-	int priority;
+	char name[9]; //!< name of PCB
+	unsigned int proctype; //!< marks type: App (1) or System(0)
+	int priority; //!< priority level assigned
 	int state; //0 for blocked, 1 for ready, and I guess 2 for running
 	int suspension; //0 for suspended, 1 for not
-	unsigned char *stacktop;
-	unsigned char *stackbase;
+	unsigned char *stacktop;//!< top of stack
+	unsigned char *stackbase; //!<base of stack
 	//Pointers to other PCBs
-	pcb *next;
-	pcb *prev;
+	pcb *next; //!<pointer to next PCB in queue
+	pcb *prev; //!<pointer to previous PCB in queue
 };
 
 pcb *allocatePCB();
