@@ -39,5 +39,6 @@ int removePCB(pcb *oldpcb);
 
 void displayPCB(pcb *apcb);
 void displayReady();
+void displayBlocked();
 
 #endif

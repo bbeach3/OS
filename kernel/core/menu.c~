@@ -121,6 +121,10 @@ switch(inputInt)
   serial_println("What do you want to suspend?");
   takeInput(*input,size);
   pcb *suspendedPCB = findPCB(*input);
+  if(suspendedPCB == NULL){
+    serial_println("Could not find that PCB");
+    break;
+  }
   suspendedPCB->suspension=0;
   break;
 
@@ -129,6 +133,10 @@ switch(inputInt)
   serial_println("What do you want to resume?");
   takeInput(*input,size);
   pcb *resumedPCB = findPCB(*input);
+  if(resumedPCB == NULL){
+    serial_println("Could not find that PCB");
+    break;
+  }
   resumedPCB->suspension =1;
   break;
 
@@ -137,6 +145,10 @@ switch(inputInt)
   serial_println("What do you want to change the priority of?");
   takeInput(*input,size);
   pcb *priorityPCB = findPCB(*input);
+  if(priorityPCB == NULL){
+    serial_println("Could not find that PCB");
+    break;
+  }
   serial_println("What do you want to change the priority to?");
   takeInput(*input,size);
   input2 = input[0];
@@ -146,6 +158,9 @@ switch(inputInt)
   else
   {
   priorityPCB->priority=inputInt;
+  //putting in proper place in queue
+  removePCB(priorityPCB);
+  insertPCB(priorityPCB);
   }
   break;
 
@@ -155,19 +170,18 @@ switch(inputInt)
   displayPCB(findPCB(*input));
   break;
 
-  case 5:
-  serial_println("Show all Processes goes here");
-  
+  case 5: //show all processes
+  displayReady();
+  displayBlocked();
   break;
 
-  case 6:
-  serial_println("Show Ready Processes goes here");
+  case 6: //show ready processes
   displayReady();
 
   break;
 
-  case 7:
-  serial_println("Show Blocked Processes goes here");
+  case 7: //show blocked processes
+  displayBlocked();
   break;
   
   case 8:
@@ -188,9 +202,22 @@ switch(inputInt)
  	 takeInput(*input, size);
  	 input2 = input[0];
 	 inputInt = atoi(input2);
- 	 serial_println("give name");
+	 if(inputInt<0||inputInt>9) {
+	 serial_println("Error, this must be between 0 and 9");
+	 break;
+	 }
+	 int stateVal;
+	 serial_println("Give type. 1 = App. 0 = System.");
+	 takeInput(*input, size);
+	 input2 = input[0];
+	 stateVal = atoi(input2);
+	 if(stateVal < 0 || stateVal > 1){
+	 serial_println("Not a valid state");
+	 break;
+	 }
+ 	 serial_println("Give name");
  	 takeInput(*input, size);
-	 struct pcb *temp = setupPCB(*input,1,inputInt);
+	 struct pcb *temp = setupPCB(*input,stateVal,inputInt);
 	 if(temp == NULL){
 	 serial_println("Invalid name - please use a unique name under 8 characters.");
 	 } else {
@@ -207,27 +234,40 @@ switch(inputInt)
  	 break;
 	
 	 case 3:
-	 //serial_println("Block goes here");
+	 //Block
 	 
 	 serial_println("What do you want to block?");
 	 takeInput(*input,size);
-	 removePCB(findPCB(*input));
-	 pcb *changePCB = findPCB(*input);
-	 changePCB->state=0;
-	 insertBlocked(findPCB(*input));
+	 pcb *toBlockPCB = findPCB(*input);
+    if(toBlockPCB == NULL){
+    serial_println("Could not find that PCB");
+    break;
+    }
+	 removePCB(toBlockPCB);
+	 toBlockPCB->state=0;
+	 //remove links to old queue
+	 toBlockPCB->prev = NULL;
+	 toBlockPCB->next = NULL;
+	 insertPCB(toBlockPCB);
 	 	 
 	 break;
 	
 	 case 4:
-  	// serial_println("Unblock goes here");
-
+  	// Unblock
 	 serial_println("What do you want to unblock?");
 	 takeInput(*input,size);
-	 removePCB(findPCB(*input));
-	 pcb *changedPCB = findPCB(*input);
-	 changedPCB->state = 1;
-	 insertReady(findPCB(*input));
- 	 break;
+	 pcb *toUnblockPCB = findPCB(*input);
+    if(toUnblockPCB == NULL){
+    serial_println("Could not find that PCB");
+    break;
+    }
+	 removePCB(toUnblockPCB);
+	 toUnblockPCB->state=1;
+	 toUnblockPCB->prev = NULL;
+	 toUnblockPCB->next = NULL;
+	 insertPCB(toUnblockPCB);
+	 	 
+	 break;
 
 	//if this part of the menu wasn't temporary, I'd fix this so it only went back one step.
   	 case 5:
