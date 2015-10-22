@@ -9,7 +9,8 @@ struct context {
 	u32int eip, cs, eflags;
 };
 
-extern context *cop;
+extern context *pcb;
+extern context *oldcon;
 
 u32int* sys_call(context *registers);
 
