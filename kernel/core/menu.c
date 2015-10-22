@@ -310,9 +310,11 @@ switch(inputInt)
  	 case 2:
  	 serial_println("Give name.");
  	 takeInput(*input, size);
-	 if((removePCB(findPCB(*input))) == 0){
+ 	 pcb *toDelete = findPCB(*input);
+	 if((removePCB(toDelete)) == 0){
 	 serial_println("PCB not deleted - could not be found");
 	 }
+	 freePCB(toDelete);
  	 break;
 	
 	 case 3:

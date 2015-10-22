@@ -231,7 +231,6 @@ int removePCB(pcb *oldpcb)
 	}
 	oldpcb->next = NULL;
 	oldpcb->prev = NULL;
-	freePCB(oldpcb);
 return 1; //success code
 }
 

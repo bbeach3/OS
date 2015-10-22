@@ -6,14 +6,14 @@
 u32int* sys_call(context *registers){
 	if(cop == NULL)
 	{
-		//save the above context as a global variable, probably cop
-		cop == registers;
+		//save the above context as a global variable
+		oldcon == registers;
 	}
 	else
 	{
 		if(params.op_code == IDLE)
 		{
-			//save context
+			//save context (reassign cop's stack top)
 		}
 		else
 		{

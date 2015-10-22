@@ -117,7 +117,9 @@ switch(inputInt)
  	  serial_println("2. Delete PCB");
  	  serial_println("3. Block");
  	  serial_println("4. Unblock");
- 	  serial_println("5. Go Back");
+	  serial_println("5. Yield (Manual Interrupt)");
+	  serial_println("6. Load r3 Processes");
+ 	  serial_println("7. Go Back");
   
  	  takeInput(*input,size);
  	  input2 = input[0];
@@ -134,6 +136,15 @@ switch(inputInt)
 		break;
 
 		case 4: unblock_help();
+		break;
+
+		case 5: asm volatile ("int $60");
+		break;
+
+		case 6: //loadr3 goes here 
+		break;
+
+		case 7:
 		break;
 	  }
 	break;
@@ -298,10 +309,13 @@ switch(inputInt)
 	
  	 case 2:
  	 serial_println("Give name.");
+ 	 serial_println("updated! Delete this.");
  	 takeInput(*input, size);
-	 if((removePCB(findPCB(*input))) == 0){
+ 	 pcb *toDelete = findPCB(*input);
+	 if((removePCB(toDelete)) == 0){
 	 serial_println("PCB not deleted - could not be found");
 	 }
+	 freePCB(toDelete);
  	 break;
 	
 	 case 3:

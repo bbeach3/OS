@@ -1,4 +1,4 @@
-/*
+/* 
   ----- kmain.c ----- 
  
   Description..: Kernel main. The first function called after
@@ -21,7 +21,7 @@
 #include "menu.c"
 
 void kmain(void) 
-{
+{ 
    extern uint32_t magic;
    // Uncomment if you want to access the multiboot header
    // extern void *mbd;
