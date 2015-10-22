@@ -90,28 +90,52 @@ switch(inputInt)
    inputInt = atoi(input2);
    switch(inputInt)
    {
-	case 1:
+	case 1: suspend_help();
 	break;
 	
-	case 2:
+	case 2: resume_help();
 	break;
 
-	case 3:
+	case 3: setpriority_help();
 	break;
 
-	case 4:
+	case 4: pcbprint_help();
 	break;
 
-	case 5:
+	case 5: processdisplay_help();
 	break;
 
-	case 6:
+	case 6: readydisplay_help();
 	break;
 
-	case 7:
+	case 7: blockdisplay_help();
 	break;
 
 	case 8:
+	  serial_println("What temporary PCB-related command would you like help with?");
+ 	  serial_println("1. Create PCB");
+ 	  serial_println("2. Delete PCB");
+ 	  serial_println("3. Block");
+ 	  serial_println("4. Unblock");
+ 	  serial_println("5. Go Back");
+  
+ 	  takeInput(*input,size);
+ 	  input2 = input[0];
+ 	  inputInt = atoi(input2);
+ 	  switch(inputInt)
+	  {
+		case 1: createpcb_help();
+		break;
+
+		case 2: deletepcb_help();
+		break;
+
+		case 3: block_help();
+		break;
+
+		case 4: unblock_help();
+		break;
+	  }
 	break;
 
 	case 9:
