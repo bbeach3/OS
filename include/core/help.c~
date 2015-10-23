@@ -150,4 +150,56 @@ void blockdisplay_help()
 serial_println("This command allows you to show all the blocke processes that currently eist.");
 }
 
+/**
+\Function: createpcb_help
+\Description: prints out help for the 'Create PCB' option
+\Parameters: none
+\Returns: none
+*/
+void createpcb_help()
+{
+serial_println("This command allows you to create a new PCB.");
+}
 
+/**
+\Function: deletepcb_help
+\Description: prints out help for the 'Delete PCB' option
+\Parameters: none
+\Returns: none
+*/
+void deletepcb_help()
+{
+serial_println("This command allows you to delete a PCB.");
+}
+
+/**
+\Function: block_help
+\Description: prints out help for the 'Block' option
+\Parameters: none
+\Returns: none
+*/
+void block_help()
+{
+serial_println("This command allows you to set a PCB to the blocked state.");
+}
+
+/**
+\Function: unblock_help
+\Description: prints out help for the 'Unblock' option
+\Parameters: none
+\Returns: none
+*/
+void unblock_help()
+{
+serial_println("This command allows you to set a PCB to the unblocked state.");
+}
+
+void yield_help()
+{
+serial_println("This command causes commhand to yield so that other processes may run.");
+}
+
+void loadr3_help()
+{
+serial_println("This command loads all the r3 processe into memory.");
+}

@@ -139,10 +139,10 @@ switch(inputInt)
 		case 4: unblock_help();
 		break;
 
-		case 5: asm volatile ("int $60");
+		case 5: yield_help();
 		break;
 
-		case 6: //loadr3 goes here 
+		case 6: loadr3_help();
 		break;
 
 		case 7:
@@ -273,7 +273,9 @@ switch(inputInt)
  	serial_println("2. Delete PCB");
  	serial_println("3. Block");
  	serial_println("4. Unblock");
- 	serial_println("5. Go Back");
+	serial_println("5. Yield (Manual Interrupt)");
+	serial_println("6. Load r3 Processes");
+ 	serial_println("7. Go Back");
  
  	takeInput(*input,size);
  	input2 = input[0];
@@ -355,8 +357,14 @@ switch(inputInt)
 	 break;
 
 	//if this part of the menu wasn't temporary, I'd fix this so it only went back one step.
-  	 case 5:
-  	 break;
+	case 5: asm volatile ("int $60");
+	break;
+
+	case 6: //loadr3();
+	break;
+
+	case 7:
+	break;
   	}
   break;
 

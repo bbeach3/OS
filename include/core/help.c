@@ -193,3 +193,25 @@ void unblock_help()
 {
 serial_println("This command allows you to set a PCB to the unblocked state.");
 }
+
+/**
+\Function: yield_help
+\Description: prints out help for the 'Yield' option
+\Parameters: none
+\Returns: none
+*/
+void yield_help()
+{
+serial_println("This command causes commhand to yield so that other processes may run.");
+}
+
+/**
+\Function: loadr3_help
+\Description: prints out help for the 'loadr3' option
+\Parameters: none
+\Returns: none
+*/
+void loadr3_help()
+{
+serial_println("This command loads all the r3 processe into memory.");
+}

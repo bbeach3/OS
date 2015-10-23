@@ -15,7 +15,6 @@ gdt_entry gdt_entries[5];
 // Interrupt Descriptor Table
 idt_descriptor idt_ptr;
 idt_entry idt_entries[256];
-idt_set_gate(60, (u32int)sys_call_isr, 0x08, 0x0e);
 
 // Assembly routines to install tables
 extern void write_gdt_ptr(u32int, size_t);

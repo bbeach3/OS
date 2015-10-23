@@ -19,6 +19,7 @@
  
 #include "modules/mpx_supt.h"
 #include "menu.c"
+#include "irq.s"
 
 void kmain(void) 
 {
@@ -44,7 +45,8 @@ void kmain(void)
    // 2) Descriptor Tables
    klogv("Initializing descriptor tables...");
    init_gdt();
-   init_idt(); 
+   init_idt();
+   idt_set_gate(60, (u32int)sys_call_isr, 0x08, 0x0e); 
   
    // 3?) Interrupt (Controller)  
    klogv("Initializing the interrupt controller..."); 

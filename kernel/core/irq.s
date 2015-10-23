@@ -3,7 +3,7 @@
 
   ;; Description..: Interrupt handler stubs. All call C routines
   ;; 	to do the real work. Also, default system call handler
-  ;; 	located at the bottom.
+  ;;	located at the bottom.
 
 
 [GLOBAL divide_error]
@@ -43,6 +43,7 @@ extern do_general_protection
 extern do_page_fault
 extern do_reserved
 extern do_coprocessor
+extern sys_call
 
 ; RTC interrupt handler
 ; Tells the slave PIC to ignore
@@ -51,10 +52,10 @@ rtc_isr:
 	cli
 	push ax
 	
-	; Tell the PIC this is EOI
-	; This really should be done
-	; at the RTC level -- but this is
-	; okay for now...
+	;; Tell the PIC this is EOI
+	;; This really should be done
+	;; at the RTC level -- but this is
+	;; okay for now...
 	mov al, 0x20
 	out 0xA0, al
 	
@@ -114,11 +115,11 @@ coprocessor:
 	call do_coprocessor
 	iret
 
-;;; System call interrupt handler. Pushes all the x86 registers
-;;; onto the stack followed by ds,es,fs,gs (see context structure).
-;;; Pushes esp last, which the function can cast to a context and
-;;; access the registers. The C handler returns the address of the
-;;; new processes stack top/pointer.
+;; System call interrupt handler. Pushes all the x86 registers
+;; onto the stack followed by ds,es,fs,gs (see context structure).
+;; Pushes esp last, which the function can cast to a context and
+;; access the registers. The C handler returns the address of the
+;; new processes stack top/pointer.
 sys_call_isr:
 	pusha
 	push ds
@@ -126,11 +127,11 @@ sys_call_isr:
 	push fs
 	push gs
 	push esp
-	;;;apparently, the IA-32 passes arguments by popping them off the stack.
-	;;;since esp was the last one put on, it comes out when it needs to
+	;;apparently, the IA-32 passes arguments by popping them off the stack.
+	;;since esp was the last one put on, it comes out when it needs to
 	call sys_call
-	;;;Set a new stack pointer
-	;;;the result of the C function is put in eax.
+	;;Set a new stack pointer
+	;;the result of the C function is put in eax.
 	mov esp, eax
 	pop gs
 	pop fs
