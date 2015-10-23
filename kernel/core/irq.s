@@ -125,10 +125,13 @@ sys_call_isr:
 	push es
 	push fs
 	push gs
-
-	call sys_call %esp
+	push esp
+	;;;apparently, the IA-32 passes arguments by popping them off the stack.
+	;;;since esp was the last one put on, it comes out when it needs to
+	call sys_call
 	;;;Set a new stack pointer
-
+	;;;the result of the C function is put in eax.
+	mov esp, eax
 	pop gs
 	pop fs
 	pop es
