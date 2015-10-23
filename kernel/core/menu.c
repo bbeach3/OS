@@ -16,6 +16,7 @@
 #include "modules/time.c"
 #include "modules/mod2/pcb.h"
 #include "modules/mod2/queue.h"
+#include "modules/mod34/call.h"
 
 void menu()
 {

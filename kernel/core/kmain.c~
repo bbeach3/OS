@@ -19,9 +19,10 @@
  
 #include "modules/mpx_supt.h"
 #include "menu.c"
+#include "modules/mod34/call.h"
 
 void kmain(void) 
-{ 
+{
    extern uint32_t magic;
    // Uncomment if you want to access the multiboot header
    // extern void *mbd;
