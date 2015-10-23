@@ -2,6 +2,8 @@
 #include "../irq.s"
 #include "../mpx_supt.c"
 
+context *cop;
+
 //cop needs to be set up somewhere, as a 'global variable'
 u32int* sys_call(context *registers){
 	if(cop == NULL)

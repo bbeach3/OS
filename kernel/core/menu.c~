@@ -139,10 +139,10 @@ switch(inputInt)
 		case 4: unblock_help();
 		break;
 
-		case 5: asm volatile ("int $60");
+		case 5: yield_help();
 		break;
 
-		case 6: //loadr3 goes here 
+		case 6: loadr3_help();
 		break;
 
 		case 7:
@@ -203,7 +203,8 @@ switch(inputInt)
   //serial_println("Suspend goes here");
   serial_println("What do you want to suspend?");
   takeInput(*input,size);
-  pcb *suspendedPCB = findPCB(*input);
+  pcb *suspendedPCB;
+  *suspendedPCB = findPCB(*input);
   if(suspendedPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -215,7 +216,8 @@ switch(inputInt)
   //serial_println("Resume goes here");
   serial_println("What do you want to resume?");
   takeInput(*input,size);
-  pcb *resumedPCB = findPCB(*input);
+  pcb *resumedPCB;
+  *resumedPCB = findPCB(*input);
   if(resumedPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -227,7 +229,8 @@ switch(inputInt)
   //serial_println("Set Priority goes here");
   serial_println("What do you want to change the priority of?");
   takeInput(*input,size);
-  pcb *priorityPCB = findPCB(*input);
+  pcb *priorityPCB;
+  *priorityPCB = findPCB(*input);
   if(priorityPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -273,7 +276,9 @@ switch(inputInt)
  	serial_println("2. Delete PCB");
  	serial_println("3. Block");
  	serial_println("4. Unblock");
- 	serial_println("5. Go Back");
+	serial_println("5. Yield (Manual Interrupt)");
+	serial_println("6. Load r3 Processes");
+ 	serial_println("7. Go Back");
  
  	takeInput(*input,size);
  	input2 = input[0];
@@ -311,7 +316,8 @@ switch(inputInt)
  	 case 2:
  	 serial_println("Give name.");
  	 takeInput(*input, size);
- 	 pcb *toDelete = findPCB(*input);
+	 pcb *toDelete;
+ 	 *toDelete = findPCB(*input);
 	 if((removePCB(toDelete)) == 0){
 	 serial_println("PCB not deleted - could not be found");
 	 }
@@ -323,7 +329,8 @@ switch(inputInt)
 	 
 	 serial_println("What do you want to block?");
 	 takeInput(*input,size);
-	 pcb *toBlockPCB = findPCB(*input);
+	 pcb *toBlockPCB;
+	 *toBlockPCB = findPCB(*input);
     if(toBlockPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -341,7 +348,8 @@ switch(inputInt)
   	// Unblock
 	 serial_println("What do you want to unblock?");
 	 takeInput(*input,size);
-	 pcb *toUnblockPCB = findPCB(*input);
+	 pcb *toUnblockPCB;
+	 *toUnblockPCB = findPCB(*input);
     if(toUnblockPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -355,8 +363,14 @@ switch(inputInt)
 	 break;
 
 	//if this part of the menu wasn't temporary, I'd fix this so it only went back one step.
-  	 case 5:
-  	 break;
+	case 5: asm volatile ("int $60");
+	break;
+
+	case 6: //loadr3();
+	break;
+
+	case 7:
+	break;
   	}
   break;
 
