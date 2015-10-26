@@ -18,8 +18,7 @@
 #include <mem/paging.h>
  
 #include "modules/mpx_supt.h"
-#include "menu.c"
-#include "irq.s"
+#include "/menu.h"
 
 void kmain(void) 
 {
