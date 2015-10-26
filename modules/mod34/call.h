@@ -10,7 +10,6 @@ struct context {
 };
 
 extern context *cop;
-extern context *oldcon;
 
 u32int* sys_call(context *registers);
 

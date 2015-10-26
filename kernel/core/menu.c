@@ -9,14 +9,7 @@
 \Parameters: none
 \Returns: none
 */
-#include "kernel/core/keyboardInput.c"
-#include "include/core/shutdown.c"
-#include "include/core/version.c"
-#include "include/core/help.c"
-#include "modules/time.c"
-#include "modules/mod2/pcb.h"
-#include "modules/mod2/queue.h"
-#include "modules/mod34/call.h"
+#include "kernel/core/menu.h"
 
 void menu()
 {
@@ -360,7 +353,12 @@ switch(inputInt)
 	case 5: asm volatile ("int $60");
 	break;
 
-	case 6: //loadr3();
+	case 6: //loadr3
+	pcb *proc1 = loadr3("Process1");
+	pcb *proc2 = loadr3("Process2");
+	pcb *proc3 = loadr3("Process3");
+	pcb *proc4 = loadr3("Process4");
+	pcb *proc5 = loadr3("Process5");
 	break;
 
 	case 7:

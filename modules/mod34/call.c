@@ -1,6 +1,5 @@
 #include "call.h"
-#include "../irq.s"
-#include "../mpx_supt.c"
+#include "../mpx_supt.h"
 
 context *cop;
 
@@ -9,7 +8,7 @@ u32int* sys_call(context *registers){
 	if(cop == NULL)
 	{
 		//save the above context as a global variable
-		oldcon == registers;
+		cop == registers;
 	}
 	else
 	{

@@ -203,8 +203,7 @@ switch(inputInt)
   //serial_println("Suspend goes here");
   serial_println("What do you want to suspend?");
   takeInput(*input,size);
-  pcb *suspendedPCB;
-  *suspendedPCB = findPCB(*input);
+  pcb *suspendedPCB = findPCB(*input);
   if(suspendedPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -216,8 +215,7 @@ switch(inputInt)
   //serial_println("Resume goes here");
   serial_println("What do you want to resume?");
   takeInput(*input,size);
-  pcb *resumedPCB;
-  *resumedPCB = findPCB(*input);
+  pcb *resumedPCB = findPCB(*input);
   if(resumedPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -229,8 +227,7 @@ switch(inputInt)
   //serial_println("Set Priority goes here");
   serial_println("What do you want to change the priority of?");
   takeInput(*input,size);
-  pcb *priorityPCB;
-  *priorityPCB = findPCB(*input);
+  pcb *priorityPCB = findPCB(*input);
   if(priorityPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -316,8 +313,7 @@ switch(inputInt)
  	 case 2:
  	 serial_println("Give name.");
  	 takeInput(*input, size);
-	 pcb *toDelete;
- 	 *toDelete = findPCB(*input);
+ 	 pcb *toDelete = findPCB(*input);
 	 if((removePCB(toDelete)) == 0){
 	 serial_println("PCB not deleted - could not be found");
 	 }
@@ -329,8 +325,7 @@ switch(inputInt)
 	 
 	 serial_println("What do you want to block?");
 	 takeInput(*input,size);
-	 pcb *toBlockPCB;
-	 *toBlockPCB = findPCB(*input);
+	 pcb *toBlockPCB = findPCB(*input);
     if(toBlockPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -348,8 +343,7 @@ switch(inputInt)
   	// Unblock
 	 serial_println("What do you want to unblock?");
 	 takeInput(*input,size);
-	 pcb *toUnblockPCB;
-	 *toUnblockPCB = findPCB(*input);
+	 pcb *toUnblockPCB = findPCB(*input);
     if(toUnblockPCB == NULL){
     serial_println("Could not find that PCB");
     break;
@@ -366,7 +360,12 @@ switch(inputInt)
 	case 5: asm volatile ("int $60");
 	break;
 
-	case 6: //loadr3();
+	case 6: //loadr3
+	pcb *proc1 = loadr3("Process1");
+	pcb *proc2 = loadr3("Process2");
+	pcb *proc3 = loadr3("Process3");
+	pcb *proc4 = loadr3("Process4");
+	pcb *proc5 = loadr3("Process5");
 	break;
 
 	case 7:

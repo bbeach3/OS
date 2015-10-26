@@ -1,3 +1,19 @@
+pcb *loadr3(char *name)//stack size?
+{
+	pcb *newpcb = setupPCB(name, 1, 1);
+	context *con = (context*)(newpcb->stacktop);
+	memset(con, 0 sizeof(context));
+	con->fs = 0x10;
+	con->gs = 0x10;
+	con->ds = 0x10;
+	con->es = 0x10;
+	con->cs = 0x8;
+	con->ebp = (u32int)(newpcb->stackbase);
+	con->esp = (u32int)(newpcb->stacktop);
+	con->elp = (u32int)func;
+	return newpcb;
+}
+
 void proc1()
 {
   int i;
