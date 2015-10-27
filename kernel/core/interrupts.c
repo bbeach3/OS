@@ -45,6 +45,7 @@ extern void page_fault();
 extern void reserved();
 extern void coprocessor();
 extern void rtc_isr();
+extern void sys_call_isr();
 
 extern idt_entry idt_entries[256];
 
@@ -95,6 +96,9 @@ void init_irq(void)
   }
   // Ignore interrupts from the real time clock
   idt_set_gate(0x08, (u32int)rtc_isr, 0x08, 0x8e);
+  
+  //testing to see if this i where the initialization from the slides goes
+  idt_set_gate(60, (u32int)sys_call_isr, 0x08, 0x0e); 
 }
 
 /*
@@ -194,3 +198,5 @@ void do_coprocessor()
 {
   kpanic("Coprocessor error");
 }
+
+

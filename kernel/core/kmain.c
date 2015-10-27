@@ -5,7 +5,6 @@
       the bootloader. Initialization of hardware, system
       structures, devices, and initial processes happens here.   
 */ 
- 
 #include <stdint.h>
 #include <string.h>
 #include <system.h>
@@ -18,7 +17,7 @@
 #include <mem/paging.h>
  
 #include "modules/mpx_supt.h"
-#include "/menu.h"
+#include "menu.h"
 
 void kmain(void) 
 {
@@ -45,7 +44,6 @@ void kmain(void)
    klogv("Initializing descriptor tables...");
    init_gdt();
    init_idt();
-   idt_set_gate(60, (u32int)sys_call_isr, 0x08, 0x0e); 
   
    // 3?) Interrupt (Controller)  
    klogv("Initializing the interrupt controller..."); 
