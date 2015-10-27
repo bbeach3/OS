@@ -5,7 +5,7 @@
 #include <core/serial.h>
 
 #include "procsr3.h"
-#include "mpx_supt.h"
+#include "../mpx_supt.h"
 
 #define RC_1 1
 #define RC_2 2

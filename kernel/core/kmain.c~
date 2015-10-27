@@ -5,13 +5,13 @@
       the bootloader. Initialization of hardware, system
       structures, devices, and initial processes happens here.   
 */ 
- 
 #include <stdint.h>
 #include <string.h>
 #include <system.h>
 
 #include <core/io.h>
 #include <core/serial.h>
+#include "modules/mod34/call.h" 
 #include <core/tables.h>
 #include <core/interrupts.h>
 #include <mem/heap.h>
@@ -45,7 +45,6 @@ void kmain(void)
    klogv("Initializing descriptor tables...");
    init_gdt();
    init_idt();
-   idt_set_gate(60, (u32int)sys_call_isr, 0x08, 0x0e); 
   
    // 3?) Interrupt (Controller)  
    klogv("Initializing the interrupt controller..."); 

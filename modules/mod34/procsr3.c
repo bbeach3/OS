@@ -1,8 +1,10 @@
+#include "procsr3.h"
+
 pcb *loadr3(char *name)//stack size?
 {
 	pcb *newpcb = setupPCB(name, 1, 1);
 	context *con = (context*)(newpcb->stacktop);
-	memset(con, 0 sizeof(context));
+	memset(con, 0, sizeof(context));
 	con->fs = 0x10;
 	con->gs = 0x10;
 	con->ds = 0x10;
@@ -10,7 +12,7 @@ pcb *loadr3(char *name)//stack size?
 	con->cs = 0x8;
 	con->ebp = (u32int)(newpcb->stackbase);
 	con->esp = (u32int)(newpcb->stacktop);
-	con->elp = (u32int)func;
+	con->eip = (u32int)proc1;
 	return newpcb;
 }
 
