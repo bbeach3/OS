@@ -1,14 +1,15 @@
 #include "call.h"
 #include "../mpx_supt.h"
 
-context *cop;
+
+pcb *cop;
 
 //cop needs to be set up somewhere, as a 'global variable'
 u32int* sys_call(context *registers){
 	if(cop == NULL)
 	{
 		//save the above context as a global variable
-		oldcon == registers;
+		cop == registers;
 	}
 	else
 	{
@@ -42,6 +43,11 @@ u32int* sys_call(context *registers){
 	}
 	//if not
 		//return thing we saved in step 1
-		//this is possibly wrong
-		return cop->stacktop;
+		//if opcode is idle, cop
+		//if exit, oldcon
+		if(params.op_code == IDLE){
+			return cop->stacktop;
+		}
+		//otherwise
+		return oldcon;
 }
