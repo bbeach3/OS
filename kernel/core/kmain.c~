@@ -17,7 +17,8 @@
 #include <mem/paging.h>
  
 #include "modules/mpx_supt.h"
-#include "menu.h"
+#include "menu.c"
+#include "modules/mod34/procsr3.h"
 
 void kmain(void) 
 {

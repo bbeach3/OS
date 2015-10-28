@@ -24,7 +24,7 @@ void proc1()
   while(1){
     for(i=0; i<RC_1; i++){
       serial_println("proc1 dispatched");
-      sys_req(IDLE);
+      sys_req(IDLE);77777777777777777
     }
     sys_req(EXIT);
     serial_println("proc1 ran after it was terminated");

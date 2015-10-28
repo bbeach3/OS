@@ -1,4 +1,4 @@
-/*  
+/* 
   ----- kmain.c ----- 
  
   Description..: Kernel main. The first function called after
@@ -18,6 +18,7 @@
  
 #include "modules/mpx_supt.h"
 #include "menu.h"
+#include "modules/mod34/procsr3.h"
 
 void kmain(void) 
 {
