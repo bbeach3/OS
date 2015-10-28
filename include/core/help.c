@@ -140,14 +140,14 @@ serial_println("This command allows you to show all the ready processes that cur
 }
 
 /**
-\Function: blockdislay_help
+\Function: blockdisplay_help
 \Description: prints out help for the 'Display blocked processes' option
 \Parameters: none
 \Returns: none
 */
 void blockdisplay_help()
 {
-serial_println("This command allows you to show all the blocke processes that currently eist.");
+serial_println("This command allows you to show all the blocked processes that currently exist.");
 }
 
 /**
@@ -213,5 +213,5 @@ serial_println("This command causes commhand to yield so that other processes ma
 */
 void loadr3_help()
 {
-serial_println("This command loads all the r3 processe into memory.");
+serial_println("This command loads all the r3 processes into memory.");
 }

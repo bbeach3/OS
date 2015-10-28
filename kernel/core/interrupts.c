@@ -11,6 +11,7 @@
 #include <core/serial.h>
 #include <core/tables.h>
 #include <core/interrupts.h>
+#include <modules/mod34/call.h>
 
 // Programmable Interrupt Controllers
 #define PIC1 0x20

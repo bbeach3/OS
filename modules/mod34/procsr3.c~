@@ -12,7 +12,7 @@ pcb *loadr3(char *name)//stack size?
 	con->cs = 0x8;
 	con->ebp = (u32int)(newpcb->stackbase);
 	con->esp = (u32int)(newpcb->stacktop);
-	con->eip = (u32int)proc1();
+	con->eip = (u32int)proc1;
 	return newpcb;
 }
 

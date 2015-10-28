@@ -13,6 +13,8 @@
 #define RC_4 4
 #define RC_5 5
 
+pcb* loadr3(char* name);
+
 void proc1();
 
 void proc2();
