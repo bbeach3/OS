@@ -11,6 +11,7 @@ struct context {
 	u32int eip, cs, eflags;
 };
 
+param params;
 extern pcb *cop;
 extern context *oldcon;
 

@@ -71,6 +71,8 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
+	//stack setup - Is there a stack struct that we need to make somewhere else?
+	newpcb->stacktop = unsigned char[1024];
 	//set to ready and unsuspended
 	newpcb->state = 1;
 	newpcb->suspension = 1;
