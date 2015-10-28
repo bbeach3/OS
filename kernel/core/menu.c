@@ -354,6 +354,7 @@ switch(inputInt)
 	break;
 
 	case 6: //loadr3
+
 	pcb *proc1 = loadr3("Process1");
 	pcb *proc2 = loadr3("Process2");
 	pcb *proc3 = loadr3("Process3");
