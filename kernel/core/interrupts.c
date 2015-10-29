@@ -218,6 +218,8 @@ u32int* sys_call(context *registers){
 		{
 			//save context (reassign cop's stack top)
 			cop->stacktop = (unsigned char*)registers;
+			//and cop goes idle but ready
+			insertPCB(cop);
 		}
 		else
 		{
@@ -236,6 +238,7 @@ u32int* sys_call(context *registers){
 	//NOTE: this is probably wrong and we'll need to redo it to not always take the head
 	if(readyQueue->head != NULL){
 		pcb *temp;
+		//we should have a better algo for picking than "the head"
 		temp = readyQueue->head;
 		removePCB(temp);
 		insertPCB(cop);
