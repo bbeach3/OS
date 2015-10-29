@@ -1,0 +1,327 @@
+#include "pcb.h"
+#include "../mpx_supt.h"
+#include <string.h>
+#include <core/serial.h>
+
+/*TO DO FOR MODULE 2:
+	-Fine-tune/bugfix any and all methods located in pcb.c
+		-Ensure we have covered any and all error cases when necessary, giving 			them appropriate error codes
+	-Determine what exactly needs to be done concerning the queues, and if we want 		to even implement a two-queue system
+	-Determine if the queues should remain doubly-linked, or shift to become 		singly-linked - They don't appear to do anything but complicate methods as of 		right now, but who knows
+	-Implement selectability of said methods into menu.c
+	-Update the manuals and documentation for any new files or new methods in 		existing files
+*/
+struct queue *readyQueue;
+struct queue *blockedQueue;
+int queuesExist = 0;
+/**
+\Function allocatePCB
+\Description: allocates memory for new PCB
+\Parameters: None
+\Returns: PCB Pointer, or Null if an error occurs
+*/
+pcb *allocatePCB()
+{
+/* I'm not sure how to implement the "return Null on error" part right now.
+Whenever we deal with memory ourselves, we'll need to come back to this.
+*/
+	if(queuesExist == 0){
+	readyQueue = sys_alloc_mem(sizeof(queue));
+	blockedQueue = sys_alloc_mem(sizeof(queue));
+	queuesExist = 1;
+	}
+	pcb *toPCB;
+	toPCB = (pcb *)sys_alloc_mem(sizeof(pcb));
+	return toPCB;
+}
+
+/**
+\Function freePCB
+\Description: releases memory associated with PCB
+\Parameters: oldpcb - pointer to pcb to release
+\Returns: Success or error code
+*/
+int freePCB(pcb *oldpcb)
+{
+	if(oldpcb == NULL){
+		return 0; //error code
+	}
+	sys_free_mem(oldpcb);
+	return 1;
+}
+
+/**
+\Function setupPCB
+\Description: initializes a PCB
+\Parameters: pcbname - name to use, pcbproc - class of process to use, pcbprior - priority to use
+\Returns: PCB pointer, or null for error
+*/
+pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
+{
+	//note: length check
+	int length = strlen(pcbname);
+	if(length > 9){
+	return NULL;
+	}
+	if(findPCB(pcbname) != NULL){
+	return NULL;	
+	}
+	pcb *newpcb = allocatePCB();
+	strcpy(newpcb->name, pcbname);
+	newpcb->proctype = pcbproc;
+	newpcb->priority = pcbprior;
+	//stack setup - Is there a stack struct that we need to make somewhere else?
+	unsigned char new[1024];
+	newpcb->stacktop = new;
+	//set to ready and unsuspended
+	newpcb->state = 1;
+	newpcb->suspension = 1;
+	newpcb->next = NULL;
+	newpcb->prev = NULL;
+	return newpcb;
+}
+
+/**
+\Function findPCB
+\Description: searches both queues for the PCB with the given name
+\Parameters: pcbname - name to look for
+\Returns: PCB pointer, or null if not found
+*/
+pcb *findPCB(char *pcbname)
+{	
+	struct pcb *temp = readyQueue->head;
+	while(temp != NULL){
+		if(strcmp(temp->name, pcbname) == 0){ 
+			return temp;
+		}
+		temp = temp->next;
+	}
+	temp = blockedQueue->head;
+	while(temp != NULL){
+		if(strcmp(temp->name, pcbname) == 0){
+			return temp;
+		}
+		temp = temp->next;
+	}
+	return NULL;
+}
+
+/**
+\Function insertPCB
+\Description: inserts given PCB into proper queue
+\Parameters: newpcb - pointer to PCB to insert
+\Returns: none
+*/
+void insertPCB(pcb *newpcb)
+{
+	if(newpcb->state == 1){
+		insertReady(newpcb);
+	} else {
+		insertBlocked(newpcb);
+	}
+}
+
+/**
+\Function insertReady
+\Description: inserts given PCB into ready queue in proper place
+\Parameters: newpcb - pointer to PCB to insert
+\Returns: none
+*/
+void insertReady(pcb *newpcb){
+	//check for empty
+	if(readyQueue->head == NULL){
+		//insert first pcb
+		readyQueue->count = 1;
+		readyQueue->head = newpcb;
+		readyQueue->tail = newpcb;
+		return;
+	}
+	struct pcb *temp = readyQueue->head;
+	if(temp->next == NULL){ //head is only pcb
+		if(newpcb->priority > temp->priority){ //newpcb is higher priority
+			readyQueue->head = newpcb;
+			newpcb->next = temp;
+			temp->prev = newpcb;		
+			readyQueue->count++;
+			return;
+		} else { //old head is higher priority or equal
+			readyQueue->tail = newpcb;
+			newpcb->prev = temp;
+			temp->next = newpcb;
+			readyQueue->count++;
+			return;
+		}
+	}
+	while(temp->next != NULL){
+		//since we look ahead, if statement triggers only at the end of a priority level
+		if(newpcb->priority > temp->next->priority){
+			newpcb->prev = temp;
+			newpcb->next = temp->next;
+			temp->next->prev = newpcb;
+			temp->next = newpcb;
+			readyQueue->count++;
+			return;
+		}
+		temp = temp->next;
+	}
+	//if we get here, we're at the end.
+	readyQueue->tail = newpcb;
+	newpcb->prev = temp;
+	temp->next = newpcb;
+	readyQueue->count++;
+	return;
+}
+
+/**
+\Function insertBlocked
+\Description: inserts given PCB into blocked queue in proper place
+\Parameters: newpcb - pointer to PCB to insert
+\Returns: none
+*/
+void insertBlocked(pcb *newpcb){
+	if(blockedQueue->head == NULL){
+		blockedQueue->count = 1;
+		blockedQueue->head = newpcb;
+		blockedQueue->tail = newpcb;
+		return;
+	}
+	//just FIFO, so we put it at the end of the queue
+	struct pcb *temp = blockedQueue->tail;
+	newpcb->prev = temp;
+	temp->next = newpcb;
+	blockedQueue->tail = newpcb;
+	blockedQueue->count++;
+	return;
+}
+
+/**
+\Function removePCB
+\Description: removes given PCB from queues
+\Parameters: oldpcb - pointer to PCB to remove
+\Returns: Success or Error code
+*/
+int removePCB(pcb *oldpcb)
+{
+	if(oldpcb == NULL){
+	return 0; //error code
+	}
+	if(oldpcb->state == 1){
+		if(oldpcb->prev == NULL){
+			readyQueue->head = oldpcb->next;
+		} else {
+			oldpcb->prev->next = oldpcb->next;
+		}
+		if(oldpcb->next == NULL){
+			readyQueue->tail = oldpcb->prev;
+		} else {
+			oldpcb->next->prev = oldpcb->prev;
+		}
+		readyQueue->count--;
+	} else if(oldpcb->state == 0){
+		if(oldpcb->prev == NULL){
+			blockedQueue->head = oldpcb->next;
+		} else {
+			oldpcb->prev->next = oldpcb->next;
+		}
+		if(oldpcb->next == NULL){
+			blockedQueue->tail = oldpcb->prev;
+		} else {
+			oldpcb->next->prev = oldpcb->prev;
+		}
+		blockedQueue->count--;
+		
+	}
+	oldpcb->next = NULL;
+	oldpcb->prev = NULL;
+return 1; //success code
+}
+
+/**
+\Function displayReady
+\Description: displays all PCBs in ready queue in order.
+\Parameters: none
+\Returns: none
+*/
+void displayReady(){
+	serial_println("Ready Queue:");
+	struct pcb *temp = readyQueue->head;
+	while(temp != NULL){
+		displayPCB(temp);
+		temp = temp->next;
+	}
+}
+
+/**
+\Function displayBlocked
+\Description: displays all PCBs in blocked queue in order.
+\Parameters: none
+\Returns: none
+*/
+void displayBlocked(){
+	serial_println("Blocked Queue:");
+	struct pcb *temp = blockedQueue->head;
+	while(temp != NULL){
+		displayPCB(temp);
+		temp = temp->next;
+	}
+}
+
+/**
+\Function displayPCB
+\Description: prints important contents of PCB
+\Parameters: apcb - pointer to PCB to display
+\Returns: none
+*/
+void displayPCB(pcb *apcb){
+	if(apcb == NULL){
+	serial_println("Not found");
+	return;
+	}
+	serial_println("Name:");
+	char* name = sys_alloc_mem(*apcb->name); 
+	strcpy(name, apcb->name);
+	serial_println(name);
+	serial_println("Class:");
+	if (apcb->proctype == 1){
+	serial_println("App");
+	} else {
+	serial_println("System");
+	}
+	serial_println("State:");
+	if(apcb->state == 1){
+	serial_println("Ready");
+	} else {
+	serial_println("Blocked");
+	}
+	//note: add running
+	serial_println("Suspended?");
+	if(apcb->suspension == 1){
+	serial_println("Not suspended");
+	} else {
+	serial_println("Suspended");
+	}
+	serial_println("Priority:");
+	//We really need to make sprintf. This is a hassle.
+	if(apcb->priority == 0) {
+	serial_println("0");
+	} else if(apcb->priority == 1) {
+	serial_println("1");
+	} else if(apcb->priority == 2) {
+	serial_println("2");
+	} else if(apcb->priority == 3) {
+	serial_println("3");
+	} else if(apcb->priority == 4) {
+	serial_println("4");
+	} else if(apcb->priority == 5) {
+	serial_println("5");
+	} else if(apcb->priority == 6) {
+	serial_println("6");
+	} else if(apcb->priority == 7) {
+	serial_println("7");
+	} else if(apcb->priority == 8) {
+	serial_println("8");
+	} else if(apcb->priority == 9) {
+	serial_println("9");
+	}
+	serial_println(" ");
+}
