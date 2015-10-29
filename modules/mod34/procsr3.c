@@ -13,7 +13,27 @@ pcb *loadr3(char *name)//stack size?
 	con->cs = 0x8;
 	con->ebp = (u32int)(newpcb->stackbase);
 	con->esp = (u32int)(newpcb->stacktop);
-	con->eip = (u32int)proc1;
+	if(strcmp(name, "Process1") == 0)
+	{
+		con->eip = (u32int)proc1;
+	}
+	else if(strcmp(name, "Process2") == 0)
+	{
+		con->eip = (u32int)proc2;
+	}
+	else if(strcmp(name, "Process3") == 0)
+	{
+		con->eip = (u32int)proc3;
+	}
+	else if(strcmp(name, "Process4") == 0)
+	{
+		con->eip = (u32int)proc4;
+	}
+	else
+	{
+		con->eip = (u32int)proc5;
+	}
+	//These are all hard-coded, so there's no need to check for any other cases
 	return newpcb;
 }
 

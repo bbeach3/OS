@@ -1,3 +1,6 @@
+#include <core/serial.h>
+#include <core/io.h>
+
 /** \file
  *Contains the source code for the function that prints out the version number
  *Contains the source code for the function that prints out the version number

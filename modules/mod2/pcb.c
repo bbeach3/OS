@@ -70,9 +70,10 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
-	//set to ready and unsuspended
-	newpcb->state = 1;
-	newpcb->suspension = 1;
+	//This is causing errors.
+	//newpcb->stacktop = unsigned char[1024];
+	newpcb->state = 1; //ready
+	newpcb->suspension = 1; //unsuspended
 	newpcb->next = NULL;
 	newpcb->prev = NULL;
 	return newpcb;

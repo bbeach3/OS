@@ -1,4 +1,5 @@
 #include <core/serial.h>
+#include <core/io.h>
 /** \file
  *Contains source code controlling keyboard inputs
  *Contains source code controlling keyboard inputs
