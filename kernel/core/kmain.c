@@ -1,4 +1,4 @@
-/* 
+/*  
   ----- kmain.c ----- 
  
   Description..: Kernel main. The first function called after
@@ -59,7 +59,7 @@ void kmain(void)
   
    // 5) Call Commhand  
    klogv("Transferring control to commhand...");
-menu();//
+	menu();
 //version();  
    // 11) System Shutdown
    klogv("Starting system shutdown procedure...");  

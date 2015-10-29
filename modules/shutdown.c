@@ -10,6 +10,9 @@
 \Parameters: none
 \Returns: none
 */
+#include <core/serial.h>
+#include <core/io.h>
+
 void shutdown()
 {
 serial_println("Are you sure you want to shut down?");

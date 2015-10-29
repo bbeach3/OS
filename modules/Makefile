@@ -13,6 +13,12 @@ ASFLAGS = -f elf -g
 OBJFILES =\
 mpx_supt.o\
 mod2/pcb.o\
+mod34/call.o\
+mod34/procsr3.o\
+time.o \
+shutdown.o\
+version.o\
+help.o
 
 .c.s:
 	$(CC) $(CFLAGS) -S -o $@ $<

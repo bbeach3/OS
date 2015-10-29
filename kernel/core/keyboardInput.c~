@@ -116,7 +116,7 @@ void takeInput(char *inputLine, int inputSize) {
 										special = 0;
 										resetLine(curEnd);
 										serial_print(inputLine);
-										//curEnd--;
+										curEnd--;
 									}
 									break;
 							}

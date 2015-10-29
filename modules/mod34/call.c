@@ -1,7 +1,7 @@
 #include "call.h"
 #include "../mpx_supt.h"
 
-
+/*
 pcb *cop;
 context *oldcon;
 
@@ -53,3 +53,4 @@ u32int* sys_call(context *registers){
 		//otherwise
 		return oldcon;
 }
+*/

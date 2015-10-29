@@ -1,8 +1,7 @@
 #include "pcb.h"
-#include "queue.h"
-#include "../mpx_supt.h"
-#include <string.h>
-#include <core/serial.h>
+
+queue* readyQueue;
+queue* blockedQueue;
 
 /*TO DO FOR MODULE 2:
 	-Fine-tune/bugfix any and all methods located in pcb.c
@@ -12,8 +11,8 @@
 	-Implement selectability of said methods into menu.c
 	-Update the manuals and documentation for any new files or new methods in 		existing files
 */
-struct queue *readyQueue;
-struct queue *blockedQueue;
+//struct queue *readyQueue;
+//struct queue *blockedQueue;
 int queuesExist = 0;
 /**
 \Function allocatePCB
@@ -71,12 +70,10 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
-	//stack setup - Is there a stack struct that we need to make somewhere else?
-	unsigned char new[1024];
-	newpcb->stacktop = new;
-	//set to ready and unsuspended
-	newpcb->state = 1;
-	newpcb->suspension = 1;
+	//This is causing errors.
+	//newpcb->stacktop = unsigned char[1024];
+	newpcb->state = 1; //ready
+	newpcb->suspension = 1; //unsuspended
 	newpcb->next = NULL;
 	newpcb->prev = NULL;
 	return newpcb;

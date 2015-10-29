@@ -1,6 +1,12 @@
 #ifndef _INTERRUPTS_H
 #define _INTERRUPTS_H
 
+#include <modules/mod34/call.h>
+#include <modules/mod2/pcb.h>
+
+extern pcb* cop;
+extern context* oldcon;
+
 /*
   Procedure..: init_irq
   Description..: Installs the initial interrupt handlers for
