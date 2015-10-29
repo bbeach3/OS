@@ -4,7 +4,6 @@
 #include <system.h>
 #include <core/serial.h>
 
-#include "procsr3.h"
 #include "../mpx_supt.h"
 #include "../mod2/pcb.h"
 #include "call.h"

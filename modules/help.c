@@ -1,3 +1,6 @@
+#include <core/serial.h>
+#include <core/io.h>
+
 /** \file
  *Contains source code for help functions
  *Contains source code for functions printing out help messages for menu options
