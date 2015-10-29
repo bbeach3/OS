@@ -20,7 +20,8 @@ core/system.o\
 core/tables.o\
 mem/paging.o\
 mem/heap.o \
-core/menu.o
+core/menu.o\
+core/keyboardInput.o
 
 .s.o:
 	$(AS) $(ASFLAGS) -o $@ $<

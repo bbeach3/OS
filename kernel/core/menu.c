@@ -9,13 +9,16 @@
 \Parameters: none
 \Returns: none
 */
-#include "kernel/core/menu.h"
-
-pcb *process1;
-pcb *process2;
-pcb *process3;
-pcb *process4;
-pcb *process5;
+#include "include/core/serial.h"
+#include "include/core/keyboardInput.h"
+#include "include/core/shutdown.h"
+#include "include/core/version.h"
+#include "include/core/help.h"
+#include "modules/time.h"
+#include "modules/mod2/pcb.h"
+#include "modules/mod2/queue.h"
+#include "modules/mod34/call.h"
+#include "modules/mod34/procsr3.h"
 
 void menu()
 {
@@ -360,12 +363,13 @@ switch(inputInt)
 	break;
 
 	case 6: //loadr3
-
-	process1 = loadr3("Process1");
-	process2 = loadr3("Process2");
-	process3 = loadr3("Process3");
-	process4 = loadr3("Process4");
-	process5 = loadr3("Process5");
+	//we never used the pcb* proc1 et al, which threw warnings
+	//'temporarily' removed
+	loadr3("Process1");
+	loadr3("Process2");
+	loadr3("Process3");
+	loadr3("Process4");
+	loadr3("Process5");
 	break;
 
 	case 7:

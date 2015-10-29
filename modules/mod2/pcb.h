@@ -1,8 +1,9 @@
 #ifndef _PCB_H
 #define _PCB_H
-
-//extern queue readyQueue;
-//extern queue blockedQueue;
+#include "pcb.h"
+#include "../mpx_supt.h"
+#include <string.h>
+#include <core/serial.h>
 
 typedef struct pcb pcb;
 
@@ -19,7 +20,16 @@ struct pcb{
 	pcb *prev; //!<pointer to previous PCB in queue
 };
 
+typedef struct queue queue;
 
+struct queue{
+	int count; //!<number of PCBs in the queue
+	pcb *head; //!<pointer to first PCB of queue
+	pcb *tail; //!<pointer to last PCB of queue
+};
+
+extern queue *readyQueue;
+extern queue *blockedQueue;
 
 pcb *allocatePCB();
 

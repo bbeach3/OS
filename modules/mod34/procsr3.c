@@ -1,9 +1,9 @@
 #include "procsr3.h"
 
-pcb *loadr3(char *name)
+pcb *loadr3(char *name)//stack size?
 {
 	pcb *newpcb = setupPCB(name, 1, 1);
-	newpcb->suspended = 0; //Must be suspended ready
+	newpcb->suspension = 0; //Must be suspended ready
 	context *con = (context*)(newpcb->stacktop);
 	memset(con, 0, sizeof(context));
 	con->fs = 0x10;
@@ -13,19 +13,19 @@ pcb *loadr3(char *name)
 	con->cs = 0x8;
 	con->ebp = (u32int)(newpcb->stackbase);
 	con->esp = (u32int)(newpcb->stacktop);
-	if(name == "Process1")
+	if(strcmp(name, "Process1") == 0)
 	{
 		con->eip = (u32int)proc1;
 	}
-	else if(name == "Process2")
+	else if(strcmp(name, "Process2") == 0)
 	{
 		con->eip = (u32int)proc2;
 	}
-	else if(name == "Process3")
+	else if(strcmp(name, "Process3") == 0)
 	{
 		con->eip = (u32int)proc3;
 	}
-	else if(name == "Process4")
+	else if(strcmp(name, "Process4") == 0)
 	{
 		con->eip = (u32int)proc4;
 	}
