@@ -11,6 +11,12 @@
 */
 #include "kernel/core/menu.h"
 
+pcb *process1;
+pcb *process2;
+pcb *process3;
+pcb *process4;
+pcb *process5;
+
 void menu()
 {
 int x=1;
@@ -355,11 +361,11 @@ switch(inputInt)
 
 	case 6: //loadr3
 
-	pcb *proc1 = loadr3("Process1");
-	pcb *proc2 = loadr3("Process2");
-	pcb *proc3 = loadr3("Process3");
-	pcb *proc4 = loadr3("Process4");
-	pcb *proc5 = loadr3("Process5");
+	process1 = loadr3("Process1");
+	process2 = loadr3("Process2");
+	process3 = loadr3("Process3");
+	process4 = loadr3("Process4");
+	process5 = loadr3("Process5");
 	break;
 
 	case 7:
