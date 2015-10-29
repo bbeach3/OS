@@ -3,6 +3,7 @@
 pcb *loadr3(char *name)//stack size?
 {
 	pcb *newpcb = setupPCB(name, 1, 1);
+	newpcb->suspension = 0; //Must be suspended ready
 	context *con = (context*)(newpcb->stacktop);
 	memset(con, 0, sizeof(context));
 	con->fs = 0x10;
@@ -24,7 +25,7 @@ void proc1()
   while(1){
     for(i=0; i<RC_1; i++){
       serial_println("proc1 dispatched");
-      sys_req(IDLE);77777777777777777
+      sys_req(IDLE);
     }
     sys_req(EXIT);
     serial_println("proc1 ran after it was terminated");

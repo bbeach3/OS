@@ -1,7 +1,7 @@
 #ifndef _CALL_H
 #define _CALL_H
 
-#include "modules/mod2/pcb.h"
+#include "../mod2/pcb.h"
 
 typedef struct context context;
 
@@ -11,8 +11,8 @@ struct context {
 	u32int eip, cs, eflags;
 };
 
-extern pcb *cop;
-extern context *oldcon;
+//extern pcb *cop;
+//extern context *oldcon;
 
 u32int* sys_call(context *registers);
 

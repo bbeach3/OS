@@ -6,6 +6,7 @@
 
 #include "procsr3.h"
 #include "../mpx_supt.h"
+#include "../mod2/pcb.h"
 
 #define RC_1 1
 #define RC_2 2
@@ -14,6 +15,7 @@
 #define RC_5 5
 
 pcb* loadr3(char* name);
+
 void proc1();
 
 void proc2();

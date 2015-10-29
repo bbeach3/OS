@@ -9,7 +9,6 @@
 \Parameters: none
 \Returns: none
 */
-#include "kernel/core/menu.h"
 
 void menu()
 {

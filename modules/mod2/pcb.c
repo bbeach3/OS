@@ -1,8 +1,7 @@
 #include "pcb.h"
-#include "queue.h"
-#include "../mpx_supt.h"
-#include <string.h>
-#include <core/serial.h>
+
+queue* readyQueue;
+queue* blockedQueue;
 
 /*TO DO FOR MODULE 2:
 	-Fine-tune/bugfix any and all methods located in pcb.c
@@ -12,8 +11,8 @@
 	-Implement selectability of said methods into menu.c
 	-Update the manuals and documentation for any new files or new methods in 		existing files
 */
-struct queue *readyQueue;
-struct queue *blockedQueue;
+//struct queue *readyQueue;
+//struct queue *blockedQueue;
 int queuesExist = 0;
 /**
 \Function allocatePCB

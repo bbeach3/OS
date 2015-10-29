@@ -12,6 +12,9 @@
 #include <core/tables.h>
 #include <core/interrupts.h>
 #include <modules/mod34/call.h>
+#include <modules/mod2/pcb.h>
+#include <modules/mod2/queue.h>
+#include <modules/mpx_supt.h>
 
 // Programmable Interrupt Controllers
 #define PIC1 0x20
@@ -49,6 +52,9 @@ extern void rtc_isr();
 extern void sys_call_isr();
 
 extern idt_entry idt_entries[256];
+
+pcb* cop;
+context* oldcon;
 
 //Current serial handler
 extern void isr0();
@@ -200,4 +206,49 @@ void do_coprocessor()
   kpanic("Coprocessor error");
 }
 
-
+u32int* sys_call(context *registers){
+	if(cop == NULL)
+	{
+		//save the above context as a global variable
+		oldcon = registers;
+	}
+	else
+	{
+		if(params.op_code == IDLE)
+		{
+			//save context (reassign cop's stack top)
+			cop->stacktop = (unsigned char*)registers;
+		}
+		else
+		{
+			if(params.op_code == EXIT)
+			{
+				//free cop
+				freePCB(cop);
+			}
+		}
+	}
+	//check for ready process
+	//if there is a ready process
+		//remove from queue
+		//assign cop
+		//return cop's stacktop
+	//NOTE: this is probably wrong and we'll need to redo it to not always take the head
+	if(readyQueue->head != NULL){
+		pcb *temp;
+		temp = readyQueue->head;
+		removePCB(temp);
+		insertPCB(cop);
+		cop = temp;
+		return (u32int*)cop->stacktop;
+	}
+	//if not
+		//return thing we saved in step 1
+		//if opcode is idle, cop
+		//if exit, oldcon
+		if(params.op_code == IDLE){
+			return (u32int*)cop->stacktop;
+		}
+		//otherwise
+		return (u32int*)oldcon;
+}

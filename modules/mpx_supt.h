@@ -20,6 +20,7 @@ typedef struct {
   int device_id;
 } param;
 
+extern param params;
 /*
   Procedure..: sys_req
   Description..: Generate interrupt 60H
