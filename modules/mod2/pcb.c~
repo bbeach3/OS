@@ -70,11 +70,10 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
-	//stack setup - Is there a stack struct that we need to make somewhere else?
-	newpcb->stacktop = unsigned char[1024];
-	//set to ready and unsuspended
-	newpcb->state = 1;
-	newpcb->suspension = 1;
+	unsigned char newStacktop[1024];
+	newpcb->stacktop = newStacktop;
+	newpcb->state = 1; //ready
+	newpcb->suspension = 1; //unsuspended
 	newpcb->next = NULL;
 	newpcb->prev = NULL;
 	return newpcb;
@@ -113,6 +112,8 @@ pcb *findPCB(char *pcbname)
 */
 void insertPCB(pcb *newpcb)
 {
+	serial_print("inserting: ");
+	serial_println(newpcb->name);
 	if(newpcb->state == 1){
 		insertReady(newpcb);
 	} else {

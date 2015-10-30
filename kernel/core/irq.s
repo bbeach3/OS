@@ -133,7 +133,7 @@ sys_call_isr:
 	call sys_call
 	;;Set a new stack pointer
 	;;the result of the C function is put in eax.
-	mov esp, eax
+	mov esp,eax
 	pop gs
 	pop fs
 	pop es

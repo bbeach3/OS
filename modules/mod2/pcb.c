@@ -70,8 +70,8 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
-	//This is causing errors.
-	//newpcb->stacktop = unsigned char[1024];
+	unsigned char newStacktop[1024];
+	newpcb->stacktop = newStacktop;
 	newpcb->state = 1; //ready
 	newpcb->suspension = 1; //unsuspended
 	newpcb->next = NULL;
@@ -112,6 +112,7 @@ pcb *findPCB(char *pcbname)
 */
 void insertPCB(pcb *newpcb)
 {
+
 	if(newpcb->state == 1){
 		insertReady(newpcb);
 	} else {

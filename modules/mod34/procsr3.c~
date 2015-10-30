@@ -4,6 +4,7 @@ pcb *loadr3(char *name)//stack size?
 {
 	pcb *newpcb = setupPCB(name, 1, 1);
 	newpcb->suspension = 0; //Must be suspended ready
+	serial_println("inserted process");
 	context *con = (context*)(newpcb->stacktop);
 	memset(con, 0, sizeof(context));
 	con->fs = 0x10;
@@ -21,7 +22,7 @@ pcb *loadr3(char *name)//stack size?
 	{
 		con->eip = (u32int)proc2;
 	}
-	else ifif(strcmp(name, "Process3") == 0)
+	else if(strcmp(name, "Process3") == 0)
 	{
 		con->eip = (u32int)proc3;
 	}

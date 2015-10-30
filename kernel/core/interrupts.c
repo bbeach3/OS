@@ -105,7 +105,7 @@ void init_irq(void)
   idt_set_gate(0x08, (u32int)rtc_isr, 0x08, 0x8e);
   
   //testing to see if this i where the initialization from the slides goes
-  idt_set_gate(60, (u32int)sys_call_isr, 0x08, 0x0e); 
+  idt_set_gate(60, (u32int)sys_call_isr, 0x08, 0x8e); 
 }
 
 /*
@@ -207,13 +207,16 @@ void do_coprocessor()
 }
 
 u32int* sys_call(context *registers){
+	serial_println("inside syscall");
 	if(cop == NULL)
 	{
+		serial_println("cop is null");
 		//save the above context as a global variable
 		oldcon = registers;
 	}
 	else
 	{
+		serial_println("cop is not null");
 		if(params.op_code == IDLE)
 		{
 			//save context (reassign cop's stack top)
@@ -239,6 +242,7 @@ u32int* sys_call(context *registers){
 	if(readyQueue->head != NULL){
 		pcb *temp;
 		//we should have a better algo for picking than "the head"
+		//I think we're actaully supposed to pick the head, because why else use a queue. however, I think we're supposed to arrange processes by priority in the queue, so that highest priority is always the head. - Nathan
 		temp = readyQueue->head;
 		removePCB(temp);
 		insertPCB(cop);

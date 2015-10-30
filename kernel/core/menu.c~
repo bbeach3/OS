@@ -365,11 +365,11 @@ switch(inputInt)
 	case 6: //loadr3
 	//we never used the pcb* proc1 et al, which threw warnings
 	//'temporarily' removed
-	loadr3("Process1");
-	loadr3("Process2");
-	loadr3("Process3");
-	loadr3("Process4");
-	loadr3("Process5");
+	insertPCB(loadr3("Process1"));
+	insertPCB(loadr3("Process2"));
+	insertPCB(loadr3("Process3"));
+	insertPCB(loadr3("Process4"));
+	insertPCB(loadr3("Process5"));
 	break;
 
 	case 7:
