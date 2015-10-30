@@ -1,6 +1,4 @@
 #include "call.h"
-#include "../mpx_supt.h"
-
 /*
 pcb *cop;
 context *oldcon;
@@ -10,7 +8,7 @@ u32int* sys_call(context *registers){
 	if(cop == NULL)
 	{
 		//save the above context as a global variable
-		oldcon == registers;
+		oldcon = registers;
 		//cop is still null? How do we make sure that we only get here once?
 	}
 	else

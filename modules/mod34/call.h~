@@ -1,7 +1,8 @@
 #ifndef _CALL_H
 #define _CALL_H
 
-#include "/mod2/pcb.h"
+#include "../mod2/pcb.h"
+#include "../mpx_supt.h"
 
 typedef struct context context;
 
@@ -9,7 +10,7 @@ struct context {
 	u32int gs, fs, es, ds;
 	u32int edi, esi, ebp, esp, ebx, edx, ecx, eax;
 	u32int eip, cs, eflags;
-};
+} oldcon;
 
 //extern pcb *cop;
 //extern context *oldcon;

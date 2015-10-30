@@ -29,9 +29,17 @@ pcb *loadr3(char *name)//stack size?
 	{
 		con->eip = (u32int)proc4;
 	}
-	else
+	else if(strcmp(name, "Process5") == 0)
 	{
 		con->eip = (u32int)proc5;
+	}
+	else if(strcmp(name, "Menu") == 0)
+	{
+		con->eip = (u32int)menu;
+	}
+	else
+	{
+		con->eip = (u32int)idle;
 	}
 	//These are all hard-coded, so there's no need to check for any other cases
 	return newpcb;

@@ -5,6 +5,7 @@
       the bootloader. Initialization of hardware, system
       structures, devices, and initial processes happens here.   
 */ 
+ 
 #include <stdint.h>
 #include <string.h>
 #include <system.h>
@@ -17,7 +18,7 @@
 #include <mem/paging.h>
  
 #include "modules/mpx_supt.h"
-#include "menu.c"
+#include "menu.h"
 #include "modules/mod34/procsr3.h"
 
 void kmain(void) 
@@ -58,7 +59,12 @@ void kmain(void)
   
    // 5) Call Commhand  
    klogv("Transferring control to commhand...");
-	menu();
+   //menu();
+   //Module 4 stuff - Uncomment above line to access menu automatically
+   insertPCB(loadr3("Menu"));
+   insertPCB(loadr3("Idle"));
+   sys_req(IDLE);
+   //Module 4 ends here
 //version();  
    // 11) System Shutdown
    klogv("Starting system shutdown procedure...");  

@@ -19,6 +19,7 @@
 #include "modules/mod2/queue.h"
 #include "modules/mod34/call.h"
 #include "modules/mod34/procsr3.h"
+#include "include/core/interrupts.h"
 
 void menu()
 {
@@ -366,11 +367,17 @@ switch(inputInt)
 	case 6: //loadr3
 	//we never used the pcb* proc1 et al, which threw warnings
 	//'temporarily' removed
+	serial_println("Start");
 	insertPCB(loadr3("Process1"));
+	serial_println("1");
 	insertPCB(loadr3("Process2"));
+	serial_println("2");
 	insertPCB(loadr3("Process3"));
+	serial_println("3");
 	insertPCB(loadr3("Process4"));
+	serial_println("4");
 	insertPCB(loadr3("Process5"));
+	serial_println("5");	
 	break;
 
 	case 7:
@@ -391,5 +398,6 @@ switch(inputInt)
  x=0;
  break;
  }
+sys_req(EXIT);
 }
 }
