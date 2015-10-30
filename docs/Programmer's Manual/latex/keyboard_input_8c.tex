@@ -1,8 +1,11 @@
-\hypertarget{keyboard_input_8c}{}\section{keyboard\+Input.\+c File Reference}
-\label{keyboard_input_8c}\index{keyboard\+Input.\+c@{keyboard\+Input.\+c}}
+\hypertarget{keyboard_input_8c}{}\section{kernel/core/keyboard\+Input.c File Reference}
+\label{keyboard_input_8c}\index{kernel/core/keyboard\+Input.\+c@{kernel/core/keyboard\+Input.\+c}}
 {\ttfamily \#include $<$core/serial.\+h$>$}\\*
+{\ttfamily \#include $<$core/io.\+h$>$}\\*
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
+\item 
+void \hyperlink{keyboard_input_8c_ac8ec98ee091cd89cdb492d80e90f0c84}{reset\+Line} (int cur\+End)
 \item 
 void \hyperlink{keyboard_input_8c_a87766e20708d77f4468393bf4f866f60}{take\+Input} (char $\ast$input\+Line, int input\+Size)
 \end{DoxyCompactItemize}
@@ -12,7 +15,14 @@ void \hyperlink{keyboard_input_8c_a87766e20708d77f4468393bf4f866f60}{take\+Input
 Contains source code controlling keyboard inputs Contains source code controlling keyboard inputs 
 
 \subsection{Function Documentation}
-\hypertarget{keyboard_input_8c_a87766e20708d77f4468393bf4f866f60}{}\index{keyboard\+Input.\+c@{keyboard\+Input.\+c}!take\+Input@{take\+Input}}
+\hypertarget{keyboard_input_8c_ac8ec98ee091cd89cdb492d80e90f0c84}{}\index{keyboard\+Input.\+c@{keyboard\+Input.\+c}!reset\+Line@{reset\+Line}}
+\index{reset\+Line@{reset\+Line}!keyboard\+Input.\+c@{keyboard\+Input.\+c}}
+\subsubsection[{reset\+Line(int cur\+End)}]{\setlength{\rightskip}{0pt plus 5cm}void reset\+Line (
+\begin{DoxyParamCaption}
+\item[{int}]{cur\+End}
+\end{DoxyParamCaption}
+)}\label{keyboard_input_8c_ac8ec98ee091cd89cdb492d80e90f0c84}
+reset\+Line \+: clears the input currently displayed on the line \+: cur\+End -\/ length of current input \+: none \hypertarget{keyboard_input_8c_a87766e20708d77f4468393bf4f866f60}{}\index{keyboard\+Input.\+c@{keyboard\+Input.\+c}!take\+Input@{take\+Input}}
 \index{take\+Input@{take\+Input}!keyboard\+Input.\+c@{keyboard\+Input.\+c}}
 \subsubsection[{take\+Input(char $\ast$input\+Line, int input\+Size)}]{\setlength{\rightskip}{0pt plus 5cm}void take\+Input (
 \begin{DoxyParamCaption}

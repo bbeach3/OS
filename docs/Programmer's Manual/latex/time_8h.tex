@@ -1,5 +1,5 @@
-\hypertarget{time_8h}{}\section{time.\+h File Reference}
-\label{time_8h}\index{time.\+h@{time.\+h}}
+\hypertarget{time_8h}{}\section{modules/time.h File Reference}
+\label{time_8h}\index{modules/time.\+h@{modules/time.\+h}}
 {\ttfamily \#include \char`\"{}core/io.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}core/serial.\+h\char`\"{}}\\*
 {\ttfamily \#include \char`\"{}string.\+h\char`\"{}}\\*
@@ -10,9 +10,9 @@ void \hyperlink{time_8h_a2197fd0d3804af2685e0d3ea6365c40c}{getdate} ()
 \item 
 void \hyperlink{time_8h_ac9e53b9f4a62a88b8e8461c168e5d9a5}{gettime} ()
 \item 
-void \hyperlink{time_8h_aec4bde795690552c121276488745c918}{setdate} (char datestring\mbox{[}$\,$\mbox{]})
+void \hyperlink{time_8h_a904fe4a826bc545ea2cf3d561c6162cb}{setdate} (char datestring\mbox{[}$\,$\mbox{]}, int datelength)
 \item 
-void \hyperlink{time_8h_ae8f3cf343499d2d5c53edf508e4f00cb}{settime} (char timestring\mbox{[}$\,$\mbox{]})
+void \hyperlink{time_8h_a17b4220ea702703600c6891d02ca59e7}{settime} (char timestring\mbox{[}$\,$\mbox{]}, int timelength)
 \end{DoxyCompactItemize}
 
 
@@ -31,17 +31,20 @@ void \hyperlink{time_8h_ae8f3cf343499d2d5c53edf508e4f00cb}{settime} (char timest
 {}
 \end{DoxyParamCaption}
 )}\label{time_8h_ac9e53b9f4a62a88b8e8461c168e5d9a5}
-\+: get\+Time \+: Prints out the time \+: none \+: none \hypertarget{time_8h_aec4bde795690552c121276488745c918}{}\index{time.\+h@{time.\+h}!setdate@{setdate}}
+\+: get\+Time \+: Prints out the time \+: none \+: none \hypertarget{time_8h_a904fe4a826bc545ea2cf3d561c6162cb}{}\index{time.\+h@{time.\+h}!setdate@{setdate}}
 \index{setdate@{setdate}!time.\+h@{time.\+h}}
-\subsubsection[{setdate(char datestring[])}]{\setlength{\rightskip}{0pt plus 5cm}void setdate (
+\subsubsection[{setdate(char datestring[], int datelength)}]{\setlength{\rightskip}{0pt plus 5cm}void setdate (
 \begin{DoxyParamCaption}
-\item[{char}]{datestring\mbox{[}$\,$\mbox{]}}
+\item[{char}]{datestring\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{datelength}
 \end{DoxyParamCaption}
-)}\label{time_8h_aec4bde795690552c121276488745c918}
-\+: set\+Date \+: Sets the date on the system \+: datestring\mbox{[}\mbox{]} -\/ A string specifying the date \+: none \hypertarget{time_8h_ae8f3cf343499d2d5c53edf508e4f00cb}{}\index{time.\+h@{time.\+h}!settime@{settime}}
+)}\label{time_8h_a904fe4a826bc545ea2cf3d561c6162cb}
+\+: set\+Date \+: Sets the date on the system \+: datestring\mbox{[}\mbox{]} -\/ A string specifying the date, datelength -\/ The length of datestring \+: none \hypertarget{time_8h_a17b4220ea702703600c6891d02ca59e7}{}\index{time.\+h@{time.\+h}!settime@{settime}}
 \index{settime@{settime}!time.\+h@{time.\+h}}
-\subsubsection[{settime(char timestring[])}]{\setlength{\rightskip}{0pt plus 5cm}void settime (
+\subsubsection[{settime(char timestring[], int timelength)}]{\setlength{\rightskip}{0pt plus 5cm}void settime (
 \begin{DoxyParamCaption}
-\item[{char}]{timestring\mbox{[}$\,$\mbox{]}}
+\item[{char}]{timestring\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{timelength}
 \end{DoxyParamCaption}
-)}\label{time_8h_ae8f3cf343499d2d5c53edf508e4f00cb}
+)}\label{time_8h_a17b4220ea702703600c6891d02ca59e7}
+\+: set\+Time \+: Sets the time on the system \+: timestring\mbox{[}\mbox{]} -\/ A string specifying the time, timelength -\/ The length of timestring \+: none 

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['year',['year',['../structdate__time.html#abeac221e38b7b9ce7df8722c842bf671',1,'date_time']]]
+  ['usermode',['usermode',['../structpage__entry.html#a2beafd3900a1f36f09af9c35a9a14f18',1,'page_entry']]]
 ];

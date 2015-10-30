@@ -1,12 +1,16 @@
 var searchData=
 [
-  ['table',['table',['../structindex__table.html#ac79481e508bbe68d18d747f7af369986',1,'index_table']]],
-  ['table_5fsize',['TABLE_SIZE',['../heap_8h.html#a032503e76d6f69bc67e99e909c8125da',1,'heap.h']]],
-  ['tables',['tables',['../structpage__dir.html#a3d121c0f2d5bf9079178a0889d26ae94',1,'page_dir']]],
-  ['tables_2ec',['tables.c',['../tables_8c.html',1,'']]],
-  ['tables_2eh',['tables.h',['../tables_8h.html',1,'']]],
-  ['tables_5fphys',['tables_phys',['../structpage__dir.html#a67d4c7f42d2b63673971e15ebabed897',1,'page_dir']]],
-  ['takeinput',['takeInput',['../keyboard_input_8c.html#a87766e20708d77f4468393bf4f866f60',1,'keyboardInput.c']]],
-  ['time_2ec',['time.c',['../time_8c.html',1,'']]],
-  ['time_2eh',['time.h',['../time_8h.html',1,'']]]
+  ['rc_5f1',['RC_1',['../procsr3_8h.html#a69bb368d802d94815d8480c1196eb868',1,'procsr3.h']]],
+  ['rc_5f2',['RC_2',['../procsr3_8h.html#aecb625779f85a782d04475c4fb74ebc5',1,'procsr3.h']]],
+  ['rc_5f3',['RC_3',['../procsr3_8h.html#acf180d856b90414b8bed369054fcd763',1,'procsr3.h']]],
+  ['rc_5f4',['RC_4',['../procsr3_8h.html#ac76d64b147c7d9537915e51c7dc02bc1',1,'procsr3.h']]],
+  ['rc_5f5',['RC_5',['../procsr3_8h.html#acba6a931785dc419ad6337bc9c1a24f8',1,'procsr3.h']]],
+  ['read',['READ',['../mpx__supt_8h.html#ada74e7db007a68e763f20c17f2985356',1,'mpx_supt.h']]],
+  ['readydisplay_5fhelp',['readydisplay_help',['../help_8h.html#af44b9b24064dc488a5fe36743fec78b8',1,'readydisplay_help():&#160;help.c'],['../help_8c.html#af44b9b24064dc488a5fe36743fec78b8',1,'readydisplay_help():&#160;help.c']]],
+  ['readyqueue',['readyQueue',['../pcb_8c.html#a558b620fad6ac9a074555773db686a58',1,'readyQueue():&#160;pcb.c'],['../pcb_8h.html#a558b620fad6ac9a074555773db686a58',1,'readyQueue():&#160;pcb.c']]],
+  ['removepcb',['removePCB',['../pcb_8c.html#aa0d8f851a9411c921848c487087b397e',1,'removePCB(pcb *oldpcb):&#160;pcb.c'],['../pcb_8h.html#aa0d8f851a9411c921848c487087b397e',1,'removePCB(pcb *oldpcb):&#160;pcb.c']]],
+  ['reserved',['reserved',['../structpage__entry.html#af6d963f09b01571b107e6f505050c0e5',1,'page_entry::reserved()'],['../interrupts_8c.html#ad686e3fee8ec8346a6d8e98d970a02dd',1,'reserved():&#160;interrupts.c']]],
+  ['resetline',['resetLine',['../keyboard_input_8c.html#ac8ec98ee091cd89cdb492d80e90f0c84',1,'keyboardInput.c']]],
+  ['resume_5fhelp',['resume_help',['../help_8h.html#ace3dcdc3890d5a29cfc1018ca9c485e6',1,'resume_help():&#160;help.c'],['../help_8c.html#ace3dcdc3890d5a29cfc1018ca9c485e6',1,'resume_help():&#160;help.c']]],
+  ['rtc_5fisr',['rtc_isr',['../interrupts_8c.html#a52f2615cebbdeab188085a03c913fcf9',1,'interrupts.c']]]
 ];

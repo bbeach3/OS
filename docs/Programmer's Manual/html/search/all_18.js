@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['z',['Z',['../docs_2_programmer's_manual_2html_2jquery_8js.html#adc18d83abfd9f87d396e8fd6b6ac0fe1',1,'Z():&#160;jquery.js'],['../html_2jquery_8js.html#adc18d83abfd9f87d396e8fd6b6ac0fe1',1,'Z():&#160;jquery.js']]],
-  ['zero',['zero',['../structidt__entry__struct.html#a94515e42687e7508877c09da81f86860',1,'idt_entry_struct::zero()'],['../tables_8h.html#a94515e42687e7508877c09da81f86860',1,'zero():&#160;tables.h']]]
+  ['year',['year',['../structdate__time.html#ae96e2e4cc09780eaac04038e12bbe06b',1,'date_time']]],
+  ['yield_5fhelp',['yield_help',['../help_8h.html#a92f5204a22cf980aae34bf310fbc89d0',1,'yield_help():&#160;help.c'],['../help_8c.html#a92f5204a22cf980aae34bf310fbc89d0',1,'yield_help():&#160;help.c']]]
 ];
