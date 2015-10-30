@@ -6,6 +6,7 @@
 
 #include "../mpx_supt.h"
 #include "../mod2/pcb.h"
+#include <../kernel/core/menu.h>
 #include "call.h"
 
 #define RC_1 1
