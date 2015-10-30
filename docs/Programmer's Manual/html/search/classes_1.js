@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['footer',['footer',['../structfooter.html',1,'']]]
+  ['date_5ftime',['date_time',['../structdate__time.html',1,'']]]
 ];

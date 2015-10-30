@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['table',['table',['../structindex__table.html#ac79481e508bbe68d18d747f7af369986',1,'index_table']]],
-  ['tables',['tables',['../structpage__dir.html#a3d121c0f2d5bf9079178a0889d26ae94',1,'page_dir']]],
-  ['tables_5fphys',['tables_phys',['../structpage__dir.html#a67d4c7f42d2b63673971e15ebabed897',1,'page_dir']]]
+  ['readyqueue',['readyQueue',['../pcb_8c.html#a558b620fad6ac9a074555773db686a58',1,'readyQueue():&#160;pcb.c'],['../pcb_8h.html#a558b620fad6ac9a074555773db686a58',1,'readyQueue():&#160;pcb.c']]],
+  ['reserved',['reserved',['../structpage__entry.html#af6d963f09b01571b107e6f505050c0e5',1,'page_entry']]]
 ];

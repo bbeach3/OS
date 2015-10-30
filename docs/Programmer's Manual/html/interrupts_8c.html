@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>MPX-Fall2015-Group0: interrupts.c File Reference</title>
+<title>mpx-fall2015-group0: kernel/core/interrupts.c File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,8 +23,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">MPX-Fall2015-Group0
-   &#160;<span id="projectnumber">R1</span>
+   <div id="projectname">mpx-fall2015-group0
    </div>
   </td>
  </tr>
@@ -39,7 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -62,7 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -81,7 +80,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_8ceffd4ee35c3518d4e8bdc7e638efe8.html">Users</a></li><li class="navelem"><a class="el" href="dir_230b84ad8ff1285f421368e13e3575c4.html">Nathan</a></li><li class="navelem"><a class="el" href="dir_60379d5f29e57557158439a6430f1064.html">Desktop</a></li><li class="navelem"><a class="el" href="dir_768501a5e220b40e00ce738cc4ebb399.html">Media</a></li><li class="navelem"><a class="el" href="dir_ebcac4274f11895d33a2028e75abfdd5.html">Projects</a></li><li class="navelem"><a class="el" href="dir_4ad145b30a7e32494895dd7d7af89a50.html">School</a></li><li class="navelem"><a class="el" href="dir_99b385d699539b9303159b7e24db60ad.html">CS450</a></li><li class="navelem"><a class="el" href="dir_721e6a9ae15db85331bb02833bc5fe94.html">mpx-fall2015-group0</a></li><li class="navelem"><a class="el" href="dir_d5c3d2162cc2b7f6958aead9722be5eb.html">kernel</a></li><li class="navelem"><a class="el" href="dir_c09e73326bd9ba32643305ef39a59c2e.html">core</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_dc43877d82dd332f9fb2071fcca799d6.html">kernel</a></li><li class="navelem"><a class="el" href="dir_5215f8c381c24c03346eeeea66185b9a.html">core</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -98,6 +97,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <code>#include &lt;<a class="el" href="serial_8h_source.html">core/serial.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="tables_8h_source.html">core/tables.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="interrupts_8h_source.html">core/interrupts.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="call_8h_source.html">modules/mod34/call.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="pcb_8h_source.html">modules/mod2/pcb.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="queue_8h_source.html">modules/mod2/queue.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="mpx__supt_8h_source.html">modules/mpx_supt.h</a>&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -150,6 +153,8 @@ Functions</h2></td></tr>
 <tr class="separator:a5c538c7b7a55e3c981780b599fcb1de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52f2615cebbdeab188085a03c913fcf9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#a52f2615cebbdeab188085a03c913fcf9">rtc_isr</a> ()</td></tr>
 <tr class="separator:a52f2615cebbdeab188085a03c913fcf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99cc9cf3204b4d11bebf1f85b763f608"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#a99cc9cf3204b4d11bebf1f85b763f608">sys_call_isr</a> ()</td></tr>
+<tr class="separator:a99cc9cf3204b4d11bebf1f85b763f608"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af88eb8e98d943aa0461c01de3cb53493"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#af88eb8e98d943aa0461c01de3cb53493">isr0</a> ()</td></tr>
 <tr class="separator:af88eb8e98d943aa0461c01de3cb53493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f9ba1353a3e7fcf94720c1c56ab3a96"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#a1f9ba1353a3e7fcf94720c1c56ab3a96">do_isr</a> ()</td></tr>
@@ -192,11 +197,17 @@ Functions</h2></td></tr>
 <tr class="separator:a3b448798302562f8ef16b8ee1de71ba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a3725c251a2cb8e346a847febf66ed2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#a8a3725c251a2cb8e346a847febf66ed2">do_coprocessor</a> ()</td></tr>
 <tr class="separator:a8a3725c251a2cb8e346a847febf66ed2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad8093682fcfe15c2669288f19d1c52c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="system_8h.html#a757de76cafbcddaac0d1632902fe4cb8">u32int</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#aad8093682fcfe15c2669288f19d1c52c">sys_call</a> (<a class="el" href="structcontext.html">context</a> *registers)</td></tr>
+<tr class="separator:aad8093682fcfe15c2669288f19d1c52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a3c386c59636822ce451be20cc1433a55"><td class="memItemLeft" align="right" valign="top">idt_entry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#a3c386c59636822ce451be20cc1433a55">idt_entries</a> [256]</td></tr>
 <tr class="separator:a3c386c59636822ce451be20cc1433a55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84b90790e5d7941eb2b41fbb512ebc0e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structpcb.html">pcb</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#a84b90790e5d7941eb2b41fbb512ebc0e">cop</a></td></tr>
+<tr class="separator:a84b90790e5d7941eb2b41fbb512ebc0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53918285c344f327f569cde518b2f184"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structcontext.html">context</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interrupts_8c.html#a53918285c344f327f569cde518b2f184">oldcon</a></td></tr>
+<tr class="separator:a53918285c344f327f569cde518b2f184"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a class="anchor" id="ac56445256ce58f14f3c61af0cbf0cdad"></a>
@@ -850,13 +861,69 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aad8093682fcfe15c2669288f19d1c52c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="system_8h.html#a757de76cafbcddaac0d1632902fe4cb8">u32int</a>* sys_call </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structcontext.html">context</a> *&#160;</td>
+          <td class="paramname"><em>registers</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>sys_call : controls which process is currently operating : registers - context Pointer to register values : u32Int </p>
+
+</div>
+</div>
+<a class="anchor" id="a99cc9cf3204b4d11bebf1f85b763f608"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sys_call_isr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="a84b90790e5d7941eb2b41fbb512ebc0e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpcb.html">pcb</a>* cop</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3c386c59636822ce451be20cc1433a55"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">idt_entry idt_entries[256]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a53918285c344f327f569cde518b2f184"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcontext.html">context</a>* oldcon</td>
         </tr>
       </table>
 </div><div class="memdoc">

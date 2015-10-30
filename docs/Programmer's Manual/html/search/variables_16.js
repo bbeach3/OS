@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero',['zero',['../structidt__entry__struct.html#a94515e42687e7508877c09da81f86860',1,'idt_entry_struct::zero()'],['../tables_8h.html#a94515e42687e7508877c09da81f86860',1,'zero():&#160;tables.h']]]
+  ['writeable',['writeable',['../structpage__entry.html#a2ea8d7684fe45772b6acba70d46e41d9',1,'page_entry']]]
 ];

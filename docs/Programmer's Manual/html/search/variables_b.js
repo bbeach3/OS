@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['limit',['limit',['../structidt__struct.html#a68fd3b4f6c14a331ca9b226cbf122e13',1,'idt_struct::limit()'],['../structgdt__descriptor__struct.html#a68fd3b4f6c14a331ca9b226cbf122e13',1,'gdt_descriptor_struct::limit()'],['../tables_8h.html#a68fd3b4f6c14a331ca9b226cbf122e13',1,'limit():&#160;tables.h']]],
-  ['limit_5flow',['limit_low',['../structgdt__entry__struct.html#af9013229edfb91d4820f66b8df890ce3',1,'gdt_entry_struct::limit_low()'],['../tables_8h.html#af9013229edfb91d4820f66b8df890ce3',1,'limit_low():&#160;tables.h']]]
+  ['k',['k',['../jquery_8js.html#ab26645c014aa005ecedef329ecf58c99',1,'jquery.js']]],
+  ['kdir',['kdir',['../heap_8c.html#a61ce943ba80d9dfab89a826cae9ddc4a',1,'kdir():&#160;paging.c'],['../paging_8c.html#a61ce943ba80d9dfab89a826cae9ddc4a',1,'kdir():&#160;paging.c']]],
+  ['kheap',['kheap',['../heap_8c.html#a61825456a33b09780a5493c95adcae8a',1,'kheap():&#160;heap.c'],['../paging_8c.html#a61825456a33b09780a5493c95adcae8a',1,'kheap():&#160;heap.c']]]
 ];

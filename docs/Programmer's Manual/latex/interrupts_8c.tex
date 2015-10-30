@@ -1,10 +1,14 @@
-\hypertarget{interrupts_8c}{}\section{interrupts.\+c File Reference}
-\label{interrupts_8c}\index{interrupts.\+c@{interrupts.\+c}}
+\hypertarget{interrupts_8c}{}\section{kernel/core/interrupts.c File Reference}
+\label{interrupts_8c}\index{kernel/core/interrupts.\+c@{kernel/core/interrupts.\+c}}
 {\ttfamily \#include $<$system.\+h$>$}\\*
 {\ttfamily \#include $<$core/io.\+h$>$}\\*
 {\ttfamily \#include $<$core/serial.\+h$>$}\\*
 {\ttfamily \#include $<$core/tables.\+h$>$}\\*
 {\ttfamily \#include $<$core/interrupts.\+h$>$}\\*
+{\ttfamily \#include $<$modules/mod34/call.\+h$>$}\\*
+{\ttfamily \#include $<$modules/mod2/pcb.\+h$>$}\\*
+{\ttfamily \#include $<$modules/mod2/queue.\+h$>$}\\*
+{\ttfamily \#include $<$modules/mpx\+\_\+supt.\+h$>$}\\*
 \subsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
@@ -57,6 +61,8 @@ void \hyperlink{interrupts_8c_a5c538c7b7a55e3c981780b599fcb1de7}{coprocessor} ()
 \item 
 void \hyperlink{interrupts_8c_a52f2615cebbdeab188085a03c913fcf9}{rtc\+\_\+isr} ()
 \item 
+void \hyperlink{interrupts_8c_a99cc9cf3204b4d11bebf1f85b763f608}{sys\+\_\+call\+\_\+isr} ()
+\item 
 void \hyperlink{interrupts_8c_af88eb8e98d943aa0461c01de3cb53493}{isr0} ()
 \item 
 void \hyperlink{interrupts_8c_a1f9ba1353a3e7fcf94720c1c56ab3a96}{do\+\_\+isr} ()
@@ -98,11 +104,17 @@ void \hyperlink{interrupts_8c_a70473c7f1d2679277751cb161e2d768d}{do\+\_\+page\+\
 void \hyperlink{interrupts_8c_a3b448798302562f8ef16b8ee1de71ba7}{do\+\_\+reserved} ()
 \item 
 void \hyperlink{interrupts_8c_a8a3725c251a2cb8e346a847febf66ed2}{do\+\_\+coprocessor} ()
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} $\ast$ \hyperlink{interrupts_8c_aad8093682fcfe15c2669288f19d1c52c}{sys\+\_\+call} (\hyperlink{structcontext}{context} $\ast$registers)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 idt\+\_\+entry \hyperlink{interrupts_8c_a3c386c59636822ce451be20cc1433a55}{idt\+\_\+entries} \mbox{[}256\mbox{]}
+\item 
+\hyperlink{structpcb}{pcb} $\ast$ \hyperlink{interrupts_8c_a84b90790e5d7941eb2b41fbb512ebc0e}{cop}
+\item 
+\hyperlink{structcontext}{context} $\ast$ \hyperlink{interrupts_8c_a53918285c344f327f569cde518b2f184}{oldcon}
 \end{DoxyCompactItemize}
 
 
@@ -402,9 +414,29 @@ idt\+\_\+entry \hyperlink{interrupts_8c_a3c386c59636822ce451be20cc1433a55}{idt\+
 {}
 \end{DoxyParamCaption}
 )}\label{interrupts_8c_a1ccc3198890318741629a03bb88bee6f}
+\hypertarget{interrupts_8c_aad8093682fcfe15c2669288f19d1c52c}{}\index{interrupts.\+c@{interrupts.\+c}!sys\+\_\+call@{sys\+\_\+call}}
+\index{sys\+\_\+call@{sys\+\_\+call}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection[{sys\+\_\+call(context $\ast$registers)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int}$\ast$ sys\+\_\+call (
+\begin{DoxyParamCaption}
+\item[{{\bf context} $\ast$}]{registers}
+\end{DoxyParamCaption}
+)}\label{interrupts_8c_aad8093682fcfe15c2669288f19d1c52c}
+sys\+\_\+call \+: controls which process is currently operating \+: registers -\/ context Pointer to register values \+: u32\+Int \hypertarget{interrupts_8c_a99cc9cf3204b4d11bebf1f85b763f608}{}\index{interrupts.\+c@{interrupts.\+c}!sys\+\_\+call\+\_\+isr@{sys\+\_\+call\+\_\+isr}}
+\index{sys\+\_\+call\+\_\+isr@{sys\+\_\+call\+\_\+isr}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection[{sys\+\_\+call\+\_\+isr()}]{\setlength{\rightskip}{0pt plus 5cm}void sys\+\_\+call\+\_\+isr (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{interrupts_8c_a99cc9cf3204b4d11bebf1f85b763f608}
 
 
 \subsection{Variable Documentation}
+\hypertarget{interrupts_8c_a84b90790e5d7941eb2b41fbb512ebc0e}{}\index{interrupts.\+c@{interrupts.\+c}!cop@{cop}}
+\index{cop@{cop}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection[{cop}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pcb}$\ast$ cop}\label{interrupts_8c_a84b90790e5d7941eb2b41fbb512ebc0e}
 \hypertarget{interrupts_8c_a3c386c59636822ce451be20cc1433a55}{}\index{interrupts.\+c@{interrupts.\+c}!idt\+\_\+entries@{idt\+\_\+entries}}
 \index{idt\+\_\+entries@{idt\+\_\+entries}!interrupts.\+c@{interrupts.\+c}}
 \subsubsection[{idt\+\_\+entries}]{\setlength{\rightskip}{0pt plus 5cm}idt\+\_\+entry idt\+\_\+entries\mbox{[}256\mbox{]}}\label{interrupts_8c_a3c386c59636822ce451be20cc1433a55}
+\hypertarget{interrupts_8c_a53918285c344f327f569cde518b2f184}{}\index{interrupts.\+c@{interrupts.\+c}!oldcon@{oldcon}}
+\index{oldcon@{oldcon}!interrupts.\+c@{interrupts.\+c}}
+\subsubsection[{oldcon}]{\setlength{\rightskip}{0pt plus 5cm}{\bf context}$\ast$ oldcon}\label{interrupts_8c_a53918285c344f327f569cde518b2f184}

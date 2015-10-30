@@ -1,11 +1,20 @@
-\hypertarget{interrupts_8h}{}\section{interrupts.\+h File Reference}
-\label{interrupts_8h}\index{interrupts.\+h@{interrupts.\+h}}
+\hypertarget{interrupts_8h}{}\section{include/core/interrupts.h File Reference}
+\label{interrupts_8h}\index{include/core/interrupts.\+h@{include/core/interrupts.\+h}}
+{\ttfamily \#include $<$modules/mod34/call.\+h$>$}\\*
+{\ttfamily \#include $<$modules/mod2/pcb.\+h$>$}\\*
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 void \hyperlink{interrupts_8h_ad17d9a8aa78440af8fc40d3fd55dbad8}{init\+\_\+irq} (void)
 \item 
 void \hyperlink{interrupts_8h_afbc0dbef6f15e2df21b38724ea38c483}{init\+\_\+pic} (void)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structpcb}{pcb} $\ast$ \hyperlink{interrupts_8h_a84b90790e5d7941eb2b41fbb512ebc0e}{cop}
+\item 
+\hyperlink{structcontext}{context} $\ast$ \hyperlink{interrupts_8h_a53918285c344f327f569cde518b2f184}{oldcon}
 \end{DoxyCompactItemize}
 
 
@@ -24,3 +33,12 @@ void \hyperlink{interrupts_8h_afbc0dbef6f15e2df21b38724ea38c483}{init\+\_\+pic} 
 \item[{void}]{}
 \end{DoxyParamCaption}
 )}\label{interrupts_8h_afbc0dbef6f15e2df21b38724ea38c483}
+
+
+\subsection{Variable Documentation}
+\hypertarget{interrupts_8h_a84b90790e5d7941eb2b41fbb512ebc0e}{}\index{interrupts.\+h@{interrupts.\+h}!cop@{cop}}
+\index{cop@{cop}!interrupts.\+h@{interrupts.\+h}}
+\subsubsection[{cop}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pcb}$\ast$ cop}\label{interrupts_8h_a84b90790e5d7941eb2b41fbb512ebc0e}
+\hypertarget{interrupts_8h_a53918285c344f327f569cde518b2f184}{}\index{interrupts.\+h@{interrupts.\+h}!oldcon@{oldcon}}
+\index{oldcon@{oldcon}!interrupts.\+h@{interrupts.\+h}}
+\subsubsection[{oldcon}]{\setlength{\rightskip}{0pt plus 5cm}{\bf context}$\ast$ oldcon}\label{interrupts_8h_a53918285c344f327f569cde518b2f184}
