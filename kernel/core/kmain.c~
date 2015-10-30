@@ -5,6 +5,7 @@
       the bootloader. Initialization of hardware, system
       structures, devices, and initial processes happens here.   
 */ 
+ 
 #include <stdint.h>
 #include <string.h>
 #include <system.h>
@@ -17,7 +18,7 @@
 #include <mem/paging.h>
  
 #include "modules/mpx_supt.h"
-#include "menu.c"
+#include "menu.h"
 #include "modules/mod34/procsr3.h"
 
 void kmain(void) 

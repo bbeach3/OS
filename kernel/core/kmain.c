@@ -21,7 +21,7 @@
 #include "menu.h"
 #include "modules/mod34/procsr3.h"
 
-void kmain(void) 
+void kmain(void)
 {
    extern uint32_t magic;
    // Uncomment if you want to access the multiboot header

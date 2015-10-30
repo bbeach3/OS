@@ -1,5 +1,11 @@
 #include "procsr3.h"
 
+/**
+\Function loadr3
+\Description: creates pcbs for one of the five provided processes
+\Parameters: char * name - a pointer to the name of the process
+\Returns: pointer to created pcb
+*/
 pcb *loadr3(char *name)//stack size?
 {
 	pcb *newpcb = setupPCB(name, 1, 1);

@@ -206,22 +206,31 @@ void do_coprocessor()
   kpanic("Coprocessor error");
 }
 
+/**
+\Function sys_call
+\Description: controls which process is currently operating
+\Parameters: registers - context Pointer to register values
+\Returns: u32Int
+*/
+
+//Note to self: In testing, it throws a page fault.
+//I did a test where proc2 and 4 were unsuspended, and both ran. 
+//Might be good to know for fixing it.
 u32int* sys_call(context *registers){
-	serial_println("inside syscall");
+	
 	if(cop == NULL)
 	{
-		serial_println("cop is null");
-		//save the above context as a global variable
+		//save the registers as a global variable
 		oldcon = registers;
 	}
 	else
 	{
-		serial_println("cop is not null");
 		if(params.op_code == IDLE)
 		{
 			//save context (reassign cop's stack top)
 			cop->stacktop = (unsigned char*)registers;
 			//and cop goes idle but ready
+			cop->state = 1;
 			insertPCB(cop);
 		}
 		else
@@ -233,28 +242,22 @@ u32int* sys_call(context *registers){
 			}
 		}
 	}
-	//check for ready process
-	//if there is a ready process
-		//remove from queue
-		//assign cop
-		//return cop's stacktop
-	//NOTE: this is probably wrong and we'll need to redo it to not always take the head
-	if(readyQueue->head != NULL){
+	//this will need reworked to use priority levels
+	if(readyQueue->head != NULL){ //if there are ready pcbs
 		pcb *temp;
-		//we should have a better algo for picking than "the head"
-		//I think we're actaully supposed to pick the head, because why else use a queue. however, I think we're supposed to arrange processes by priority in the queue, so that highest priority is always the head. - Nathan
 		temp = readyQueue->head;
-		removePCB(temp);
-		insertPCB(cop);
-		cop = temp;
-		return (u32int*)cop->stacktop;
+		while(temp != NULL){
+			if(temp->suspension == 1){//finding a non-suspended ready process
+				removePCB(temp); //remove ready process from queue
+				cop = temp; //assign cop 
+				return (u32int*)(cop->stacktop); //return cop's stack top
+			}
+			temp = temp->next;
+		}
 	}
-	//if not
-		//return thing we saved in step 1
-		//if opcode is idle, cop
-		//if exit, oldcon
+	//if you get here, there were no ready pcbs. 
 		if(params.op_code == IDLE){
-			return (u32int*)cop->stacktop;
+			return (u32int*)(cop->stacktop);
 		}
 		//otherwise
 		return (u32int*)oldcon;

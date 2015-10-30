@@ -8,7 +8,6 @@ queue* blockedQueue;
 		-Ensure we have covered any and all error cases when necessary, giving 			them appropriate error codes
 	-Determine what exactly needs to be done concerning the queues, and if we want 		to even implement a two-queue system
 	-Determine if the queues should remain doubly-linked, or shift to become 		singly-linked - They don't appear to do anything but complicate methods as of 		right now, but who knows
-	-Implement selectability of said methods into menu.c
 	-Update the manuals and documentation for any new files or new methods in 		existing files
 */
 //struct queue *readyQueue;
@@ -71,7 +70,7 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
 	unsigned char newStacktop[1024];
-	newpcb->stacktop = newStacktop;
+	newpcb->stacktop = sys_alloc_mem(sizeof(newStacktop));
 	newpcb->state = 1; //ready
 	newpcb->suspension = 1; //unsuspended
 	newpcb->next = NULL;

@@ -71,7 +71,7 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
 	unsigned char newStacktop[1024];
-	newpcb->stacktop = newStacktop;
+	newpcb->stacktop = sys_alloc_mem(sizeof(newStacktop));
 	newpcb->state = 1; //ready
 	newpcb->suspension = 1; //unsuspended
 	newpcb->next = NULL;
@@ -112,8 +112,7 @@ pcb *findPCB(char *pcbname)
 */
 void insertPCB(pcb *newpcb)
 {
-	serial_print("inserting: ");
-	serial_println(newpcb->name);
+
 	if(newpcb->state == 1){
 		insertReady(newpcb);
 	} else {
