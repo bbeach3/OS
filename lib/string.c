@@ -43,9 +43,8 @@ char* strcpy(char *s1, const char *s2)
 	*/
 //When I was compiling this part it didn't like it so I changed it and now the compiler likes it.
   char *s = s1;
-  while((*s++=*s2++)!=0)
-  ;
-  return s1; // return pointer to destination string
+  while((*s1++=*s2++));
+  return s; // return pointer to destination string
 }
 
 

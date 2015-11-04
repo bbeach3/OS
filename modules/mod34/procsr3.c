@@ -17,7 +17,7 @@ pcb *loadr3(char *name)//stack size?
 	con->ds = 0x10;
 	con->es = 0x10;
 	con->cs = 0x8;
-	con->ebp = (u32int)(newpcb->stackbase);
+	con->ebp = (u32int)(newpcb->stack);
 	con->esp = (u32int)(newpcb->stacktop);
 	if(strcmp(name, "Process1") == 0)
 	{

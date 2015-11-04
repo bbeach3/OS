@@ -212,6 +212,9 @@ switch(inputInt)
     break;
   }
   suspendedPCB->suspension=0;
+  //reinserting into queue
+  removePCB(suspendedPCB);
+  insertPCB(suspendedPCB);
   break;
 
   case 2:
@@ -224,6 +227,9 @@ switch(inputInt)
     break;
   }
   resumedPCB->suspension =1;
+  //reinserting into queue
+  removePCB(resumedPCB);
+  insertPCB(resumedPCB);
   break;
 
   case 3:

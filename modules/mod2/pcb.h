@@ -4,6 +4,7 @@
 #include "../mpx_supt.h"
 #include <string.h>
 #include <core/serial.h>
+#include "../mod34/call.h"
 
 typedef struct pcb pcb;
 
@@ -14,7 +15,7 @@ struct pcb{
 	int state; //0 for blocked, 1 for ready, and I guess 2 for running
 	int suspension; //0 for suspended, 1 for not
 	unsigned char *stacktop;//!< top of stack
-	unsigned char *stackbase; //!<base of stack
+	unsigned char *stack[1024]; //!<base of stack
 	//Pointers to other PCBs
 	pcb *next; //!<pointer to next PCB in queue
 	pcb *prev; //!<pointer to previous PCB in queue
