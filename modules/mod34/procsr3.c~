@@ -39,7 +39,7 @@ pcb *loadr3(char *name)//stack size?
 	{
 		con->eip = (u32int)proc5;
 	}
-	else if(strcmp(name, "Commhand") == 0)
+	else if(strcmp(name, "Menu") == 0)
 	{
 		con->eip = (u32int)menu;
 	}

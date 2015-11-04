@@ -398,5 +398,6 @@ switch(inputInt)
  x=0;
  break;
  }
+//sys_req(EXIT); Not yet
 }
 }

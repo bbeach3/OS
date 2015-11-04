@@ -69,10 +69,9 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
-	unsigned char newStacktop[1024];
-	newpcb->stacktop = sys_alloc_mem(sizeof(newStacktop));
+	newpcb->stacktop = (unsigned char*)(newpcb->stack + 1024 - sizeof(context));
 	newpcb->state = 1; //ready
-	newpcb->suspension = 1; //unsuspended
+	newpcb->suspension = 0; //suspended
 	newpcb->next = NULL;
 	newpcb->prev = NULL;
 	return newpcb;
@@ -152,7 +151,7 @@ void insertReady(pcb *newpcb){
 	}
 	while(temp->next != NULL){
 		//since we look ahead, if statement triggers only at the end of a priority level
-		if(newpcb->priority > temp->next->priority){
+		if(newpcb->priority < temp->next->priority){ //low# = high priority
 			newpcb->prev = temp;
 			newpcb->next = temp->next;
 			temp->next->prev = newpcb;
