@@ -242,7 +242,8 @@ u32int* sys_call(context *registers){
 			}
 		}
 	}
-	//this will need reworked to use priority levels
+	//Talked to Thomas: I wasn't checking for has next
+	//could definitely cause the hangs, if temp != NULL is being weird...
 	if(readyQueue->head != NULL){ //if there are ready pcbs
 		pcb *temp;
 		temp = readyQueue->head;
