@@ -404,6 +404,6 @@ switch(inputInt)
  x=0;
  break;
  }
-//sys_req(EXIT); Not yet
+sys_req(IDLE); //let things dispatch
 }
 }

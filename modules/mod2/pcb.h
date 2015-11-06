@@ -15,7 +15,7 @@ struct pcb{
 	int state; //0 for blocked, 1 for ready, and I guess 2 for running
 	int suspension; //0 for suspended, 1 for not
 	unsigned char *stacktop;//!< top of stack
-	unsigned char *stack[1024]; //!<base of stack
+	unsigned char stack[2048];//!<base of stack
 	//Pointers to other PCBs
 	pcb *next; //!<pointer to next PCB in queue
 	pcb *prev; //!<pointer to previous PCB in queue
