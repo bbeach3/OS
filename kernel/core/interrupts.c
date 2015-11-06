@@ -243,17 +243,22 @@ u32int* sys_call(context *registers){
 		}
 	}
 	//Talked to Thomas: I wasn't checking for has next
-	//could definitely cause the hangs, if temp != NULL is being weird...
+	//stepping into a trap and then seeing if we're dead...
 	if(readyQueue->head != NULL){ //if there are ready pcbs
 		pcb *temp;
 		temp = readyQueue->head;
-		while(temp != NULL){
+		if(temp->suspension == 1){//finding a non-suspended ready process
+			removePCB(temp); //remove ready process from queue
+			cop = temp; //assign cop 
+			return (u32int*)(cop->stacktop); //return cop's stack top
+		}
+		while(temp->next != NULL){
+			temp = temp->next;
 			if(temp->suspension == 1){//finding a non-suspended ready process
 				removePCB(temp); //remove ready process from queue
 				cop = temp; //assign cop 
 				return (u32int*)(cop->stacktop); //return cop's stack top
 			}
-			temp = temp->next;
 		}
 	}
 	//if you get here, there were no ready pcbs. 

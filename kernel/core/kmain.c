@@ -59,11 +59,11 @@ void kmain(void)
   
    // 5) Call Commhand  
    klogv("Transferring control to commhand...");
-   menu();
+  // menu();
    //Module 4 stuff - Uncomment above line to access menu automatically
-   //insertPCB(loadr3("Menu"));
-   //insertPCB(loadr3("Idle"));
-   //sys_req(IDLE);
+   insertPCB(loadr3("Menu"));
+   insertPCB(loadr3("Idle"));
+	asm volatile ("int $60");
    //Module 4 ends here
 //version();  
    // 11) System Shutdown

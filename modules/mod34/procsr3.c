@@ -8,8 +8,18 @@
 */
 pcb *loadr3(char *name)//stack size?
 {
-	pcb *newpcb = setupPCB(name, 1, 1);
+	pcb *newpcb = allocatePCB();
+	newpcb = setupPCB(name, 1, 1);
 	newpcb->suspension = 0; //Must be suspended ready
+	
+	if(strcmp(name, "Menu") == 0)
+	{
+		newpcb->suspension = 1;
+	}
+	if(strcmp(name, "Idle") == 0)
+	{
+		newpcb->suspension = 1;
+	}
 	context *con = (context*)(newpcb->stacktop);
 	memset(con, 0, sizeof(context));
 	con->fs = 0x10;

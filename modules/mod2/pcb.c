@@ -69,7 +69,7 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
-	newpcb->stacktop = (unsigned char*)(newpcb->stack + 1024 - sizeof(context));
+	newpcb->stacktop = newpcb->stack + 2048 - sizeof(context);
 	newpcb->state = 1; //ready
 	newpcb->suspension = 0; //suspended
 	newpcb->next = NULL;
