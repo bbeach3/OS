@@ -367,7 +367,8 @@ switch(inputInt)
 
 	//if this part of the menu wasn't temporary, I'd fix this so it only went back one step.
 	case 5: 
-	asm volatile ("int $60");
+	//Mod 3 only - Defunct!
+	//asm volatile ("int $60");
 	break;
 
 	case 6: //loadr3
