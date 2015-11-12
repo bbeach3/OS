@@ -368,7 +368,8 @@ switch(inputInt)
 
 	//if this part of the menu wasn't temporary, I'd fix this so it only went back one step.
 	case 5: 
-	asm volatile ("int $60");
+	//Mod 3 only - Defunct!
+	//asm volatile ("int $60");
 	break;
 
 	case 6: //loadr3
@@ -403,9 +404,8 @@ switch(inputInt)
  char input3 = *input[0];
  if(input3=='y')
  x=0;
- hlt();
  break;
  }
-sys_req(IDLE); //let things dispatch
+//sys_req(IDLE); //let things dispatch
 }
 }
