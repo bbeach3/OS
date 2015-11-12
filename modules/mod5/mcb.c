@@ -6,6 +6,7 @@ void *mcbheap;
 mcblist *freelist;
 mcblist *alloclist;
 
+
 int main(int argc, char* argv[])
 {
 	printf("initializing \n");
@@ -21,6 +22,7 @@ int main(int argc, char* argv[])
 	allocateMem(30);
 	isEmpty();
 	showAllocMap();
+	showFreeMap();
 }
 
 int initializeHeap()//Returns # of bytes allocated/Error code
@@ -231,12 +233,12 @@ int freeMem(void *ptr)
 void showAllocMap()
 {
 	if(alloclist->head == NULL){
-		printf("No alloc.");
+		printf("No alloc.\n");
 		return;
 	}
 	compmcb *temp = alloclist->head;	
 	while(temp != NULL){
-		printf("Printing a block");
+		printf("Printing a block\n");
 		printf("location %p \n", temp);
 		printf("size %d \n", temp->size);
 		printf("alloc code %d \n", temp->alloc);
@@ -247,7 +249,16 @@ void showAllocMap()
 
 void showFreeMap()
 {
-	
+	compmcb *tempFree = freelist->head;
+	while(tempFree !=NULL)
+	{
+	printf("Printing free block\n");
+	printf("Location %p \n",tempFree);
+	printf("Size %d \n",tempFree->size);
+	printf("Alloc code %d \n",tempFree->alloc);
+	printf("Block done. \n");
+	tempFree = tempFree->next;
+	}
 }
 
 int isEmpty()
