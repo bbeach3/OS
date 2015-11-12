@@ -11,14 +11,14 @@ typedef struct {
 	void *prev;
 } compmcb;
 
-typedef struxt {
+typedef struct {
 	int alloc;
 	int size;	
 } limitmcb;
 
 struct heap *mcbheap;
-void *freelist;
-void *alloclist;
+compmcb *freelist;
+compmcb *alloclist;
 
 int initializeHeap();
 

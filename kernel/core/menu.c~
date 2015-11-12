@@ -166,7 +166,6 @@ switch(inputInt)
 
  case 2:
  version();
- sys_req(IDLE);
  break;
 
  case 3:
@@ -406,6 +405,6 @@ switch(inputInt)
  x=0;
  break;
  }
-sys_req(EXIT);
+//sys_req(IDLE); //let things dispatch
 }
 }
