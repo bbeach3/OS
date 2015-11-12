@@ -18,6 +18,7 @@ mod34/procsr3.o\
 time.o \
 shutdown.o\
 version.o\
+mod5/mcb.o\
 help.o
 
 .c.s:

@@ -17,9 +17,19 @@ typedef struxt {
 } limitmcb;
 
 struct heap *mcbheap;
-void *freelist;
-void *alloclist;
+compmcb *freelist;
+compmcb *alloclist;
 
-int initializeHeap()
+int initializeHeap();
+
+u32int *allocateMem(int bytesalloc);
+
+void freeMem();
+
+void showAllocMap();
+
+void showFreeMap();
+
+int isEmpty();
 
 #endif
