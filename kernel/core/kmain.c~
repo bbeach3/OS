@@ -61,13 +61,9 @@ void kmain(void)
    klogv("Transferring control to commhand...");
   // menu();
    //Module 4 stuff - Uncomment above line to access menu automatically
-   pcb *newpcb = loadr3("Menu");
-   klogv("menu done");
-   insertPCB(newpcb);
-   klogv("menu inserted");
-   //insertPCB(loadr3("Menu"));
-   //insertPCB(loadr3("Idle"));
-	//asm volatile ("int $60");
+   insertPCB(loadr3("Menu"));
+   insertPCB(loadr3("Idle"));
+	asm volatile ("int $60");
    //Module 4 ends here
 //version();  
    // 11) System Shutdown
@@ -75,5 +71,6 @@ void kmain(void)
    
    /* Shutdown Procedure */
    klogv("Shutdown complete. You may now turn off the machine. (QEMU: C-a x)");
+   sys_req(EXIT);
    hlt();
 }
