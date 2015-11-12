@@ -1,0 +1,84 @@
+\hypertarget{serial_8c}{}\section{kernel/core/serial.c File Reference}
+\label{serial_8c}\index{kernel/core/serial.\+c@{kernel/core/serial.\+c}}
+{\ttfamily \#include $<$stdint.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$core/io.\+h$>$}\\*
+{\ttfamily \#include $<$core/serial.\+h$>$}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{serial_8c_a258bb72419ef143530a2f8f55e7d57af}{N\+O\+\_\+\+E\+R\+R\+O\+R}~0
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{serial_8c_a7078c07ff8b2c48780558549a8f7cf90}{init\+\_\+serial} (int device)
+\item 
+int \hyperlink{serial_8c_a3514f7abff236a4e00a6c46021ce5e22}{serial\+\_\+println} (const char $\ast$msg)
+\item 
+int \hyperlink{serial_8c_a995827efcd4dcfb780c9fbb9645410a4}{serial\+\_\+print} (const char $\ast$msg)
+\item 
+int \hyperlink{serial_8c_ae97b87ee1f57c687e7fca6f9958e03ef}{set\+\_\+serial\+\_\+out} (int device)
+\item 
+int \hyperlink{serial_8c_a3f4008da5feabfb7e086f6673a81104b}{set\+\_\+serial\+\_\+in} (int device)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{serial_8c_adbb2c18b0aaab5c1927a6f674768a710}{serial\+\_\+port\+\_\+out} = 0
+\item 
+int \hyperlink{serial_8c_a1a756238531fc5bf1096f89dc18e835e}{serial\+\_\+port\+\_\+in} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{serial_8c_a258bb72419ef143530a2f8f55e7d57af}{}\index{serial.\+c@{serial.\+c}!N\+O\+\_\+\+E\+R\+R\+O\+R@{N\+O\+\_\+\+E\+R\+R\+O\+R}}
+\index{N\+O\+\_\+\+E\+R\+R\+O\+R@{N\+O\+\_\+\+E\+R\+R\+O\+R}!serial.\+c@{serial.\+c}}
+\subsubsection[{N\+O\+\_\+\+E\+R\+R\+O\+R}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+O\+\_\+\+E\+R\+R\+O\+R~0}\label{serial_8c_a258bb72419ef143530a2f8f55e7d57af}
+
+
+\subsection{Function Documentation}
+\hypertarget{serial_8c_a7078c07ff8b2c48780558549a8f7cf90}{}\index{serial.\+c@{serial.\+c}!init\+\_\+serial@{init\+\_\+serial}}
+\index{init\+\_\+serial@{init\+\_\+serial}!serial.\+c@{serial.\+c}}
+\subsubsection[{init\+\_\+serial(int device)}]{\setlength{\rightskip}{0pt plus 5cm}int init\+\_\+serial (
+\begin{DoxyParamCaption}
+\item[{int}]{device}
+\end{DoxyParamCaption}
+)}\label{serial_8c_a7078c07ff8b2c48780558549a8f7cf90}
+\hypertarget{serial_8c_a995827efcd4dcfb780c9fbb9645410a4}{}\index{serial.\+c@{serial.\+c}!serial\+\_\+print@{serial\+\_\+print}}
+\index{serial\+\_\+print@{serial\+\_\+print}!serial.\+c@{serial.\+c}}
+\subsubsection[{serial\+\_\+print(const char $\ast$msg)}]{\setlength{\rightskip}{0pt plus 5cm}int serial\+\_\+print (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{msg}
+\end{DoxyParamCaption}
+)}\label{serial_8c_a995827efcd4dcfb780c9fbb9645410a4}
+\hypertarget{serial_8c_a3514f7abff236a4e00a6c46021ce5e22}{}\index{serial.\+c@{serial.\+c}!serial\+\_\+println@{serial\+\_\+println}}
+\index{serial\+\_\+println@{serial\+\_\+println}!serial.\+c@{serial.\+c}}
+\subsubsection[{serial\+\_\+println(const char $\ast$msg)}]{\setlength{\rightskip}{0pt plus 5cm}int serial\+\_\+println (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{msg}
+\end{DoxyParamCaption}
+)}\label{serial_8c_a3514f7abff236a4e00a6c46021ce5e22}
+\hypertarget{serial_8c_a3f4008da5feabfb7e086f6673a81104b}{}\index{serial.\+c@{serial.\+c}!set\+\_\+serial\+\_\+in@{set\+\_\+serial\+\_\+in}}
+\index{set\+\_\+serial\+\_\+in@{set\+\_\+serial\+\_\+in}!serial.\+c@{serial.\+c}}
+\subsubsection[{set\+\_\+serial\+\_\+in(int device)}]{\setlength{\rightskip}{0pt plus 5cm}int set\+\_\+serial\+\_\+in (
+\begin{DoxyParamCaption}
+\item[{int}]{device}
+\end{DoxyParamCaption}
+)}\label{serial_8c_a3f4008da5feabfb7e086f6673a81104b}
+\hypertarget{serial_8c_ae97b87ee1f57c687e7fca6f9958e03ef}{}\index{serial.\+c@{serial.\+c}!set\+\_\+serial\+\_\+out@{set\+\_\+serial\+\_\+out}}
+\index{set\+\_\+serial\+\_\+out@{set\+\_\+serial\+\_\+out}!serial.\+c@{serial.\+c}}
+\subsubsection[{set\+\_\+serial\+\_\+out(int device)}]{\setlength{\rightskip}{0pt plus 5cm}int set\+\_\+serial\+\_\+out (
+\begin{DoxyParamCaption}
+\item[{int}]{device}
+\end{DoxyParamCaption}
+)}\label{serial_8c_ae97b87ee1f57c687e7fca6f9958e03ef}
+
+
+\subsection{Variable Documentation}
+\hypertarget{serial_8c_a1a756238531fc5bf1096f89dc18e835e}{}\index{serial.\+c@{serial.\+c}!serial\+\_\+port\+\_\+in@{serial\+\_\+port\+\_\+in}}
+\index{serial\+\_\+port\+\_\+in@{serial\+\_\+port\+\_\+in}!serial.\+c@{serial.\+c}}
+\subsubsection[{serial\+\_\+port\+\_\+in}]{\setlength{\rightskip}{0pt plus 5cm}int serial\+\_\+port\+\_\+in = 0}\label{serial_8c_a1a756238531fc5bf1096f89dc18e835e}
+\hypertarget{serial_8c_adbb2c18b0aaab5c1927a6f674768a710}{}\index{serial.\+c@{serial.\+c}!serial\+\_\+port\+\_\+out@{serial\+\_\+port\+\_\+out}}
+\index{serial\+\_\+port\+\_\+out@{serial\+\_\+port\+\_\+out}!serial.\+c@{serial.\+c}}
+\subsubsection[{serial\+\_\+port\+\_\+out}]{\setlength{\rightskip}{0pt plus 5cm}int serial\+\_\+port\+\_\+out = 0}\label{serial_8c_adbb2c18b0aaab5c1927a6f674768a710}
