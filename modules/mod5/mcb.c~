@@ -8,7 +8,6 @@ mcblist *alloclist;
 
 int main(int argc, char* argv[])
 {
-	printf("test... \n");
 	printf("initializing \n");
 	int initcheck;
 	initcheck = initializeHeap();
@@ -18,9 +17,10 @@ int main(int argc, char* argv[])
 		printf("init worked. \n");
 	}
 	isEmpty();
-	printf("did empty check.\n");
+	printf("Allocating 30.\n");
 	allocateMem(30);
 	isEmpty();
+	showAllocMap();
 }
 
 int initializeHeap()//Returns # of bytes allocated/Error code
@@ -94,7 +94,6 @@ void *allocateMem(int bytesalloc)
 	found->next = NULL;
 	found->prev = NULL;
 	
-	printf("We removed found!\n");
 	
 	//we only make a remainder block if enough is left over.
 	//for now, I'm setting the cutoff at 50. This is meaningless.
@@ -138,48 +137,80 @@ void *allocateMem(int bytesalloc)
 }
 
 void insertMCB(compmcb *toInsert){
-	printf("insert\n");
-	mcblist* rightlist;
-	//pick the list to use
-	if(toInsert->alloc = 0){
-		rightlist = freelist;
+	if(toInsert->alloc == 0){
+		if(freelist->head == NULL){
+			freelist->head = toInsert;
+			return;
+		}
+		struct compmcb *temp = freelist->head;
+		if(temp->next == NULL){ //only the head exists
+			if(toInsert->address > temp->address){ //head has lower address
+				temp->next = toInsert;
+				toInsert->prev = temp;
+				return;
+			} else { //head has higher address
+				freelist->head = toInsert;
+				toInsert->next = temp;
+				temp->prev = toInsert;
+				return;
+			}
+		}	
+		//there's more than just the head to go through
+		while(temp->next != NULL){
+			temp = temp->next;
+			if(toInsert->address < temp->address){
+				temp->prev->next = toInsert;
+				toInsert->prev = temp->prev;
+				temp->prev = toInsert;
+				toInsert->next = temp;
+				return;
+			}
+		}
+		//if we get here, toInsert had the highest address
+		//and temp is the last current compmcb
+		temp->next = toInsert;
+		toInsert->prev = temp;
+		return;
+			
+		
+		
+		//stop
 	} else {
-		rightlist = alloclist;
-	}
-	//if list is empty, put mcb at head
-	if(rightlist->head == NULL){
-		rightlist->head = toInsert;
+		//if list is empty, put mcb at head
+		if(alloclist->head == NULL){
+			alloclist->head = toInsert;
+			return;
+		}
+		struct compmcb *temp = alloclist->head;
+		if(temp->next == NULL){ //only the head exists
+			if(toInsert->address > temp->address){ //head has lower address
+				temp->next = toInsert;
+				toInsert->prev = temp;
+				return;
+			} else { //head has higher address
+				alloclist->head = toInsert;
+				toInsert->next = temp;
+				temp->prev = toInsert;
+				return;
+			}
+		}
+		//there's more than just the head to go through
+		while(temp->next != NULL){
+			temp = temp->next;
+			if(toInsert->address < temp->address){
+				temp->prev->next = toInsert;
+				toInsert->prev = temp->prev;
+				temp->prev = toInsert;
+				toInsert->next = temp;
+				return;
+			}
+		}
+		//if we get here, toInsert had the highest address
+		//and temp is the last current compmcb
+		temp->next = toInsert;
+		toInsert->prev = temp;
 		return;
 	}
-	struct compmcb *temp = rightlist->head;
-	if(temp->next == NULL){ //only the head exists
-		if(toInsert->address > temp->address){ //head has lower address
-			temp->next = toInsert;
-			toInsert->prev = temp;
-			return;
-		} else { //head has higher address
-			rightlist->head = toInsert;
-			toInsert->next = temp;
-			temp->prev = toInsert;
-			return;
-		}
-	}
-	//there's more than just the head to go through
-	while(temp->next != NULL){
-		temp = temp->next;
-		if(toInsert->address < temp->address){
-			temp->prev->next = toInsert;
-			toInsert->prev = temp->prev;
-			temp->prev = toInsert;
-			toInsert->next = temp;
-			return;
-		}
-	}
-	//if we get here, toInsert had the highest address
-	//and temp is the last current compmcb
-	temp->next = toInsert;
-	toInsert->prev = temp;
-	return;
 }
 
 int freeMem(void *ptr)
@@ -206,8 +237,11 @@ void showAllocMap()
 	compmcb *temp = alloclist->head;	
 	while(temp != NULL){
 		printf("Printing a block");
-		
-		printf("Block done.");
+		printf("location %p \n", temp);
+		printf("size %d \n", temp->size);
+		printf("alloc code %d \n", temp->alloc);
+		printf("Block done. \n");
+		temp = temp->next;
 	}
 }
 
