@@ -217,14 +217,49 @@ void insertMCB(compmcb *toInsert){
 
 int freeMem(void *ptr)
 {
-	//1. Go to the amcb we're told. 
+	//1. Go to the amcb we're told. ~If we have a pointer, I don't think we'll need to search for it~
 	//2. remove amcb from alloclist (special case - it's the head)
 	//3. change compmcb and limitmcb to free
 	//4. link into FMCB
 	//5. do merges. 
 		//check the limitmcb by free compmcb, compmcb by free limitmcb
 	//6. return
-
+	compmcb *toFree = (compmcb *)ptr;
+	if(toFree->alloc!=1){
+		return 0; //mcb is not allocated, return error code
+	}
+	if(freelist->head==toFree){
+		toFree->next->prev = NULL;
+		freelist->head = toFree->next;
+		toFree->next = NULL;
+	}
+	else{
+		toFree->next->prev = toFree->prev;
+		toFree->prev->next = toFree->next;
+		toFree->next=NULL;
+		toFree->prev=NULL;
+	}
+	toFree->alloc = 0;
+	limitmcb *limit = toFree+toFree->size - sizeof(limitmcb); //I THINK this is right, but it may be off. Check this if there seems to be issues
+	limit->alloc = 0;
+	insertMCB(toFree);
+	/*Outline of merging mcbs
+	limitmcb *behind = toFree - sizeof(limitmcb); //next lmbc should be size of an lmbc before ptr
+	if(behind->alloc == 0){
+		toFree->size+=behind->size; //merged MCB is size of both together
+		limit->size+=behind->size;
+		//Now we need to find the compmcb and remove it from freelist
+		//we also need to get right of behind somehow
+	}
+	compmcb *ahead = limit + sizeof(limitmcb) //next compmcb should be size of an lmbc after limit
+	if(ahead->alloc == 0){
+		toFree->size+=ahead->size;
+		limit->size+=ahead->size;
+		ahead->next = NULL;	//removing ahead from freelist
+		ahead->prev = NULL;
+		//Also need to somehow get rid of the limited mcb
+	}
+	*/
 	//To replace sys_free_mem, found in mpx_supt
 	//Only returns error codes
 	return 1; //this is garbage so it compiles
@@ -233,7 +268,7 @@ int freeMem(void *ptr)
 void showAllocMap()
 {
 	if(alloclist->head == NULL){
-		printf("No alloc.");
+		printf("No alloc.\n");
 		return;
 	}
 	compmcb *temp = alloclist->head;	
@@ -253,9 +288,9 @@ void showFreeMap()
 	while(tempFree !=NULL)
 	{
 	printf("Printing free block\n");
-	printf("location %p \n",tempFree);
-	printf("size %d \n",tempFree->size);
-	printf("alloc code %d \n",tempFree->alloc);
+	printf("Location %p \n",tempFree);
+	printf("Size %d \n",tempFree->size);
+	printf("Alloc code %d \n",tempFree->alloc);
 	printf("Block done. \n");
 	tempFree = tempFree->next;
 	}
