@@ -1,5 +1,6 @@
 #include "mpx_supt.h"
 #include "mem/heap.h"
+#include "mod5/mcb.h"
 
 param params;
 int current_module = -1;
@@ -33,13 +34,13 @@ void *sys_alloc_mem(u32int size)
   if (current_module < MODULE_R5)
     return (void *) kmalloc(size);
   else
-    return (void *) (*student_malloc)(size);
+    return (void *) allocateMem(size);
 }
 
 int sys_free_mem(void *ptr)
 {
   if (current_module >= MODULE_R5)
-    return (*student_free)(ptr);
+    return freeMem(ptr);
   // otherwise we don't free anything
   return -1;
 }

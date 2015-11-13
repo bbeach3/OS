@@ -20,6 +20,7 @@
 #include "modules/mpx_supt.h"
 #include "menu.h"
 #include "modules/mod34/procsr3.h"
+#include "modules/mod5/mcb.h"
 
 void kmain(void)
 {
@@ -71,6 +72,5 @@ void kmain(void)
    
    /* Shutdown Procedure */
    klogv("Shutdown complete. You may now turn off the machine. (QEMU: C-a x)");
-   sys_req(EXIT);
    hlt();
 }

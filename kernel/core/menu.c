@@ -402,6 +402,9 @@ switch(inputInt)
  takeInput(*input,size);
  char input3 = *input[0];
  if(input3=='y')
+ serial_println("Starting system shutdown procedure...");
+ serial_println("Shutdown complete. You may now turn off the machine. (QEMU: C-a x)");
+ hlt();
  x=0;
  break;
  }

@@ -20,6 +20,7 @@
 #include "modules/mpx_supt.h"
 #include "menu.h"
 #include "modules/mod34/procsr3.h"
+#include "modules/mod5/mcb.h"
 
 void kmain(void)
 {
@@ -33,7 +34,7 @@ void kmain(void)
    init_serial(COM1);
    set_serial_out(COM1);
    set_serial_in(COM1);
-   mpx_init(MODULE_R4);
+   mpx_init(MODULE_R5);
    klogv("Initialized serial I/O on COM1 device...");
 
    // 1) Check that the boot was successful and correct when using grub
