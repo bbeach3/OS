@@ -19,13 +19,14 @@ int main(int argc, char* argv[])
 	}
 	isEmpty();
 	printf("Allocating 30.\n");
-	compmcb *ambc = (compmcb *)allocateMem(30);
+	void *ambc = allocateMem(30);
 	isEmpty();
 	showAllocMap();
 	showFreeMap();
 	printf("freeing block \n");
-	freeMem(ambc->address);
+	freeMem(ambc);
 	printf("block as been freed \n");
+	showFreeMap();
 	showAllocMap();
 }
 
@@ -249,22 +250,27 @@ int freeMem(void *ptr)
 	}
 	if(toFree==NULL){
 		printf("didn't find it\n");
-		return;
+		return 0; //MCB not found, return error code
 	}
-	/* toFree->alloc keeps coming up as 0, code commented out for testing
+	
 	if(toFree->alloc==0){ 
-		printf("BLock not allocated. Remove later \n");
+		printf("Block not allocated. Remove later \n");
 		return 0; //mcb is not allocated, return error code
+	
 	}
-	*/
-	printf("made it past the comment \n");
-	if(&freelist->head==&toFree){
-		printf("into print statement");
-		toFree->next->prev = NULL;
-		freelist->head = toFree->next;
-		toFree->next = NULL;
+	
+	if(alloclist->head==toFree){
+		if(toFree->next==NULL)
+			alloclist->head =NULL;
+		else{
+			toFree->next->prev = NULL;
+			alloclist->head = toFree->next;
+			toFree->next = NULL;
+		}
 	}
+
 	else{
+		printf("%d\n",toFree->next->size);
 		toFree->next->prev = toFree->prev;
 		toFree->prev->next = toFree->next;
 		toFree->next=NULL;
