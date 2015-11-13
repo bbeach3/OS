@@ -1,0 +1,103 @@
+\hypertarget{paging_8h}{}\section{include/mem/paging.h File Reference}
+\label{paging_8h}\index{include/mem/paging.\+h@{include/mem/paging.\+h}}
+{\ttfamily \#include $<$system.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structpage__entry}{page\+\_\+entry}
+\item 
+struct \hyperlink{structpage__table}{page\+\_\+table}
+\item 
+struct \hyperlink{structpage__dir}{page\+\_\+dir}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{paging_8h_a7d467c1d283fdfa1f2081ba1e0d01b6e}{P\+A\+G\+E\+\_\+\+S\+I\+Z\+E}~0x1000
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{paging_8h_a70101fc152ff58caafbe36ab391a9a68}{set\+\_\+bit} (\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} addr)
+\item 
+void \hyperlink{paging_8h_adcef508c82c20a032508f871e79e1b92}{clear\+\_\+bit} (\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} addr)
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} \hyperlink{paging_8h_a317b4797bc81f65bd01cfa190800ecdd}{get\+\_\+bit} (\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} addr)
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} \hyperlink{paging_8h_acb3c25257061521382c7ba900c1c1ab4}{first\+\_\+free} ()
+\item 
+void \hyperlink{paging_8h_a919b727f386797a8b9d8eceb5c4e7313}{init\+\_\+paging} ()
+\item 
+void \hyperlink{paging_8h_a3affceba4cd194e1c516404c14abbe7c}{load\+\_\+page\+\_\+dir} (\hyperlink{structpage__dir}{page\+\_\+dir} $\ast$new\+\_\+page\+\_\+dir)
+\item 
+\hyperlink{structpage__entry}{page\+\_\+entry} $\ast$ \hyperlink{paging_8h_a69b165b3d1adf3aeaae126ca7a5aac3e}{get\+\_\+page} (\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} addr, \hyperlink{structpage__dir}{page\+\_\+dir} $\ast$dir, int make\+\_\+table)
+\item 
+void \hyperlink{paging_8h_a04bce9da2c1d7c59f6efd8e4d9b54db7}{new\+\_\+frame} (\hyperlink{structpage__entry}{page\+\_\+entry} $\ast$page)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{paging_8h_a7d467c1d283fdfa1f2081ba1e0d01b6e}{}\index{paging.\+h@{paging.\+h}!P\+A\+G\+E\+\_\+\+S\+I\+Z\+E@{P\+A\+G\+E\+\_\+\+S\+I\+Z\+E}}
+\index{P\+A\+G\+E\+\_\+\+S\+I\+Z\+E@{P\+A\+G\+E\+\_\+\+S\+I\+Z\+E}!paging.\+h@{paging.\+h}}
+\subsubsection[{P\+A\+G\+E\+\_\+\+S\+I\+Z\+E}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+A\+G\+E\+\_\+\+S\+I\+Z\+E~0x1000}\label{paging_8h_a7d467c1d283fdfa1f2081ba1e0d01b6e}
+
+
+\subsection{Function Documentation}
+\hypertarget{paging_8h_adcef508c82c20a032508f871e79e1b92}{}\index{paging.\+h@{paging.\+h}!clear\+\_\+bit@{clear\+\_\+bit}}
+\index{clear\+\_\+bit@{clear\+\_\+bit}!paging.\+h@{paging.\+h}}
+\subsubsection[{clear\+\_\+bit(u32int addr)}]{\setlength{\rightskip}{0pt plus 5cm}void clear\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{{\bf u32int}}]{addr}
+\end{DoxyParamCaption}
+)}\label{paging_8h_adcef508c82c20a032508f871e79e1b92}
+\hypertarget{paging_8h_acb3c25257061521382c7ba900c1c1ab4}{}\index{paging.\+h@{paging.\+h}!first\+\_\+free@{first\+\_\+free}}
+\index{first\+\_\+free@{first\+\_\+free}!paging.\+h@{paging.\+h}}
+\subsubsection[{first\+\_\+free()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int} first\+\_\+free (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{paging_8h_acb3c25257061521382c7ba900c1c1ab4}
+\hypertarget{paging_8h_a317b4797bc81f65bd01cfa190800ecdd}{}\index{paging.\+h@{paging.\+h}!get\+\_\+bit@{get\+\_\+bit}}
+\index{get\+\_\+bit@{get\+\_\+bit}!paging.\+h@{paging.\+h}}
+\subsubsection[{get\+\_\+bit(u32int addr)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int} get\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{{\bf u32int}}]{addr}
+\end{DoxyParamCaption}
+)}\label{paging_8h_a317b4797bc81f65bd01cfa190800ecdd}
+\hypertarget{paging_8h_a69b165b3d1adf3aeaae126ca7a5aac3e}{}\index{paging.\+h@{paging.\+h}!get\+\_\+page@{get\+\_\+page}}
+\index{get\+\_\+page@{get\+\_\+page}!paging.\+h@{paging.\+h}}
+\subsubsection[{get\+\_\+page(u32int addr, page\+\_\+dir $\ast$dir, int make\+\_\+table)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf page\+\_\+entry}$\ast$ get\+\_\+page (
+\begin{DoxyParamCaption}
+\item[{{\bf u32int}}]{addr, }
+\item[{{\bf page\+\_\+dir} $\ast$}]{dir, }
+\item[{int}]{make\+\_\+table}
+\end{DoxyParamCaption}
+)}\label{paging_8h_a69b165b3d1adf3aeaae126ca7a5aac3e}
+\hypertarget{paging_8h_a919b727f386797a8b9d8eceb5c4e7313}{}\index{paging.\+h@{paging.\+h}!init\+\_\+paging@{init\+\_\+paging}}
+\index{init\+\_\+paging@{init\+\_\+paging}!paging.\+h@{paging.\+h}}
+\subsubsection[{init\+\_\+paging()}]{\setlength{\rightskip}{0pt plus 5cm}void init\+\_\+paging (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{paging_8h_a919b727f386797a8b9d8eceb5c4e7313}
+\hypertarget{paging_8h_a3affceba4cd194e1c516404c14abbe7c}{}\index{paging.\+h@{paging.\+h}!load\+\_\+page\+\_\+dir@{load\+\_\+page\+\_\+dir}}
+\index{load\+\_\+page\+\_\+dir@{load\+\_\+page\+\_\+dir}!paging.\+h@{paging.\+h}}
+\subsubsection[{load\+\_\+page\+\_\+dir(page\+\_\+dir $\ast$new\+\_\+page\+\_\+dir)}]{\setlength{\rightskip}{0pt plus 5cm}void load\+\_\+page\+\_\+dir (
+\begin{DoxyParamCaption}
+\item[{{\bf page\+\_\+dir} $\ast$}]{new\+\_\+page\+\_\+dir}
+\end{DoxyParamCaption}
+)}\label{paging_8h_a3affceba4cd194e1c516404c14abbe7c}
+\hypertarget{paging_8h_a04bce9da2c1d7c59f6efd8e4d9b54db7}{}\index{paging.\+h@{paging.\+h}!new\+\_\+frame@{new\+\_\+frame}}
+\index{new\+\_\+frame@{new\+\_\+frame}!paging.\+h@{paging.\+h}}
+\subsubsection[{new\+\_\+frame(page\+\_\+entry $\ast$page)}]{\setlength{\rightskip}{0pt plus 5cm}void new\+\_\+frame (
+\begin{DoxyParamCaption}
+\item[{{\bf page\+\_\+entry} $\ast$}]{page}
+\end{DoxyParamCaption}
+)}\label{paging_8h_a04bce9da2c1d7c59f6efd8e4d9b54db7}
+\hypertarget{paging_8h_a70101fc152ff58caafbe36ab391a9a68}{}\index{paging.\+h@{paging.\+h}!set\+\_\+bit@{set\+\_\+bit}}
+\index{set\+\_\+bit@{set\+\_\+bit}!paging.\+h@{paging.\+h}}
+\subsubsection[{set\+\_\+bit(u32int addr)}]{\setlength{\rightskip}{0pt plus 5cm}void set\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{{\bf u32int}}]{addr}
+\end{DoxyParamCaption}
+)}\label{paging_8h_a70101fc152ff58caafbe36ab391a9a68}

@@ -1,0 +1,214 @@
+USERS GUIDE TO THE MPX-G0 SYSTEM
+
+SECTION 1, THE MAIN MENU
+Upon launching the MPG-G0 system, you will be presented with the main menu, where you will be presented with 7 options. These options are as follows : (1)help, (2)display version number, (3)get time, (4)set time, (5)get date, (6)set date,(7) PCB Commands and (8)shutdown. To choose an option, simply type in the corresponding number and press enter. 
+
+HELP
+When help is selected, the user will be presented with a menu asking them to choose what they need help with. Options one through six are, respectively, get time, set time, get date, set date and shutdown, if any of these are selected, text will be presented providing an explanation for using these functions. Seven is "go back", which will return the user to the main menu.
+Example: 
+	input: 	1
+	output: What Command would you like help with?
+		 1. Display version number
+		 2. Get Time
+		 3. Set Time
+		 4. Get Date
+		 5. Set date
+		 6. PCB Options
+		 7. Shutdown
+		 8. Go back
+
+Display Version Number
+When this option is selected, the version number of MPX-G0 will be printed out
+Example: 
+	input: 	2
+	output: MPX Version R2
+
+Get time
+When selected, the current time will be printed out in the following format: HH:MM:SS, using a 24-hour clock
+Example: 
+	input: 	3
+	output:	"The current time is 11:11:11"
+
+Set time
+When selected, the user will be promted to enter the current time in the following format: HH:MM:SS, using a 24-hour clock
+Example:
+	input:	4
+	ouput:	Please enter the current time:
+	input:	11:11:11
+	output:	Time set	
+
+Get date
+When selected, the current date will be printed out in the following format: MM-DD-YY
+Example:
+	input:	5
+	output:	10-08-15
+
+Set date
+When Selected, the user will be prompted to enter the current date in the following format: MM-DD-YY
+Example:
+	input:	6
+	output:	Please enter the current date:
+	input:	10-08-15
+	output: Date set
+
+PCB Options
+When selected, allows users to select from a list of PCB-related commands (NOTE: These commands will be covered in Section 2)
+Example:
+	input: 	7
+	output:	What PCB-related Command would you like?
+		1. Suspend
+		2. Resume
+		3. Set Priority
+		4. Show PCB
+		5. Show all Processes
+		6. Show Ready Processes
+		7. Show Blocked Processes
+		8. Temporary Commands
+		9. Go Back		 
+
+Shutdown
+When this option is selected, the MPX-G0 system will ask the user for confirmation, and if they then enter y, MPX will shut down.
+Example:
+	input: 	8
+	output:	Are you sure you want to shutdown? Use y/n."
+	input: y
+
+
+Section 2, The PCB menu
+Upon selecting PCB Commands, you will be presented with the PCB menu, where you will be presented with 9 options. These options are as follows : (1)Suspend, (2)Resume, (3)Set Priority, (4)Show PCB, (5)Show all Processes, (6)Show Ready Processes,(7) Show Blocked Processes (8)Temporary Commands and (9)Go Back. To choose an option, simply type in the corresponding number and press enter. 
+
+Suspend
+When selected, this command requests the name of a PCB. That PCB is then placed into a suspended state
+Example:
+	input: 	1
+	output:	What do you want to suspend?
+	input: Process1
+
+Resume
+When selected, this command requests the name of a PCB. That PCb is then removed from a suspended state.
+Example:
+	input: 	2
+	output: What do you want to resume?
+	input: 	Process1
+
+Set Priority
+When select, this command requests the name of a PCB. It then requests a priority level, in integer form between 0 and 9, and sets the priority of the specified PCB to the specified level.
+Example:
+	input: 	3
+	output: What do you want to change the priority of?
+	input: 	Process1
+	output: 9
+
+Show PCB:
+When selected, this command requests the user for the name of a PCB, then prints out all information pertaining to the specified PCB
+Example:
+	input:	4
+	output:	Plese input name of wanted PCB
+	input:	Process1
+	output:	Name: Process1
+		Priority: 9
+		State: 1
+		Suspension: 0
+
+Show All Processes:
+When selected, this command prints out all information pertaining to every PCB in the system
+Example:
+	input:	5
+	output:	Name:Process1
+		Priority: 9
+		State: 1
+		Suspension: 0
+		
+		Name:Process2
+		Priority: 0
+		State: 0
+		Suspension: 1
+Show Ready Processes
+When selected, this command prints out all information pertaining to every PCB currently in the Ready State
+Example:
+	input:	6
+	output:	Name:Process1
+		Priority:9
+		State:1
+		Suspension:0
+
+Show Blocked Processes
+When selected, this command prints out all information pertaining to every PCB currently in the Blocked State
+Example:
+	Input:	7
+	Output: Name:Process2
+		Priority: 0
+		State:0
+		Suspension:1
+
+Temporary Commands
+When selected, this command allows the users to run several temporary PCB related commands, which will be removed in a later release (NOTE: Temporary Commands are covered in Section 3)
+Example:
+	Input:	8
+	Output:	What temporary PCB-related Command would you like?
+		1. Create PCB
+		2. Delete PCB
+		3. Block
+		4. Unblock
+		5. Go Back
+Go Back
+When selected, this command returns the user to the main menu
+Example:
+	Input:	9
+	Output:	Welcome to the MPX Project for group 0. What do you want to do?
+		 1. Help
+		 2. Display version number
+		 3. Get Time
+		 4. Set Time
+		 5. Get Date
+		 6. Set date
+		 7. PCB Options
+		 8. Shutdown
+
+
+SECTION 3, Temporary PCB Commands Menu
+Upon selecting Temporary Commands, you will be presented with the Temporary PCB Commands menu, where you will be presented with 5 options. These options are as follows : (1)Create PCB, (2)Delete PCB, (3)Block, (4)Unblock, and (5)Go Back. To choose an option, simply type in the corresponding number and press enter. 
+
+Create PCB
+When selected, this command prompts the user to enter a priority level between 0 and 9, and a name, then it creates a PCB according to these specifications.
+Example:
+	Input:	1
+	Output:	Give Priority
+	Input:	9
+	Output:	give name
+	Input:	Process1
+
+Delete PCB
+When selected, this command prompts the user to enter the name of a PCB, it will then delete the PCB with that name.
+Example:
+	Input:	2
+	Output: Give name.
+	Input: 	Process1
+
+Block
+When selected, this command prompts the user to enter the name of a PCB, it will then set that PCB into the blocked state.
+Example:
+	Input:	3
+	Output:	What do you want to block?
+	Input: 	Process1
+
+Unblock
+When selected, this command prompts the user to enter the name of a PCB, it will then set that PCB out of the blocked state.
+Example:
+	Input:	4
+	output:	What do you want to unblock?
+	Input:	Process1
+
+Go Back
+When selected, this command returns the user to the main menu
+Example:
+	Input: 5
+	Output: Welcome to the MPX Project for group 0. What do you want to do?
+		 1. Help
+		 2. Display version number
+		 3. Get Time
+		 4. Set Time
+		 5. Get Date
+		 6. Set date
+		 7. PCB Options
+		 8. Shutdown
