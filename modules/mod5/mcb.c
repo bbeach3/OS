@@ -1,6 +1,5 @@
 #include "mcb.h"
 #include <stdlib.h>
-#include <stdio.h>
 
 void *mcbheap;
 mcblist *freelist;
@@ -8,7 +7,12 @@ mcblist *alloclist;
 
 
 
-
+/**
+\Function initializeHeap
+\Description: prepares memory and related structures
+\Parameters: none
+\Returns: Success or Error code
+*/
 int initializeHeap()//Returns # of bytes allocated/Error code
 {
 	//Size of heap during testing: 200 bytes
@@ -37,13 +41,17 @@ int initializeHeap()//Returns # of bytes allocated/Error code
 	return bytesalloc;
 }
 
-//note to self - change 'bytesalloc' to 'size' when we move to mpx
+/**
+\Function allocateMem
+\Description: attempts to make allocated block in the heap
+\Parameters: bytesalloc - amount of memory to allocate
+\Returns: Pointer to where to write
+*/
 void *allocateMem(int bytesalloc)
 {
 	compmcb *found = NULL;
 	//making sure there's a free block existing
 	if(freelist->head == NULL){
-		printf("There is nothing in free list, or free list does not exist. Remove this later.");
 		return NULL;
 	}
 	//if we get here, there's a freelist head, so set search to it
@@ -62,7 +70,6 @@ void *allocateMem(int bytesalloc)
 		search = search->next; //and advance
 	}
 	if(found == NULL){
-		printf("searched the whole list and found nothing. Remove this later.");
 		return NULL; //request failed
 	}
 	
@@ -93,7 +100,8 @@ void *allocateMem(int bytesalloc)
 		templimit->size = found->size;
 		//insert procedure
 		insertMCB(found);
-		return found->address;
+		//note to self - supposed to return the memory's address
+		return found->address + sizeof(compmcb);
 	}
 	
 	//otherwise, make a remainder
@@ -121,13 +129,21 @@ void *allocateMem(int bytesalloc)
 	
 	templimitF->alloc = 0;
 	templimitF->size = leftovers;
-	return found->address;
+	//note to self - supposed to return the memory's address
+	return found->address + sizeof(compmcb);
 
 	//To replace sys_alloc_mem, found in mpx_supt
 	//Returns a pointer to the memory that was allocated, or NULL if an error occured
 	//Will handle locating and breaking up blocks as necessary
 }
 
+
+/**
+\Function insertPCB
+\Description: inserts compmcb into proper list
+\Parameters: toInsert - pointer to compmcb to insert
+\Returns: none
+*/
 void insertMCB(compmcb *toInsert){
 	if(toInsert->alloc == 0){
 		if(freelist->head == NULL){
@@ -205,6 +221,12 @@ void insertMCB(compmcb *toInsert){
 	}
 }
 
+/**
+\Function freeMem
+\Description: attempts to free a memory block
+\Parameters: ptr - pointer to block to remove
+\Returns: Success or Error code
+*/
 int freeMem(void *ptr)
 {
 	//1. Go to the amcb we're told. 
@@ -217,6 +239,10 @@ int freeMem(void *ptr)
 	if(alloclist->head == NULL){
 		return 0;
 	}	
+	//realized allocateMem was returning the wrong thing
+	//updating ptr here to keep things working
+	ptr = ptr - sizeof(compmcb);
+	
 	compmcb *toFree = NULL;
 	compmcb *search = alloclist->head;
 	while(toFree==NULL){
@@ -277,54 +303,5 @@ int freeMem(void *ptr)
 	limit->alloc = 0;
 	limit->size = toFree->size;
 	
-	return 1; //this is garbage so it compiles
-}
-
-void showAllocMap()
-{
-	if(alloclist->head == NULL){
-		printf("No alloc.\n");
-		return;
-	}
-	compmcb *temp = alloclist->head;	
-	while(temp != NULL){
-		printf("Printing a block\n");
-		int offset;
-		offset = (int ) ((void *)temp - mcbheap);
-		printf("Location %d \n",offset);
-		printf("size %d \n", temp->size);
-		printf("alloc code %d \n", temp->alloc);
-		printf("Block done. \n");
-		temp = temp->next;
-	}
-}
-
-void showFreeMap()
-{
-	compmcb *tempFree = freelist->head;
-	while(tempFree !=NULL)
-	{
-	printf("Printing free block\n");
-	int offset;
-	offset = (int ) ((void *)tempFree - mcbheap);
-	printf("Location %d \n",offset);
-	printf("Size %d \n",tempFree->size);
-	printf("Alloc code %d \n",tempFree->alloc);
-	printf("Block done. \n");
-	tempFree = tempFree->next;
-	}
-}
-
-int isEmpty()
-{
-	if(alloclist->head == NULL){
-		if(freelist->head != NULL){
-			if(freelist->head->next == NULL){
-				printf("isEmpty = yes\n");
-				return 1; //just the one free mcb
-			}
-		}
-	}
-	printf("isEmpty = no\n");
-	return 0; //not empty
+	return 1;
 }

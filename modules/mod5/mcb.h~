@@ -32,7 +32,7 @@ extern void* mcbheap;
 int initializeHeap();
 
 //prototype must match sys_alloc_mem when we replace mpx's with our own
-void *allocateMem(int bytesalloc)
+void *allocateMem(int bytesalloc);
 //for now, it doesn't, because I had some compiling issues.
 //when we make the switch, change the name, type of size...
 //if all else fails, just leave the name as is and have sys_alloc_mem call it		
