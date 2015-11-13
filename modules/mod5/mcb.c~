@@ -285,9 +285,7 @@ int freeMem(void *ptr)
 	insertMCB(toFree);
 	compmcb *previous = toFree->prev;
 	if(previous!= NULL && previous->address+previous->size==toFree->address){
-		/* If previous was the head, since we order the list by address, previous should continue to be the head. That's why I commented this out. - Bradley
-		if(previous ==freelist->head)
-			freelist->head = toFree;
+		/* The logic that was here was preserving toFree, when we want to absorb it into previous since previous comes first. - Bradley
 			*/
 		previous->next = toFree->next;
 		previous->size += toFree->size;
