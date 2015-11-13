@@ -18,17 +18,24 @@ int main(int argc, char* argv[])
 		printf("init worked. \n");
 	}
 	isEmpty();
+	printf("printing free first time\n");
 	showFreeMap();
 	printf("Allocating 30.\n");
 	void *ambc = allocateMem(30);
 	printf("Allocating 10.\n");
-	allocateMem(10);
+	void *ambc2 = allocateMem(10);
 	isEmpty();
 	showAllocMap();
+	printf("printing free second time\n");
 	showFreeMap();
 	printf("freeing block \n");
 	freeMem(ambc);
 	printf("block as been freed \n");
+	printf("printing free third time\n");
+	showFreeMap();
+	showAllocMap();
+	freeMem(ambc2);
+	printf("printing free final time\n");
 	showFreeMap();
 	showAllocMap();
 }
@@ -114,10 +121,12 @@ void *allocateMem(int bytesalloc)
 		//too small. No remainder
 		found->alloc = 1;
 		templimit->alloc = 1;
+		templimit->size = found->size;
 		//insert procedure
 		insertMCB(found);
 		return found->address;
 	}
+	
 	//otherwise, make a remainder
 	found->alloc = 1;
 	found->size = bytesalloc + sizeof(compmcb) + sizeof(limitmcb);
@@ -125,6 +134,8 @@ void *allocateMem(int bytesalloc)
 	insertMCB(found);
 	//go to where limitmcb goes for new block
 	templimit = found->address + found->size - sizeof(limitmcb);
+	templimit->alloc = 1;
+	templimit->size=found->size;
 	
 	//make the new free mcb
 	compmcb *remaindermcb = found->address + found->size;
@@ -141,7 +152,6 @@ void *allocateMem(int bytesalloc)
 	
 	templimitF->alloc = 0;
 	templimitF->size = leftovers;
-	
 	return found->address;
 
 	//To replace sys_alloc_mem, found in mpx_supt
@@ -236,35 +246,28 @@ int freeMem(void *ptr)
 		//check the limitmcb by free compmcb, compmcb by free limitmcb
 	//6. return
 	if(alloclist->head == NULL){
-		printf("No allocated memory\n");
 		return 0;
 	}	
 	compmcb *toFree = NULL;
 	compmcb *search = alloclist->head;
-	printf("head size :: %d\n",search->size);
 	while(toFree==NULL){
 		if(search == NULL){
-			printf("end of list\n");
 			break;
 		}
 		if(search->address == ptr){
-			printf("found it!\n");
 			toFree=search;
 			break;
 		}
 		search= search->next;
 	}
 	if(toFree==NULL){
-		printf("didn't find it\n");
 		return 0; //MCB not found, return error code
 	}
 	
 	if(toFree->alloc==0){ 
-		printf("Block not allocated. Remove later \n");
 		return 0; //mcb is not allocated, return error code
 	
 	}
-	
 	if(alloclist->head==toFree){
 		if(toFree->next==NULL)
 			alloclist->head =NULL;
@@ -274,37 +277,37 @@ int freeMem(void *ptr)
 			toFree->next = NULL;
 		}
 	}
-
 	else{
-		printf("%d\n",toFree->next->size);
-		toFree->next->prev = toFree->prev;
+		if(toFree->next!=NULL)
+			toFree->next->prev = toFree->prev;
 		toFree->prev->next = toFree->next;
 		toFree->next=NULL;
 		toFree->prev=NULL;
 	}
 	toFree->alloc = 0;
-	limitmcb *limit =(limitmcb *) toFree+toFree->size - sizeof(limitmcb); //I THINK this is right, but it may be off. Check this if there seems to be issues
-	limit->alloc = 0;
+		
 	insertMCB(toFree);
-	/*Outline of merging mcbs
-	limitmcb *behind = toFree - sizeof(limitmcb); //next lmbc should be size of an lmbc before ptr
-	if(behind->alloc == 0){
-		toFree->size+=behind->size; //merged MCB is size of both together
-		limit->size+=behind->size;
-		//Now we need to find the compmcb and remove it from freelist
-		//we also need to get right of behind somehow
+	compmcb *previous = toFree->prev;
+	if(previous!= NULL && previous->address+previous->size==toFree->address){
+		if(previous ==freelist->head)
+			freelist->head = toFree;
+		toFree->prev = previous->prev;
+		toFree->size+= previous->size;
+		toFree->address = previous->address;
+		previous->next = NULL;
+		previous->prev = NULL;
 	}
-	compmcb *ahead = limit + sizeof(limitmcb) //next compmcb should be size of an lmbc after limit
-	if(ahead->alloc == 0){
-		toFree->size+=ahead->size;
-		limit->size+=ahead->size;
-		ahead->next = NULL;	//removing ahead from freelist
-		ahead->prev = NULL;
-		//Also need to somehow get rid of the limited mcb
+	compmcb *nextOne = toFree->next;
+	if(nextOne!= NULL && nextOne->address==toFree->address+toFree->size){
+		toFree->next = nextOne->next;
+		toFree->size+= nextOne->size;
+		nextOne->next = NULL;
+		nextOne->prev = NULL;
 	}
-	*/
-	//To replace sys_free_mem, found in mpx_supt
-	//Only returns error codes
+	limitmcb *limit =toFree->address + toFree->size - sizeof(limitmcb);
+	limit->alloc = 0;
+	limit->size = toFree->size;
+	
 	return 1; //this is garbage so it compiles
 }
 
