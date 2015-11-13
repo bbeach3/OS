@@ -281,7 +281,7 @@ int freeMem(void *ptr)
 		toFree->prev=NULL;
 	}
 	toFree->alloc = 0;
-		
+	
 	insertMCB(toFree);
 	compmcb *previous = toFree->prev;
 	if(previous!= NULL && previous->address+previous->size==toFree->address){
