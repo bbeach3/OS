@@ -18,8 +18,11 @@ int main(int argc, char* argv[])
 		printf("init worked. \n");
 	}
 	isEmpty();
+	showFreeMap();
 	printf("Allocating 30.\n");
 	allocateMem(30);
+	printf("Allocating 10.\n");
+	allocateMem(10);
 	isEmpty();
 	showAllocMap();
 	showFreeMap();
@@ -44,7 +47,8 @@ int initializeHeap()//Returns # of bytes allocated/Error code
 	compmcb *firstmcb = mcbheap;
 	freelist->head = firstmcb;
 	firstmcb->alloc = 0;
-	firstmcb->address = firstmcb + sizeof(compmcb);
+	//address holds firstmcb's location
+	firstmcb->address = firstmcb;
 	firstmcb->size = bytesalloc;
 	firstmcb->next = NULL;
 	firstmcb->prev = NULL;
@@ -98,11 +102,17 @@ void *allocateMem(int bytesalloc)
 	
 	
 	//we only make a remainder block if enough is left over.
-	//for now, I'm setting the cutoff at 50. This is meaningless.
-	//it should be set to sizeof(comp)+sizeof(limit)+a useable amount of mem
+	//the size of compmcb + limitmcb is 56, so 58 is a tight minimum
 	limitmcb *templimit = found->address + found->size - sizeof(limitmcb);
+	int off;
+	off = (int) ((void *)found->address - mcbheap);
+	printf("adds: %d , %d, %d \n", off, found->size, (int)sizeof(limitmcb));
+	int offset2;
+	offset2 = (int ) ((void *)templimit - mcbheap);
+	printf("templimit is %d \n",offset2);
 	int leftovers = found->size - (bytesalloc + sizeof(compmcb) + sizeof(limitmcb));
-	if(leftovers < 50){ //50 is arbitrary
+	printf("got here\n");
+	if(leftovers < 58){
 		//too small. No remainder
 		found->alloc = 1;
 		templimit->alloc = 1;
@@ -118,16 +128,34 @@ void *allocateMem(int bytesalloc)
 	//go to where limitmcb goes for new block
 	templimit = found->address + found->size - sizeof(limitmcb);
 	
+	int offset3;
+	offset3 = (int ) ((void *)templimit - mcbheap);
+	printf("templimit is %d \n",offset3);
+	
+	printf("hi\n");
 	//make the new free mcb
-	compmcb *remaindermcb = (compmcb*) (templimit + sizeof(limitmcb));
+	compmcb *remaindermcb = found->address + found->size;
 	remaindermcb->alloc = 0;
 	remaindermcb->address = remaindermcb;
+	
+	int offset4;
+	offset4 = (int ) ((void *)remaindermcb - mcbheap);
+	printf("rmcb is %d \n",offset4);
+	
 	remaindermcb->size = leftovers;
+	printf("size of rmcb is %d \n", remaindermcb->size);
 	//insert procedure
 	insertMCB(remaindermcb);
 	
+	printf("hello \n \n");
+	
 	//make limitmcb for the new free block
-	limitmcb* templimitF = (limitmcb *) (remaindermcb->address + remaindermcb->size - sizeof(limitmcb));
+	limitmcb* templimitF = remaindermcb->address + remaindermcb->size;
+	
+	int offset5;
+	offset5 = (int ) ((void *)templimitF - mcbheap);
+	printf("templimitF is %d \n",offset5);
+	
 	templimitF->alloc = 0;
 	templimitF->size = leftovers;
 	
@@ -240,7 +268,7 @@ int freeMem(void *ptr)
 		toFree->prev=NULL;
 	}
 	toFree->alloc = 0;
-	limitmcb *limit = toFree+toFree->size - sizeof(limitmcb); //I THINK this is right, but it may be off. Check this if there seems to be issues
+	limitmcb *limit =(limitmcb *) toFree+toFree->size - sizeof(limitmcb); //I THINK this is right, but it may be off. Check this if there seems to be issues
 	limit->alloc = 0;
 	insertMCB(toFree);
 	/*Outline of merging mcbs
@@ -274,7 +302,9 @@ void showAllocMap()
 	compmcb *temp = alloclist->head;	
 	while(temp != NULL){
 		printf("Printing a block\n");
-		printf("location %p \n", temp);
+		int offset;
+		offset = (int ) ((void *)temp - mcbheap);
+		printf("Location %d \n",offset);
 		printf("size %d \n", temp->size);
 		printf("alloc code %d \n", temp->alloc);
 		printf("Block done. \n");
@@ -288,7 +318,9 @@ void showFreeMap()
 	while(tempFree !=NULL)
 	{
 	printf("Printing free block\n");
-	printf("Location %p \n",tempFree);
+	int offset;
+	offset = (int ) ((void *)tempFree - mcbheap);
+	printf("Location %d \n",offset);
 	printf("Size %d \n",tempFree->size);
 	printf("Alloc code %d \n",tempFree->alloc);
 	printf("Block done. \n");
