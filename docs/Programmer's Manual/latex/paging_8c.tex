@@ -1,0 +1,132 @@
+\hypertarget{paging_8c}{}\section{kernel/mem/paging.c File Reference}
+\label{paging_8c}\index{kernel/mem/paging.\+c@{kernel/mem/paging.\+c}}
+{\ttfamily \#include $<$system.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}mem/heap.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}mem/paging.\+h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{paging_8c_a70101fc152ff58caafbe36ab391a9a68}{set\+\_\+bit} (\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} addr)
+\item 
+void \hyperlink{paging_8c_adcef508c82c20a032508f871e79e1b92}{clear\+\_\+bit} (\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} addr)
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} \hyperlink{paging_8c_a317b4797bc81f65bd01cfa190800ecdd}{get\+\_\+bit} (\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} addr)
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} \hyperlink{paging_8c_abe201f9294ab23125146fff36fe95187}{find\+\_\+free} ()
+\item 
+\hyperlink{structpage__entry}{page\+\_\+entry} $\ast$ \hyperlink{paging_8c_a69b165b3d1adf3aeaae126ca7a5aac3e}{get\+\_\+page} (\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} addr, \hyperlink{structpage__dir}{page\+\_\+dir} $\ast$dir, int make\+\_\+table)
+\item 
+void \hyperlink{paging_8c_a919b727f386797a8b9d8eceb5c4e7313}{init\+\_\+paging} ()
+\item 
+void \hyperlink{paging_8c_a31e6c585cbda542534f1b0fc83e40689}{load\+\_\+page\+\_\+dir} (\hyperlink{structpage__dir}{page\+\_\+dir} $\ast$new\+\_\+dir)
+\item 
+void \hyperlink{paging_8c_a04bce9da2c1d7c59f6efd8e4d9b54db7}{new\+\_\+frame} (\hyperlink{structpage__entry}{page\+\_\+entry} $\ast$page)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} \hyperlink{paging_8c_abf8475f59bfb67fac4b6b5a254dfe56d}{mem\+\_\+size} = 0x4000000
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} \hyperlink{paging_8c_a1cc472551ec40b65eef931fde01054e7}{page\+\_\+size} = 0x1000
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} \hyperlink{paging_8c_abf36580d5618820f15388083c9313e60}{nframes}
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} $\ast$ \hyperlink{paging_8c_a76492529572a1a20a06076ac40d66b29}{frames}
+\item 
+\hyperlink{structpage__dir}{page\+\_\+dir} $\ast$ \hyperlink{paging_8c_a61ce943ba80d9dfab89a826cae9ddc4a}{kdir} = 0
+\item 
+\hyperlink{structpage__dir}{page\+\_\+dir} $\ast$ \hyperlink{paging_8c_af7da380833e92d5c7d3c3db41484713b}{cdir} = 0
+\item 
+\hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int} \hyperlink{paging_8c_a6dfa4ef84e115e891b3679e4932b5c49}{phys\+\_\+alloc\+\_\+addr}
+\item 
+\hyperlink{structheap}{heap} $\ast$ \hyperlink{paging_8c_a61825456a33b09780a5493c95adcae8a}{kheap}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{paging_8c_adcef508c82c20a032508f871e79e1b92}{}\index{paging.\+c@{paging.\+c}!clear\+\_\+bit@{clear\+\_\+bit}}
+\index{clear\+\_\+bit@{clear\+\_\+bit}!paging.\+c@{paging.\+c}}
+\subsubsection[{clear\+\_\+bit(u32int addr)}]{\setlength{\rightskip}{0pt plus 5cm}void clear\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{{\bf u32int}}]{addr}
+\end{DoxyParamCaption}
+)}\label{paging_8c_adcef508c82c20a032508f871e79e1b92}
+\hypertarget{paging_8c_abe201f9294ab23125146fff36fe95187}{}\index{paging.\+c@{paging.\+c}!find\+\_\+free@{find\+\_\+free}}
+\index{find\+\_\+free@{find\+\_\+free}!paging.\+c@{paging.\+c}}
+\subsubsection[{find\+\_\+free()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int} find\+\_\+free (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{paging_8c_abe201f9294ab23125146fff36fe95187}
+\hypertarget{paging_8c_a317b4797bc81f65bd01cfa190800ecdd}{}\index{paging.\+c@{paging.\+c}!get\+\_\+bit@{get\+\_\+bit}}
+\index{get\+\_\+bit@{get\+\_\+bit}!paging.\+c@{paging.\+c}}
+\subsubsection[{get\+\_\+bit(u32int addr)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int} get\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{{\bf u32int}}]{addr}
+\end{DoxyParamCaption}
+)}\label{paging_8c_a317b4797bc81f65bd01cfa190800ecdd}
+\hypertarget{paging_8c_a69b165b3d1adf3aeaae126ca7a5aac3e}{}\index{paging.\+c@{paging.\+c}!get\+\_\+page@{get\+\_\+page}}
+\index{get\+\_\+page@{get\+\_\+page}!paging.\+c@{paging.\+c}}
+\subsubsection[{get\+\_\+page(u32int addr, page\+\_\+dir $\ast$dir, int make\+\_\+table)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf page\+\_\+entry}$\ast$ get\+\_\+page (
+\begin{DoxyParamCaption}
+\item[{{\bf u32int}}]{addr, }
+\item[{{\bf page\+\_\+dir} $\ast$}]{dir, }
+\item[{int}]{make\+\_\+table}
+\end{DoxyParamCaption}
+)}\label{paging_8c_a69b165b3d1adf3aeaae126ca7a5aac3e}
+\hypertarget{paging_8c_a919b727f386797a8b9d8eceb5c4e7313}{}\index{paging.\+c@{paging.\+c}!init\+\_\+paging@{init\+\_\+paging}}
+\index{init\+\_\+paging@{init\+\_\+paging}!paging.\+c@{paging.\+c}}
+\subsubsection[{init\+\_\+paging()}]{\setlength{\rightskip}{0pt plus 5cm}void init\+\_\+paging (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{paging_8c_a919b727f386797a8b9d8eceb5c4e7313}
+\hypertarget{paging_8c_a31e6c585cbda542534f1b0fc83e40689}{}\index{paging.\+c@{paging.\+c}!load\+\_\+page\+\_\+dir@{load\+\_\+page\+\_\+dir}}
+\index{load\+\_\+page\+\_\+dir@{load\+\_\+page\+\_\+dir}!paging.\+c@{paging.\+c}}
+\subsubsection[{load\+\_\+page\+\_\+dir(page\+\_\+dir $\ast$new\+\_\+dir)}]{\setlength{\rightskip}{0pt plus 5cm}void load\+\_\+page\+\_\+dir (
+\begin{DoxyParamCaption}
+\item[{{\bf page\+\_\+dir} $\ast$}]{new\+\_\+dir}
+\end{DoxyParamCaption}
+)}\label{paging_8c_a31e6c585cbda542534f1b0fc83e40689}
+\hypertarget{paging_8c_a04bce9da2c1d7c59f6efd8e4d9b54db7}{}\index{paging.\+c@{paging.\+c}!new\+\_\+frame@{new\+\_\+frame}}
+\index{new\+\_\+frame@{new\+\_\+frame}!paging.\+c@{paging.\+c}}
+\subsubsection[{new\+\_\+frame(page\+\_\+entry $\ast$page)}]{\setlength{\rightskip}{0pt plus 5cm}void new\+\_\+frame (
+\begin{DoxyParamCaption}
+\item[{{\bf page\+\_\+entry} $\ast$}]{page}
+\end{DoxyParamCaption}
+)}\label{paging_8c_a04bce9da2c1d7c59f6efd8e4d9b54db7}
+\hypertarget{paging_8c_a70101fc152ff58caafbe36ab391a9a68}{}\index{paging.\+c@{paging.\+c}!set\+\_\+bit@{set\+\_\+bit}}
+\index{set\+\_\+bit@{set\+\_\+bit}!paging.\+c@{paging.\+c}}
+\subsubsection[{set\+\_\+bit(u32int addr)}]{\setlength{\rightskip}{0pt plus 5cm}void set\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{{\bf u32int}}]{addr}
+\end{DoxyParamCaption}
+)}\label{paging_8c_a70101fc152ff58caafbe36ab391a9a68}
+
+
+\subsection{Variable Documentation}
+\hypertarget{paging_8c_af7da380833e92d5c7d3c3db41484713b}{}\index{paging.\+c@{paging.\+c}!cdir@{cdir}}
+\index{cdir@{cdir}!paging.\+c@{paging.\+c}}
+\subsubsection[{cdir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf page\+\_\+dir}$\ast$ cdir = 0}\label{paging_8c_af7da380833e92d5c7d3c3db41484713b}
+\hypertarget{paging_8c_a76492529572a1a20a06076ac40d66b29}{}\index{paging.\+c@{paging.\+c}!frames@{frames}}
+\index{frames@{frames}!paging.\+c@{paging.\+c}}
+\subsubsection[{frames}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int}$\ast$ frames}\label{paging_8c_a76492529572a1a20a06076ac40d66b29}
+\hypertarget{paging_8c_a61ce943ba80d9dfab89a826cae9ddc4a}{}\index{paging.\+c@{paging.\+c}!kdir@{kdir}}
+\index{kdir@{kdir}!paging.\+c@{paging.\+c}}
+\subsubsection[{kdir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf page\+\_\+dir}$\ast$ kdir = 0}\label{paging_8c_a61ce943ba80d9dfab89a826cae9ddc4a}
+\hypertarget{paging_8c_a61825456a33b09780a5493c95adcae8a}{}\index{paging.\+c@{paging.\+c}!kheap@{kheap}}
+\index{kheap@{kheap}!paging.\+c@{paging.\+c}}
+\subsubsection[{kheap}]{\setlength{\rightskip}{0pt plus 5cm}{\bf heap}$\ast$ kheap}\label{paging_8c_a61825456a33b09780a5493c95adcae8a}
+\hypertarget{paging_8c_abf8475f59bfb67fac4b6b5a254dfe56d}{}\index{paging.\+c@{paging.\+c}!mem\+\_\+size@{mem\+\_\+size}}
+\index{mem\+\_\+size@{mem\+\_\+size}!paging.\+c@{paging.\+c}}
+\subsubsection[{mem\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int} mem\+\_\+size = 0x4000000}\label{paging_8c_abf8475f59bfb67fac4b6b5a254dfe56d}
+\hypertarget{paging_8c_abf36580d5618820f15388083c9313e60}{}\index{paging.\+c@{paging.\+c}!nframes@{nframes}}
+\index{nframes@{nframes}!paging.\+c@{paging.\+c}}
+\subsubsection[{nframes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int} nframes}\label{paging_8c_abf36580d5618820f15388083c9313e60}
+\hypertarget{paging_8c_a1cc472551ec40b65eef931fde01054e7}{}\index{paging.\+c@{paging.\+c}!page\+\_\+size@{page\+\_\+size}}
+\index{page\+\_\+size@{page\+\_\+size}!paging.\+c@{paging.\+c}}
+\subsubsection[{page\+\_\+size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int} page\+\_\+size = 0x1000}\label{paging_8c_a1cc472551ec40b65eef931fde01054e7}
+\hypertarget{paging_8c_a6dfa4ef84e115e891b3679e4932b5c49}{}\index{paging.\+c@{paging.\+c}!phys\+\_\+alloc\+\_\+addr@{phys\+\_\+alloc\+\_\+addr}}
+\index{phys\+\_\+alloc\+\_\+addr@{phys\+\_\+alloc\+\_\+addr}!paging.\+c@{paging.\+c}}
+\subsubsection[{phys\+\_\+alloc\+\_\+addr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf u32int} phys\+\_\+alloc\+\_\+addr}\label{paging_8c_a6dfa4ef84e115e891b3679e4932b5c49}

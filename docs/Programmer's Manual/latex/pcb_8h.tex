@@ -1,0 +1,152 @@
+\hypertarget{pcb_8h}{}\section{modules/mod2/pcb.h File Reference}
+\label{pcb_8h}\index{modules/mod2/pcb.\+h@{modules/mod2/pcb.\+h}}
+{\ttfamily \#include \char`\"{}pcb.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}../mpx\+\_\+supt.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include $<$core/serial.\+h$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structpcb}{pcb}
+\item 
+struct \hyperlink{structqueue}{queue}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \hyperlink{structpcb}{pcb} \hyperlink{pcb_8h_a8350cd7e7067eae14cdb160dac06f8e6}{pcb}
+\item 
+typedef struct \hyperlink{structqueue}{queue} \hyperlink{pcb_8h_a092902733e164e20a40f08447ef1705a}{queue}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structpcb}{pcb} $\ast$ \hyperlink{pcb_8h_abaf5a209b901d0648067e94079dffe22}{allocate\+P\+C\+B} ()
+\item 
+int \hyperlink{pcb_8h_a0d635127fd918fc93274d2664778b45e}{free\+P\+C\+B} (\hyperlink{structpcb}{pcb} $\ast$oldpcb)
+\item 
+\hyperlink{structpcb}{pcb} $\ast$ \hyperlink{pcb_8h_a0ecc652fb2494acc244ee3bd4a72beb9}{setup\+P\+C\+B} (char $\ast$pcbname, unsigned int pcbproc, int pcbprior)
+\item 
+\hyperlink{structpcb}{pcb} $\ast$ \hyperlink{pcb_8h_a7ea7e332e57d1b6670527c1ebe3d7c39}{find\+P\+C\+B} (char $\ast$pcbname)
+\item 
+void \hyperlink{pcb_8h_ac2df576475db0600b1371506e81d02e8}{insert\+P\+C\+B} (\hyperlink{structpcb}{pcb} $\ast$newpcb)
+\item 
+void \hyperlink{pcb_8h_af410ae4a2e7d56b53000ce4d4a7ea936}{insert\+Ready} (\hyperlink{structpcb}{pcb} $\ast$newpcb)
+\item 
+void \hyperlink{pcb_8h_aa778b0b1cf32990d3856a1dcccc2cbd7}{insert\+Blocked} (\hyperlink{structpcb}{pcb} $\ast$newpcb)
+\item 
+int \hyperlink{pcb_8h_aa0d8f851a9411c921848c487087b397e}{remove\+P\+C\+B} (\hyperlink{structpcb}{pcb} $\ast$oldpcb)
+\item 
+void \hyperlink{pcb_8h_a8294e1ee07959a1ac3c25de2a19285dc}{display\+P\+C\+B} (\hyperlink{structpcb}{pcb} $\ast$apcb)
+\item 
+void \hyperlink{pcb_8h_aca6a148ed744d052df15e6c0a5845bb9}{display\+Ready} ()
+\item 
+void \hyperlink{pcb_8h_a412d2e817c0946e1bd28890337e8ab72}{display\+Blocked} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structqueue}{queue} $\ast$ \hyperlink{pcb_8h_a558b620fad6ac9a074555773db686a58}{ready\+Queue}
+\item 
+\hyperlink{structqueue}{queue} $\ast$ \hyperlink{pcb_8h_aaed9cc2518115fe6539eaa0c6a514286}{blocked\+Queue}
+\end{DoxyCompactItemize}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{pcb_8h_a8350cd7e7067eae14cdb160dac06f8e6}{}\index{pcb.\+h@{pcb.\+h}!pcb@{pcb}}
+\index{pcb@{pcb}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{pcb}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf pcb} {\bf pcb}}\label{pcb_8h_a8350cd7e7067eae14cdb160dac06f8e6}
+\hypertarget{pcb_8h_a092902733e164e20a40f08447ef1705a}{}\index{pcb.\+h@{pcb.\+h}!queue@{queue}}
+\index{queue@{queue}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{queue}]{\setlength{\rightskip}{0pt plus 5cm}typedef struct {\bf queue} {\bf queue}}\label{pcb_8h_a092902733e164e20a40f08447ef1705a}
+
+
+\subsection{Function Documentation}
+\hypertarget{pcb_8h_abaf5a209b901d0648067e94079dffe22}{}\index{pcb.\+h@{pcb.\+h}!allocate\+P\+C\+B@{allocate\+P\+C\+B}}
+\index{allocate\+P\+C\+B@{allocate\+P\+C\+B}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{allocate\+P\+C\+B()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pcb}$\ast$ allocate\+P\+C\+B (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_abaf5a209b901d0648067e94079dffe22}
+allocate\+P\+C\+B \+: allocates memory for new P\+C\+B \+: None \+: P\+C\+B Pointer, or Null if an error occurs \hypertarget{pcb_8h_a412d2e817c0946e1bd28890337e8ab72}{}\index{pcb.\+h@{pcb.\+h}!display\+Blocked@{display\+Blocked}}
+\index{display\+Blocked@{display\+Blocked}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{display\+Blocked()}]{\setlength{\rightskip}{0pt plus 5cm}void display\+Blocked (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_a412d2e817c0946e1bd28890337e8ab72}
+display\+Blocked \+: displays all P\+C\+Bs in blocked queue in order. \+: none \+: none \hypertarget{pcb_8h_a8294e1ee07959a1ac3c25de2a19285dc}{}\index{pcb.\+h@{pcb.\+h}!display\+P\+C\+B@{display\+P\+C\+B}}
+\index{display\+P\+C\+B@{display\+P\+C\+B}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{display\+P\+C\+B(pcb $\ast$apcb)}]{\setlength{\rightskip}{0pt plus 5cm}void display\+P\+C\+B (
+\begin{DoxyParamCaption}
+\item[{{\bf pcb} $\ast$}]{apcb}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_a8294e1ee07959a1ac3c25de2a19285dc}
+display\+P\+C\+B \+: prints important contents of P\+C\+B \+: apcb -\/ pointer to P\+C\+B to display \+: none \hypertarget{pcb_8h_aca6a148ed744d052df15e6c0a5845bb9}{}\index{pcb.\+h@{pcb.\+h}!display\+Ready@{display\+Ready}}
+\index{display\+Ready@{display\+Ready}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{display\+Ready()}]{\setlength{\rightskip}{0pt plus 5cm}void display\+Ready (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_aca6a148ed744d052df15e6c0a5845bb9}
+display\+Ready \+: displays all P\+C\+Bs in ready queue in order. \+: none \+: none \hypertarget{pcb_8h_a7ea7e332e57d1b6670527c1ebe3d7c39}{}\index{pcb.\+h@{pcb.\+h}!find\+P\+C\+B@{find\+P\+C\+B}}
+\index{find\+P\+C\+B@{find\+P\+C\+B}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{find\+P\+C\+B(char $\ast$pcbname)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pcb}$\ast$ find\+P\+C\+B (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pcbname}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_a7ea7e332e57d1b6670527c1ebe3d7c39}
+find\+P\+C\+B \+: searches both queues for the P\+C\+B with the given name \+: pcbname -\/ name to look for \+: P\+C\+B pointer, or null if not found \hypertarget{pcb_8h_a0d635127fd918fc93274d2664778b45e}{}\index{pcb.\+h@{pcb.\+h}!free\+P\+C\+B@{free\+P\+C\+B}}
+\index{free\+P\+C\+B@{free\+P\+C\+B}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{free\+P\+C\+B(pcb $\ast$oldpcb)}]{\setlength{\rightskip}{0pt plus 5cm}int free\+P\+C\+B (
+\begin{DoxyParamCaption}
+\item[{{\bf pcb} $\ast$}]{oldpcb}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_a0d635127fd918fc93274d2664778b45e}
+free\+P\+C\+B \+: releases memory associated with P\+C\+B \+: oldpcb -\/ pointer to pcb to release \+: Success or error code \hypertarget{pcb_8h_aa778b0b1cf32990d3856a1dcccc2cbd7}{}\index{pcb.\+h@{pcb.\+h}!insert\+Blocked@{insert\+Blocked}}
+\index{insert\+Blocked@{insert\+Blocked}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{insert\+Blocked(pcb $\ast$newpcb)}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Blocked (
+\begin{DoxyParamCaption}
+\item[{{\bf pcb} $\ast$}]{newpcb}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_aa778b0b1cf32990d3856a1dcccc2cbd7}
+insert\+Blocked \+: inserts given P\+C\+B into blocked queue in proper place \+: newpcb -\/ pointer to P\+C\+B to insert \+: none \hypertarget{pcb_8h_ac2df576475db0600b1371506e81d02e8}{}\index{pcb.\+h@{pcb.\+h}!insert\+P\+C\+B@{insert\+P\+C\+B}}
+\index{insert\+P\+C\+B@{insert\+P\+C\+B}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{insert\+P\+C\+B(pcb $\ast$newpcb)}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+P\+C\+B (
+\begin{DoxyParamCaption}
+\item[{{\bf pcb} $\ast$}]{newpcb}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_ac2df576475db0600b1371506e81d02e8}
+insert\+P\+C\+B \+: inserts given P\+C\+B into proper queue \+: newpcb -\/ pointer to P\+C\+B to insert \+: none \hypertarget{pcb_8h_af410ae4a2e7d56b53000ce4d4a7ea936}{}\index{pcb.\+h@{pcb.\+h}!insert\+Ready@{insert\+Ready}}
+\index{insert\+Ready@{insert\+Ready}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{insert\+Ready(pcb $\ast$newpcb)}]{\setlength{\rightskip}{0pt plus 5cm}void insert\+Ready (
+\begin{DoxyParamCaption}
+\item[{{\bf pcb} $\ast$}]{newpcb}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_af410ae4a2e7d56b53000ce4d4a7ea936}
+insert\+Ready \+: inserts given P\+C\+B into ready queue in proper place \+: newpcb -\/ pointer to P\+C\+B to insert \+: none \hypertarget{pcb_8h_aa0d8f851a9411c921848c487087b397e}{}\index{pcb.\+h@{pcb.\+h}!remove\+P\+C\+B@{remove\+P\+C\+B}}
+\index{remove\+P\+C\+B@{remove\+P\+C\+B}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{remove\+P\+C\+B(pcb $\ast$oldpcb)}]{\setlength{\rightskip}{0pt plus 5cm}int remove\+P\+C\+B (
+\begin{DoxyParamCaption}
+\item[{{\bf pcb} $\ast$}]{oldpcb}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_aa0d8f851a9411c921848c487087b397e}
+remove\+P\+C\+B \+: removes given P\+C\+B from queues \+: oldpcb -\/ pointer to P\+C\+B to remove \+: Success or Error code \hypertarget{pcb_8h_a0ecc652fb2494acc244ee3bd4a72beb9}{}\index{pcb.\+h@{pcb.\+h}!setup\+P\+C\+B@{setup\+P\+C\+B}}
+\index{setup\+P\+C\+B@{setup\+P\+C\+B}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{setup\+P\+C\+B(char $\ast$pcbname, unsigned int pcbproc, int pcbprior)}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pcb}$\ast$ setup\+P\+C\+B (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{pcbname, }
+\item[{unsigned int}]{pcbproc, }
+\item[{int}]{pcbprior}
+\end{DoxyParamCaption}
+)}\label{pcb_8h_a0ecc652fb2494acc244ee3bd4a72beb9}
+setup\+P\+C\+B \+: initializes a P\+C\+B \+: pcbname -\/ name to use, pcbproc -\/ class of process to use, pcbprior -\/ priority to use \+: P\+C\+B pointer, or null for error 
+
+\subsection{Variable Documentation}
+\hypertarget{pcb_8h_aaed9cc2518115fe6539eaa0c6a514286}{}\index{pcb.\+h@{pcb.\+h}!blocked\+Queue@{blocked\+Queue}}
+\index{blocked\+Queue@{blocked\+Queue}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{blocked\+Queue}]{\setlength{\rightskip}{0pt plus 5cm}{\bf queue}$\ast$ blocked\+Queue}\label{pcb_8h_aaed9cc2518115fe6539eaa0c6a514286}
+\hypertarget{pcb_8h_a558b620fad6ac9a074555773db686a58}{}\index{pcb.\+h@{pcb.\+h}!ready\+Queue@{ready\+Queue}}
+\index{ready\+Queue@{ready\+Queue}!pcb.\+h@{pcb.\+h}}
+\subsubsection[{ready\+Queue}]{\setlength{\rightskip}{0pt plus 5cm}{\bf queue}$\ast$ ready\+Queue}\label{pcb_8h_a558b620fad6ac9a074555773db686a58}
