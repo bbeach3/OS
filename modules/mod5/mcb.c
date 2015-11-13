@@ -19,10 +19,14 @@ int main(int argc, char* argv[])
 	}
 	isEmpty();
 	printf("Allocating 30.\n");
-	allocateMem(30);
+	compmcb *ambc = (compmcb *)allocateMem(30);
 	isEmpty();
 	showAllocMap();
 	showFreeMap();
+	printf("freeing block \n");
+	freeMem(ambc->address);
+	printf("block as been freed \n");
+	showAllocMap();
 }
 
 int initializeHeap()//Returns # of bytes allocated/Error code
@@ -217,18 +221,45 @@ void insertMCB(compmcb *toInsert){
 
 int freeMem(void *ptr)
 {
-	//1. Go to the amcb we're told. ~If we have a pointer, I don't think we'll need to search for it~
+	//1. Go to the amcb we're told. 
 	//2. remove amcb from alloclist (special case - it's the head)
 	//3. change compmcb and limitmcb to free
 	//4. link into FMCB
 	//5. do merges. 
 		//check the limitmcb by free compmcb, compmcb by free limitmcb
 	//6. return
-	compmcb *toFree = (compmcb *)ptr;
-	if(toFree->alloc!=1){
+	if(alloclist->head == NULL){
+		printf("No allocated memory\n");
+		return 0;
+	}	
+	compmcb *toFree = NULL;
+	compmcb *search = alloclist->head;
+	printf("head size :: %d\n",search->size);
+	while(toFree==NULL){
+		if(search == NULL){
+			printf("end of list\n");
+			break;
+		}
+		if(search->address == ptr){
+			printf("found it!\n");
+			toFree=search;
+			break;
+		}
+		search= search->next;
+	}
+	if(toFree==NULL){
+		printf("didn't find it\n");
+		return;
+	}
+	/* toFree->alloc keeps coming up as 0, code commented out for testing
+	if(toFree->alloc==0){ 
+		printf("BLock not allocated. Remove later \n");
 		return 0; //mcb is not allocated, return error code
 	}
-	if(freelist->head==toFree){
+	*/
+	printf("made it past the comment \n");
+	if(&freelist->head==&toFree){
+		printf("into print statement");
 		toFree->next->prev = NULL;
 		freelist->head = toFree->next;
 		toFree->next = NULL;
