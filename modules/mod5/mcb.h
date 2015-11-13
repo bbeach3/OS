@@ -42,10 +42,4 @@ void insertMCB(compmcb *toInsert);
 //see notes above on allocateMem
 int freeMem(void *ptr);
 
-void showAllocMap();
-
-void showFreeMap();
-
-int isEmpty();
-
 #endif

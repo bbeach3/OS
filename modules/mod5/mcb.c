@@ -1,6 +1,6 @@
 #include "mcb.h"
-#include <stdlib.h>
-#include <stdio.h>
+#include "system.h"
+#include "mem/heap.h"
 
 void *mcbheap;
 mcblist *freelist;
@@ -20,12 +20,12 @@ int initializeHeap()//Returns # of bytes allocated/Error code
 	//Move up to 50000 byte max for the final
 	int bytesalloc = 200;
 	
-	mcbheap = malloc(bytesalloc);	//allocate heap
+	mcbheap =(void *) kmalloc(bytesalloc);	//allocate heap
 	if(mcbheap == NULL){
 		return -1;
 	}
-	freelist = malloc(sizeof(mcblist)); //initialize free list
-	alloclist = malloc(sizeof(mcblist)); // initialize allocated list
+	freelist =(mcblist *) kmalloc(sizeof(mcblist)); //initialize free list
+	alloclist =(mcblist *) kmalloc(sizeof(mcblist)); // initialize allocated list
 	freelist->head = NULL;
 	alloclist->head = NULL;
 	
@@ -58,13 +58,13 @@ void *allocateMem(int bytesalloc)
 	//if we get here, there's a freelist head, so set search to it
 	compmcb *search = freelist->head;
 	//seeing if the head works, since first fit
-	if(search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
+	if((unsigned)search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
 		found = search;
 	}
 	//if the head wasn't good enough, go through the list
 	while(search->next != NULL){ //checking first, so we don't fall in a trap
 		if(found == NULL){ //if we haven't found found
-			if(search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
+			if((unsigned)search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
 				found = search; //we found one big enough!
 			}
 		}
@@ -293,7 +293,6 @@ int freeMem(void *ptr)
 		toFree->prev = NULL;
 	}
 	compmcb *nextOne = toFree->next;
-			printf("\n %d \n", toFree->size);
 	if(nextOne!= NULL && nextOne->address==toFree->address+toFree->size){
 		toFree->size = toFree->size + nextOne->size;
 		toFree->next = nextOne->next;
