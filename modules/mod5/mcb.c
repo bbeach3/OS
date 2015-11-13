@@ -20,19 +20,24 @@ int main(int argc, char* argv[])
 	isEmpty();
 	showFreeMap();
 	printf("Allocating 30.\n");
-	allocateMem(30);
+	void *ambc = allocateMem(30);
 	printf("Allocating 10.\n");
 	allocateMem(10);
 	isEmpty();
 	showAllocMap();
 	showFreeMap();
+	printf("freeing block \n");
+	freeMem(ambc);
+	printf("block as been freed \n");
+	showFreeMap();
+	showAllocMap();
 }
 
 int initializeHeap()//Returns # of bytes allocated/Error code
 {
 	//Size of heap during testing: 200 bytes
 	//Move up to 50000 byte max for the final
-	int bytesalloc = 500;
+	int bytesalloc = 200;
 	
 	mcbheap = malloc(bytesalloc);	//allocate heap
 	if(mcbheap == NULL){
@@ -223,23 +228,55 @@ void insertMCB(compmcb *toInsert){
 
 int freeMem(void *ptr)
 {
-	//1. Go to the amcb we're told. ~If we have a pointer, I don't think we'll need to search for it~
+	//1. Go to the amcb we're told. 
 	//2. remove amcb from alloclist (special case - it's the head)
 	//3. change compmcb and limitmcb to free
 	//4. link into FMCB
 	//5. do merges. 
 		//check the limitmcb by free compmcb, compmcb by free limitmcb
 	//6. return
-	compmcb *toFree = (compmcb *)ptr;
-	if(toFree->alloc!=1){
+	if(alloclist->head == NULL){
+		printf("No allocated memory\n");
+		return 0;
+	}	
+	compmcb *toFree = NULL;
+	compmcb *search = alloclist->head;
+	printf("head size :: %d\n",search->size);
+	while(toFree==NULL){
+		if(search == NULL){
+			printf("end of list\n");
+			break;
+		}
+		if(search->address == ptr){
+			printf("found it!\n");
+			toFree=search;
+			break;
+		}
+		search= search->next;
+	}
+	if(toFree==NULL){
+		printf("didn't find it\n");
+		return 0; //MCB not found, return error code
+	}
+	
+	if(toFree->alloc==0){ 
+		printf("Block not allocated. Remove later \n");
 		return 0; //mcb is not allocated, return error code
+	
 	}
-	if(freelist->head==toFree){
-		toFree->next->prev = NULL;
-		freelist->head = toFree->next;
-		toFree->next = NULL;
+	
+	if(alloclist->head==toFree){
+		if(toFree->next==NULL)
+			alloclist->head =NULL;
+		else{
+			toFree->next->prev = NULL;
+			alloclist->head = toFree->next;
+			toFree->next = NULL;
+		}
 	}
+
 	else{
+		printf("%d\n",toFree->next->size);
 		toFree->next->prev = toFree->prev;
 		toFree->prev->next = toFree->next;
 		toFree->next=NULL;
