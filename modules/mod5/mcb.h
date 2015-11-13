@@ -4,26 +4,26 @@
 typedef struct compmcb compmcb;
 
 struct compmcb{
-	int alloc; //0 is free, 1 is allocated
-	void *address; //own (the compmcb's) address
-	int size;
-	char pcbname[9];
-	compmcb *next;
-	compmcb *prev;
+	int alloc; //!< 0 is free, 1 is allocated
+	void *address; //!<own (the compmcb's) address
+	int size; //!< size of blocks + memory
+	char pcbname[9]; //!< name of pcb that owns block
+	compmcb *next; //!< pointer to next compmcb in list
+	compmcb *prev; //!< pointer to previous compmcb in list
 };
 
 typedef struct limitmcb limitmcb;
 
 struct limitmcb{
-	int alloc;
-	int size;	//of blocks + memory
+	int alloc;	//!< 0 is free, 1 is allocated
+	int size;	//!< size of blocks + memory
 };
 
 typedef struct mcblist mcblist;
 
 struct mcblist{
-	compmcb *head;
-};
+	compmcb *head; //!<pointer to first compmcb in list
+}; 
 
 extern mcblist* freelist;
 extern mcblist* alloclist;
