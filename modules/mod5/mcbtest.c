@@ -50,6 +50,8 @@ void freeMemory(void *address){
 	} else {
 		printf("Free Memory worked. \n");
 		int offset = (int) (address - mcbheap);
+		//address points to the memory, so we retreat to the compmcb
+		offset = offset - sizeof(compmcb);
 		printf("Block address as offset: %d \n", offset);
 	}
 }
@@ -128,10 +130,10 @@ int main(int argc, char* argv[])
 	void *addr2 = allocateMemory(30);
 	showAllocMap();
 	showFreeMap();
-	freeMemory(addr1);
+	freeMemory(addr2);
 	showAllocMap();
 	showFreeMap();
-	freeMemory(addr2);
+	freeMemory(addr1);
 	showAllocMap();
 	showFreeMap();
 	isEmpty();

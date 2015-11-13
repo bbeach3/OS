@@ -1,5 +1,6 @@
 #include "mcb.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 void *mcbheap;
 mcblist *freelist;
@@ -284,18 +285,18 @@ int freeMem(void *ptr)
 	insertMCB(toFree);
 	compmcb *previous = toFree->prev;
 	if(previous!= NULL && previous->address+previous->size==toFree->address){
-		if(previous ==freelist->head)
-			freelist->head = toFree;
-		toFree->prev = previous->prev;
-		toFree->size+= previous->size;
-		toFree->address = previous->address;
-		previous->next = NULL;
-		previous->prev = NULL;
+		/* The logic that was here was preserving toFree, when we want to absorb it into previous since previous comes first. - Bradley
+			*/
+		previous->next = toFree->next;
+		previous->size += toFree->size;
+		toFree->next = NULL;
+		toFree->prev = NULL;
 	}
 	compmcb *nextOne = toFree->next;
+			printf("\n %d \n", toFree->size);
 	if(nextOne!= NULL && nextOne->address==toFree->address+toFree->size){
+		toFree->size = toFree->size + nextOne->size;
 		toFree->next = nextOne->next;
-		toFree->size+= nextOne->size;
 		nextOne->next = NULL;
 		nextOne->prev = NULL;
 	}

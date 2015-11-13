@@ -1,5 +1,6 @@
 #include "mcb.h"
-
+#include <stdlib.h>
+#include <stdio.h>
 
 void *mcbheap;
 mcblist *freelist;
@@ -284,18 +285,20 @@ int freeMem(void *ptr)
 	insertMCB(toFree);
 	compmcb *previous = toFree->prev;
 	if(previous!= NULL && previous->address+previous->size==toFree->address){
+		/* If previous was the head, since we order the list by address, previous should continue to be the head. That's why I commented this out. - Bradley
 		if(previous ==freelist->head)
 			freelist->head = toFree;
-		toFree->prev = previous->prev;
-		toFree->size+= previous->size;
-		toFree->address = previous->address;
-		previous->next = NULL;
-		previous->prev = NULL;
+			*/
+		previous->next = toFree->next;
+		previous->size += toFree->size;
+		toFree->next = NULL;
+		toFree->prev = NULL;
 	}
 	compmcb *nextOne = toFree->next;
+			printf("\n %d \n", toFree->size);
 	if(nextOne!= NULL && nextOne->address==toFree->address+toFree->size){
+		toFree->size = toFree->size + nextOne->size;
 		toFree->next = nextOne->next;
-		toFree->size+= nextOne->size;
 		nextOne->next = NULL;
 		nextOne->prev = NULL;
 	}
