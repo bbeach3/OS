@@ -1,0 +1,90 @@
+\hypertarget{structpcb}{}\section{pcb Struct Reference}
+\label{structpcb}\index{pcb@{pcb}}
+
+
+{\ttfamily \#include $<$pcb.\+h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{structpcb_a360b3d707c6418dc8008771f43196964}{name} \mbox{[}9\mbox{]}
+\begin{DoxyCompactList}\small\item\em name of P\+C\+B \end{DoxyCompactList}\item 
+unsigned int \hyperlink{structpcb_ae911612e25b572ed39b43d31a8671b4b}{proctype}
+\begin{DoxyCompactList}\small\item\em marks type\+: App (1) or System(0) \end{DoxyCompactList}\item 
+int \hyperlink{structpcb_a1850f2ea7807c7368c02f0062bfa33ca}{priority}
+\begin{DoxyCompactList}\small\item\em priority level assigned \end{DoxyCompactList}\item 
+int \hyperlink{structpcb_ab97f8ca3e24782ed25b0cb4f21c351dc}{state}
+\item 
+int \hyperlink{structpcb_a76bef8d53d5c9a9d330a0f2933795289}{suspension}
+\item 
+unsigned char $\ast$ \hyperlink{structpcb_a625a19ac788246815a5cd923d9ca4db0}{stacktop}
+\begin{DoxyCompactList}\small\item\em top of stack \end{DoxyCompactList}\item 
+unsigned char $\ast$ \hyperlink{structpcb_abc1b0e6ef9a587d2cdf18456c9197df8}{stackbase}
+\begin{DoxyCompactList}\small\item\em base of stack \end{DoxyCompactList}\item 
+\hyperlink{structpcb}{pcb} $\ast$ \hyperlink{structpcb_a4c8a53ac3e0acb802d447066865a22f7}{next}
+\begin{DoxyCompactList}\small\item\em pointer to next P\+C\+B in queue \end{DoxyCompactList}\item 
+\hyperlink{structpcb}{pcb} $\ast$ \hyperlink{structpcb_a2d692e41a254446edf9a1d2d0a5a18de}{prev}
+\begin{DoxyCompactList}\small\item\em pointer to previous P\+C\+B in queue \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structpcb_a360b3d707c6418dc8008771f43196964}{}\index{pcb@{pcb}!name@{name}}
+\index{name@{name}!pcb@{pcb}}
+\subsubsection[{name}]{\setlength{\rightskip}{0pt plus 5cm}char pcb\+::name\mbox{[}9\mbox{]}}\label{structpcb_a360b3d707c6418dc8008771f43196964}
+
+
+name of P\+C\+B 
+
+\hypertarget{structpcb_a4c8a53ac3e0acb802d447066865a22f7}{}\index{pcb@{pcb}!next@{next}}
+\index{next@{next}!pcb@{pcb}}
+\subsubsection[{next}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pcb}$\ast$ pcb\+::next}\label{structpcb_a4c8a53ac3e0acb802d447066865a22f7}
+
+
+pointer to next P\+C\+B in queue 
+
+\hypertarget{structpcb_a2d692e41a254446edf9a1d2d0a5a18de}{}\index{pcb@{pcb}!prev@{prev}}
+\index{prev@{prev}!pcb@{pcb}}
+\subsubsection[{prev}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pcb}$\ast$ pcb\+::prev}\label{structpcb_a2d692e41a254446edf9a1d2d0a5a18de}
+
+
+pointer to previous P\+C\+B in queue 
+
+\hypertarget{structpcb_a1850f2ea7807c7368c02f0062bfa33ca}{}\index{pcb@{pcb}!priority@{priority}}
+\index{priority@{priority}!pcb@{pcb}}
+\subsubsection[{priority}]{\setlength{\rightskip}{0pt plus 5cm}int pcb\+::priority}\label{structpcb_a1850f2ea7807c7368c02f0062bfa33ca}
+
+
+priority level assigned 
+
+\hypertarget{structpcb_ae911612e25b572ed39b43d31a8671b4b}{}\index{pcb@{pcb}!proctype@{proctype}}
+\index{proctype@{proctype}!pcb@{pcb}}
+\subsubsection[{proctype}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int pcb\+::proctype}\label{structpcb_ae911612e25b572ed39b43d31a8671b4b}
+
+
+marks type\+: App (1) or System(0) 
+
+\hypertarget{structpcb_abc1b0e6ef9a587d2cdf18456c9197df8}{}\index{pcb@{pcb}!stackbase@{stackbase}}
+\index{stackbase@{stackbase}!pcb@{pcb}}
+\subsubsection[{stackbase}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char$\ast$ pcb\+::stackbase}\label{structpcb_abc1b0e6ef9a587d2cdf18456c9197df8}
+
+
+base of stack 
+
+\hypertarget{structpcb_a625a19ac788246815a5cd923d9ca4db0}{}\index{pcb@{pcb}!stacktop@{stacktop}}
+\index{stacktop@{stacktop}!pcb@{pcb}}
+\subsubsection[{stacktop}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char$\ast$ pcb\+::stacktop}\label{structpcb_a625a19ac788246815a5cd923d9ca4db0}
+
+
+top of stack 
+
+\hypertarget{structpcb_ab97f8ca3e24782ed25b0cb4f21c351dc}{}\index{pcb@{pcb}!state@{state}}
+\index{state@{state}!pcb@{pcb}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}int pcb\+::state}\label{structpcb_ab97f8ca3e24782ed25b0cb4f21c351dc}
+\hypertarget{structpcb_a76bef8d53d5c9a9d330a0f2933795289}{}\index{pcb@{pcb}!suspension@{suspension}}
+\index{suspension@{suspension}!pcb@{pcb}}
+\subsubsection[{suspension}]{\setlength{\rightskip}{0pt plus 5cm}int pcb\+::suspension}\label{structpcb_a76bef8d53d5c9a9d330a0f2933795289}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+modules/mod2/\hyperlink{pcb_8h}{pcb.\+h}\end{DoxyCompactItemize}
