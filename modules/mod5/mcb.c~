@@ -7,38 +7,7 @@ mcblist *freelist;
 mcblist *alloclist;
 
 
-int main(int argc, char* argv[])
-{
-	printf("initializing \n");
-	int initcheck;
-	initcheck = initializeHeap();
-	if(initcheck == -1){
-		printf("init failed. \n");
-	} else {
-		printf("init worked. \n");
-	}
-	isEmpty();
-	printf("printing free first time\n");
-	showFreeMap();
-	printf("Allocating 30.\n");
-	void *ambc = allocateMem(30);
-	printf("Allocating 10.\n");
-	void *ambc2 = allocateMem(10);
-	isEmpty();
-	showAllocMap();
-	printf("printing free second time\n");
-	showFreeMap();
-	printf("freeing block \n");
-	freeMem(ambc);
-	printf("block as been freed \n");
-	printf("printing free third time\n");
-	showFreeMap();
-	showAllocMap();
-	freeMem(ambc2);
-	printf("printing free final time\n");
-	showFreeMap();
-	showAllocMap();
-}
+
 
 int initializeHeap()//Returns # of bytes allocated/Error code
 {
@@ -113,7 +82,8 @@ void *allocateMem(int bytesalloc)
 	found->prev = NULL;
 	
 	
-	//we only make a remainder block if enough is left over.
+	//we only make a re
+der block if enough is left over.
 	//the size of compmcb + limitmcb is 56, so 58 is a tight minimum
 	limitmcb *templimit = found->address + found->size - sizeof(limitmcb);
 	int leftovers = found->size - (bytesalloc + sizeof(compmcb) + sizeof(limitmcb));
@@ -246,31 +216,25 @@ int freeMem(void *ptr)
 		//check the limitmcb by free compmcb, compmcb by free limitmcb
 	//6. return
 	if(alloclist->head == NULL){
-		printf("No allocated memory\n");
 		return 0;
 	}	
 	compmcb *toFree = NULL;
 	compmcb *search = alloclist->head;
-	printf("head size :: %d\n",search->size);
 	while(toFree==NULL){
 		if(search == NULL){
-			printf("end of list\n");
 			break;
 		}
 		if(search->address == ptr){
-			printf("found it!\n");
 			toFree=search;
 			break;
 		}
 		search= search->next;
 	}
 	if(toFree==NULL){
-		printf("didn't find it\n");
 		return 0; //MCB not found, return error code
 	}
 	
 	if(toFree->alloc==0){ 
-		printf("Block not allocated. Remove later \n");
 		return 0; //mcb is not allocated, return error code
 	
 	}
@@ -295,7 +259,6 @@ int freeMem(void *ptr)
 	insertMCB(toFree);
 	compmcb *previous = toFree->prev;
 	if(previous!= NULL && previous->address+previous->size==toFree->address){
-		printf("merging prev\n");
 		if(previous ==freelist->head)
 			freelist->head = toFree;
 		toFree->prev = previous->prev;
@@ -305,10 +268,7 @@ int freeMem(void *ptr)
 		previous->prev = NULL;
 	}
 	compmcb *nextOne = toFree->next;
-	printf("next address: %d\n",(int)nextOne->address);
-	printf("address+size = %d\n",(int)toFree->address+toFree->size);
 	if(nextOne!= NULL && nextOne->address==toFree->address+toFree->size){
-		printf("merging next\n");
 		toFree->next = nextOne->next;
 		toFree->size+= nextOne->size;
 		nextOne->next = NULL;
@@ -317,29 +277,7 @@ int freeMem(void *ptr)
 	limitmcb *limit =toFree->address + toFree->size - sizeof(limitmcb);
 	limit->alloc = 0;
 	limit->size = toFree->size;
-	/*
-	if(behind<limit){
-		if(behind->alloc == 0){
-			printf("in behind statement\n");
-			toFree->size+=behind->size; //merged MCB is size of both together
-			limit->size+=behind->size;
-			compmcb *comp = (compmcb *)behind - behind->size - sizeof(compmcb);
-			//Now we need to find the compmcb and remove it from freelist
-			comp->next = NULL;
-			comp->prev =NULL;
-		}
-	}
-	printf("out of behind statement");
-	compmcb *ahead =(compmcb *) limit + sizeof(limitmcb); //next compmcb should be size of an lmbc after limit
-	if(ahead->alloc == 0){
-		toFree->size+=ahead->size;
-		limit->size+=ahead->size;
-		ahead->next = NULL;	//removing ahead from freelist
-		ahead->prev = NULL;
-	}
-	*/
-	//To replace sys_free_mem, found in mpx_supt
-	//Only returns error codes
+	
 	return 1; //this is garbage so it compiles
 }
 
