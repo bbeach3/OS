@@ -104,14 +104,7 @@ void *allocateMem(int bytesalloc)
 	//we only make a remainder block if enough is left over.
 	//the size of compmcb + limitmcb is 56, so 58 is a tight minimum
 	limitmcb *templimit = found->address + found->size - sizeof(limitmcb);
-	int off;
-	off = (int) ((void *)found->address - mcbheap);
-	printf("adds: %d , %d, %d \n", off, found->size, (int)sizeof(limitmcb));
-	int offset2;
-	offset2 = (int ) ((void *)templimit - mcbheap);
-	printf("templimit is %d \n",offset2);
 	int leftovers = found->size - (bytesalloc + sizeof(compmcb) + sizeof(limitmcb));
-	printf("got here\n");
 	if(leftovers < 58){
 		//too small. No remainder
 		found->alloc = 1;
@@ -128,33 +121,18 @@ void *allocateMem(int bytesalloc)
 	//go to where limitmcb goes for new block
 	templimit = found->address + found->size - sizeof(limitmcb);
 	
-	int offset3;
-	offset3 = (int ) ((void *)templimit - mcbheap);
-	printf("templimit is %d \n",offset3);
-	
-	printf("hi\n");
 	//make the new free mcb
 	compmcb *remaindermcb = found->address + found->size;
 	remaindermcb->alloc = 0;
 	remaindermcb->address = remaindermcb;
 	
-	int offset4;
-	offset4 = (int ) ((void *)remaindermcb - mcbheap);
-	printf("rmcb is %d \n",offset4);
-	
 	remaindermcb->size = leftovers;
-	printf("size of rmcb is %d \n", remaindermcb->size);
 	//insert procedure
 	insertMCB(remaindermcb);
 	
-	printf("hello \n \n");
 	
 	//make limitmcb for the new free block
 	limitmcb* templimitF = remaindermcb->address + remaindermcb->size;
-	
-	int offset5;
-	offset5 = (int ) ((void *)templimitF - mcbheap);
-	printf("templimitF is %d \n",offset5);
 	
 	templimitF->alloc = 0;
 	templimitF->size = leftovers;
