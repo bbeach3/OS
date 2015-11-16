@@ -62,6 +62,7 @@ void kmain(void)
    klogv("Transferring control to commhand...");
   // menu();
    //Module 4 stuff - Uncomment above line to access menu automatically
+   initializeHeap();
    insertPCB(loadr3("Menu"));
    insertPCB(loadr3("Idle"));
 	asm volatile ("int $60");

@@ -18,7 +18,7 @@ int initializeHeap()//Returns # of bytes allocated/Error code
 {
 	//Size of heap during testing: 200 bytes
 	//Move up to 50000 byte max for the final
-	int bytesalloc = 200;
+	int bytesalloc = 50000;
 	
 	mcbheap =(void *) kmalloc(bytesalloc);	//allocate heap
 	if(mcbheap == NULL){

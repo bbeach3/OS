@@ -58,24 +58,21 @@ int freePCB(pcb *oldpcb)
 pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 {
 	//note: length check
-	serial_println("hi");
 	int length = strlen(pcbname);
-	serial_println("len");
 	if(length > 9){
 	return NULL;
 	}
-	serial_println("too long");
+	serial_println("why");
+	serial_println(pcbname);
 	if(findPCB(pcbname) != NULL){
 	return NULL;	
 	}
-	serial_println("null");
-	serial_println("checks done");
 	pcb *newpcb = allocatePCB();
+	serial_println("made");
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;
 	newpcb->stacktop = newpcb->stack + 2048 - sizeof(context);
-	serial_println("ok");
 	newpcb->state = 1; //ready
 	newpcb->suspension = 0; //suspended
 	newpcb->next = NULL;
