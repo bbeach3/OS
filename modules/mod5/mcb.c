@@ -30,6 +30,8 @@ int initializeHeap()//Returns # of bytes allocated/Error code
 	alloclist->head = NULL;
 	
 	//make first block (the whole thing)
+		//note to self - use memset and make the mcb, THEN point to it
+	//he also wants me to remove freelist and alloclist as a struct and make them just pointers to the heads. So I guess remove that kmalloc up there, drop the ->head from all list mentions, and we're good? 
 	compmcb *firstmcb = mcbheap;
 	freelist->head = firstmcb;
 	firstmcb->alloc = 0;
