@@ -34,7 +34,7 @@ void kmain(void)
    init_serial(COM1);
    set_serial_out(COM1);
    set_serial_in(COM1);
-   mpx_init(MODULE_R4);
+   mpx_init(MODULE_R5);
    klogv("Initialized serial I/O on COM1 device...");
 
    // 1) Check that the boot was successful and correct when using grub
@@ -62,6 +62,7 @@ void kmain(void)
    klogv("Transferring control to commhand...");
   // menu();
    //Module 4 stuff - Uncomment above line to access menu automatically
+   initializeHeap();
    insertPCB(loadr3("Menu"));
    insertPCB(loadr3("Idle"));
 	asm volatile ("int $60");
