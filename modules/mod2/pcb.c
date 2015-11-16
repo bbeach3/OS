@@ -27,6 +27,8 @@ Whenever we deal with memory ourselves, we'll need to come back to this.
 	if(queuesExist == 0){
 	readyQueue = sys_alloc_mem(sizeof(queue));
 	blockedQueue = sys_alloc_mem(sizeof(queue));
+	readyQueue->head = NULL;
+	blockedQueue->head = NULL;
 	queuesExist = 1;
 	}
 	pcb *toPCB;
@@ -62,10 +64,13 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	if(length > 9){
 	return NULL;
 	}
+	serial_println("why");
+	serial_println(pcbname);
 	if(findPCB(pcbname) != NULL){
 	return NULL;	
 	}
 	pcb *newpcb = allocatePCB();
+	serial_println("made");
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;

@@ -58,13 +58,13 @@ void *allocateMem(int bytesalloc)
 	//if we get here, there's a freelist head, so set search to it
 	compmcb *search = freelist->head;
 	//seeing if the head works, since first fit
-	if(search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
+	if((unsigned)search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
 		found = search;
 	}
 	//if the head wasn't good enough, go through the list
 	while(search->next != NULL){ //checking first, so we don't fall in a trap
 		if(found == NULL){ //if we haven't found found
-			if(search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
+			if((unsigned)search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
 				found = search; //we found one big enough!
 			}
 		}
