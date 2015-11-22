@@ -9,9 +9,7 @@
 pcb *loadr3(char *name)//stack size?
 {
 	pcb *newpcb = allocatePCB();
-	serial_println("a");
 	newpcb = setupPCB(name, 1, 1);
-	serial_println("b");
 	newpcb->suspension = 0; //Must be suspended ready
 	
 	if(strcmp(name, "Menu") == 0)

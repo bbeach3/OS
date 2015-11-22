@@ -374,17 +374,17 @@ switch(inputInt)
 	case 6: //loadr3
 	//we never used the pcb* proc1 et al, which threw warnings
 	//'temporarily' removed
-	serial_println("Start");
+	//serial_println("Start");
 	insertPCB(loadr3("Process1"));
-	serial_println("1");
+	//serial_println("1");
 	insertPCB(loadr3("Process2"));
-	serial_println("2");
+	//serial_println("2");
 	insertPCB(loadr3("Process3"));
-	serial_println("3");
+	//serial_println("3");
 	insertPCB(loadr3("Process4"));
-	serial_println("4");
+	//serial_println("4");
 	insertPCB(loadr3("Process5"));
-	serial_println("5");	
+	//serial_println("5");	
 	break;
 
 	case 7:

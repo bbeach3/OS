@@ -64,13 +64,11 @@ pcb *setupPCB(char *pcbname, unsigned int pcbproc, int pcbprior)
 	if(length > 9){
 	return NULL;
 	}
-	serial_println("why");
-	serial_println(pcbname);
+	//serial_println(pcbname);
 	if(findPCB(pcbname) != NULL){
 	return NULL;	
 	}
 	pcb *newpcb = allocatePCB();
-	serial_println("made");
 	strcpy(newpcb->name, pcbname);
 	newpcb->proctype = pcbproc;
 	newpcb->priority = pcbprior;

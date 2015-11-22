@@ -27,6 +27,8 @@ Whenever we deal with memory ourselves, we'll need to come back to this.
 	if(queuesExist == 0){
 	readyQueue = sys_alloc_mem(sizeof(queue));
 	blockedQueue = sys_alloc_mem(sizeof(queue));
+	readyQueue->head = NULL;
+	blockedQueue->head = NULL;
 	queuesExist = 1;
 	}
 	pcb *toPCB;
