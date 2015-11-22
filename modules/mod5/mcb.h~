@@ -21,12 +21,8 @@ struct limitmcb{
 
 typedef struct mcblist mcblist;
 
-struct mcblist{
-	compmcb *head; //!<pointer to first compmcb in list
-}; 
-
-extern mcblist* freelist;
-extern mcblist* alloclist;
+extern compmcb* freelist;
+extern compmcb* alloclist;
 extern void* mcbheap;
 
 int initializeHeap();
@@ -41,11 +37,5 @@ void insertMCB(compmcb *toInsert);
 
 //see notes above on allocateMem
 int freeMem(void *ptr);
-
-void showAllocMap();
-
-void showFreeMap();
-
-int isEmpty();
 
 #endif

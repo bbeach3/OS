@@ -1,10 +1,12 @@
 #include "mcb.h"
+#include "core/serial.h"
 #include "system.h"
 #include "mem/heap.h"
+#include "string.h"
 
 void *mcbheap;
-mcblist *freelist;
-mcblist *alloclist;
+compmcb *freelist;
+compmcb *alloclist;
 
 
 
@@ -24,16 +26,18 @@ int initializeHeap()//Returns # of bytes allocated/Error code
 	if(mcbheap == NULL){
 		return -1;
 	}
-	freelist =(mcblist *) kmalloc(sizeof(mcblist)); //initialize free list
-	alloclist =(mcblist *) kmalloc(sizeof(mcblist)); // initialize allocated list
-	freelist->head = NULL;
-	alloclist->head = NULL;
+	//freelist =(mcblist *) kmalloc(sizeof(mcblist)); //initialize free list
+	//alloclist =(mcblist *) kmalloc(sizeof(mcblist)); // initialize allocated list
+	freelist = NULL;
+	alloclist = NULL;
 	
 	//make first block (the whole thing)
 		//note to self - use memset and make the mcb, THEN point to it
-	//he also wants me to remove freelist and alloclist as a struct and make them just pointers to the heads. So I guess remove that kmalloc up there, drop the ->head from all list mentions, and we're good? 
-	compmcb *firstmcb = mcbheap;
-	freelist->head = firstmcb;
+	//he also wants me to remove freelist and alloclist as a struct and make them just pointers to the heads. So I guess remove that kmalloc up there, drop the ->head from all list mentions, and we're good
+	compmcb *firstmcb = memset(freelist, 0, (size_t)bytesalloc);
+	
+	firstmcb = mcbheap;
+	freelist = firstmcb;
 	firstmcb->alloc = 0;
 	//address holds firstmcb's location
 	firstmcb->address = firstmcb;
@@ -54,19 +58,19 @@ void *allocateMem(int bytesalloc)
 {
 	compmcb *found = NULL;
 	//making sure there's a free block existing
-	if(freelist->head == NULL){
+	if(freelist == NULL){
 		return NULL;
 	}
 	//if we get here, there's a freelist head, so set search to it
-	compmcb *search = freelist->head;
+	compmcb *search = freelist;
 	//seeing if the head works, since first fit
-	if((unsigned)search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
+	if((unsigned int)search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
 		found = search;
 	}
 	//if the head wasn't good enough, go through the list
 	while(search->next != NULL){ //checking first, so we don't fall in a trap
 		if(found == NULL){ //if we haven't found found
-			if((unsigned)search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
+			if((unsigned int)search->size >= bytesalloc + sizeof(compmcb) + sizeof(limitmcb)){
 				found = search; //we found one big enough!
 			}
 		}
@@ -81,7 +85,7 @@ void *allocateMem(int bytesalloc)
 	//we already know where it is (found) so no need to search
 	
 	if(found->prev == NULL){
-		freelist->head = found->next;
+		freelist = found->next;
 	} else {
 		found->prev->next = found->next;
 	}
@@ -149,18 +153,18 @@ void *allocateMem(int bytesalloc)
 */
 void insertMCB(compmcb *toInsert){
 	if(toInsert->alloc == 0){
-		if(freelist->head == NULL){
-			freelist->head = toInsert;
+		if(freelist == NULL){
+			freelist = toInsert;
 			return;
 		}
-		struct compmcb *temp = freelist->head;
+		struct compmcb *temp = freelist;
 		if(temp->next == NULL){ //only the head exists
 			if(toInsert->address > temp->address){ //head has lower address
 				temp->next = toInsert;
 				toInsert->prev = temp;
 				return;
 			} else { //head has higher address
-				freelist->head = toInsert;
+				freelist = toInsert;
 				toInsert->next = temp;
 				temp->prev = toInsert;
 				return;
@@ -188,18 +192,18 @@ void insertMCB(compmcb *toInsert){
 		//stop
 	} else {
 		//if list is empty, put mcb at head
-		if(alloclist->head == NULL){
-			alloclist->head = toInsert;
+		if(alloclist == NULL){
+			alloclist = toInsert;
 			return;
 		}
-		struct compmcb *temp = alloclist->head;
+		struct compmcb *temp = alloclist;
 		if(temp->next == NULL){ //only the head exists
 			if(toInsert->address > temp->address){ //head has lower address
 				temp->next = toInsert;
 				toInsert->prev = temp;
 				return;
 			} else { //head has higher address
-				alloclist->head = toInsert;
+				alloclist = toInsert;
 				toInsert->next = temp;
 				temp->prev = toInsert;
 				return;
@@ -239,7 +243,7 @@ int freeMem(void *ptr)
 	//5. do merges. 
 		//check the limitmcb by free compmcb, compmcb by free limitmcb
 	//6. return
-	if(alloclist->head == NULL){
+	if(alloclist == NULL){
 		return 0;
 	}	
 	//realized allocateMem was returning the wrong thing
@@ -247,7 +251,7 @@ int freeMem(void *ptr)
 	ptr = ptr - sizeof(compmcb);
 	
 	compmcb *toFree = NULL;
-	compmcb *search = alloclist->head;
+	compmcb *search = alloclist;
 	while(toFree==NULL){
 		if(search == NULL){
 			break;
@@ -266,12 +270,12 @@ int freeMem(void *ptr)
 		return 0; //mcb is not allocated, return error code
 	
 	}
-	if(alloclist->head==toFree){
+	if(alloclist==toFree){
 		if(toFree->next==NULL)
-			alloclist->head =NULL;
+			alloclist=NULL;
 		else{
 			toFree->next->prev = NULL;
-			alloclist->head = toFree->next;
+			alloclist = toFree->next;
 			toFree->next = NULL;
 		}
 	}

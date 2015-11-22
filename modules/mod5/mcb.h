@@ -19,14 +19,8 @@ struct limitmcb{
 	int size;	//!< size of blocks + memory
 };
 
-typedef struct mcblist mcblist;
-
-struct mcblist{
-	compmcb *head; //!<pointer to first compmcb in list
-}; 
-
-extern mcblist* freelist;
-extern mcblist* alloclist;
+extern compmcb* freelist;
+extern compmcb* alloclist;
 extern void* mcbheap;
 
 int initializeHeap();
