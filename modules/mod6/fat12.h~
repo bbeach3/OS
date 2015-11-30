@@ -1,0 +1,43 @@
+#ifndef _FAT_H
+#define _FAT_H
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+typedef struct bootsector bootsector;
+
+struct bootsector{
+	char nobytes[2]; //Byte 11
+	char clustercount; //Byte 13
+	char reserved[2]; //Byte 14, value is 1
+	char fatcopies; //Byte 16, value is 2
+	char maxroots[2]; //Byte 17
+	char sectorcount[2]; //Byte 19, value is 2880
+	char fatsectors[3]; //Byte 22, value is 9
+	char trackcount[2]; //Byte 24
+	char noheads[2]; //Byte 26
+	char totalsectors[4]; //Byte 32
+	char bootsig; //Byte 38, value is 0x29
+	char volumeid[4]; //Byte 39
+	char volumelabel[11]; //Byte 43
+	char systemtype[8]; //Byte 54, value is 'FAT12'
+};
+
+typedef struct entry entry;
+
+struct entry{
+	char name[8]; //Byte 0
+	char extension[3]; //Byte 8
+	char attr; //Byte 11
+	char reserve[2]; //Byte 12
+	char createtime[2]; //Byte 14
+	char createdate[2]; //Byte 16
+	char lastaccess[2]; //Byte 18
+	char lastwritetime[2]; //Byte 22
+	char lastwritedate[2]; //Byte 24
+	char firstcluster[2]; //Byte 26
+	char size[4]; //Byte 28
+};
+
+#endif
