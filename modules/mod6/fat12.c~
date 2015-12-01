@@ -45,16 +45,26 @@ int main(int argc, char **argv)
 	strcpy(boot->systemtype, "FAT12");
 	int x = 1;
 	if(argc == 1){
-			printf("Did not give the required disk image name");
+			printf("Did not give the required disk image name \n");
 			x = 0; //disk image file name must be given, so exit.
 		}
 //no check for 2, as that's the standard case.
 		if(argc == 3){
-			printf("We need code to dump the file (argument 2) to std output with no padding or formatting. Do not display menu.");
+			printf("We need code to dump the file (argument 2) to std output with no padding or formatting. Do not display menu. \n");
+			FILE * file;
+			char a;
+			file = fopen(argv[2],"r");
+			while(1)
+			{
+			a = fgetc(file);
+			if(feof(file)
+			break;
+			printf("%c",a);
+			}
 			x = 0; //so we don't display menu.
 		}
 	if(argc < 1 || argc > 3){
-		printf("invalid number of command line arguments");
+		printf("invalid number of command line arguments \n");
 		x = 0; //so we exit
 	}
 	//if argc was 2, we get to the menu
