@@ -1,14 +1,16 @@
 #ifndef _FAT_H
 #define _FAT_H
 
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 typedef struct bootsector bootsector;
 
 struct bootsector{
-	char nobytes[2]; //Byte 11
+	char *nobytes[2]; //Byte 11
 	char clustercount; //Byte 13
 	char reserved[2]; //Byte 14, value is 1
 	char fatcopies; //Byte 16, value is 2
@@ -40,4 +42,19 @@ struct entry{
 	char size[4]; //Byte 28
 };
 
+//The boot sector and the entries that make up the root directory - Thomas mentioned that data structures would be important in Module 6, but are there any other parts of the FAT system that would benefit from a data structure?
+
+void sectorinfo();
+
+void printroot();
+
+void changecurr(char newfile[]);
+
+void listcurr();
+
+void listspec(char file[]);
+
+void printfile(char file[]);
+
+void renamefile(char oldname[], char newname[]);
 #endif

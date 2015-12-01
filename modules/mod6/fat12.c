@@ -22,12 +22,26 @@
 
 bootsector *boot;
 entry maindirectory[224];//Already known for FAT12
-char fat1[];//fat1 and fat2 are both character (8 each) arrays that hold the bits that make up the 12-bit data entries, but I'm still not sure how many elements each one will have - fat2 is identical to fat1, but how many is fat1 allowed? 
-char fat2[];
+char fat1[576];
+char fat2[576];
 void sectorinfo();
 int main()
 {
 	//Before we get started, we should get the boot sector intialized, variable values and all
+	boot = (void *)malloc(sizeof(bootsector));
+	strcpy(boot->nobytes, 512);
+	boot->clustercount = '1';
+	strcpy(boot->reserved, 1);
+	strcpy(boot->maxroots, 14);
+	strcpy(boot->sectorcount, 2880);
+	strcpy(boot->fatsectors, 9);
+	//boot->trackcount is not used
+	//boot->noheads is Not used
+	strcpy(boot->totalsectors, 0);
+	boot->bootsig = 0x29;
+	//boot->volumeid = ; //Combination of the current date and time into a 32-bit value
+	strcpy(boot->volumelabel, "NO NAME   ");
+	strcpy(boot->systemtype, "FAT12");
 	int x = 1;
 	while(x == 1)
 	{
