@@ -1,0 +1,142 @@
+\hypertarget{system_8h}{}\section{include/system.h File Reference}
+\label{system_8h}\index{include/system.\+h@{include/system.\+h}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structdate__time}{date\+\_\+time}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{system_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{N\+U\+L\+L}~0
+\item 
+\#define \hyperlink{system_8h_ab3bb695e7817363c7bdb781f214e83a2}{no\+\_\+warn}(\hyperlink{jquery_8js_a2335e57f79b6acfb6de59c235dc8a83e}{p})~\hyperlink{jquery_8js_a42cbfadee2b4749e8f699ea8d745a0e4}{if} (\hyperlink{jquery_8js_a2335e57f79b6acfb6de59c235dc8a83e}{p}) while (1) break
+\item 
+\#define \hyperlink{system_8h_a71921cebf4610b0dbb2b7a0daaf3fedf}{asm}~\+\_\+\+\_\+asm\+\_\+\+\_\+
+\item 
+\#define \hyperlink{system_8h_af55a5e48555be7d32ad73e76cf5d4db0}{volatile}~\+\_\+\+\_\+volatile\+\_\+\+\_\+
+\item 
+\#define \hyperlink{system_8h_ac5d15f274bc9b1e96230f3d3c60fd1f8}{sti}()~\hyperlink{system_8h_a71921cebf4610b0dbb2b7a0daaf3fedf}{asm} \hyperlink{system_8h_af55a5e48555be7d32ad73e76cf5d4db0}{volatile} (\char`\"{}sti\char`\"{}\+::)
+\item 
+\#define \hyperlink{system_8h_a68c330e94fe121eba993e5a5973c3162}{cli}()~\hyperlink{system_8h_a71921cebf4610b0dbb2b7a0daaf3fedf}{asm} \hyperlink{system_8h_af55a5e48555be7d32ad73e76cf5d4db0}{volatile} (\char`\"{}cli\char`\"{}\+::)
+\item 
+\#define \hyperlink{system_8h_a6c92c29fa8e83ab85e05543010e10d7c}{nop}()~\hyperlink{system_8h_a71921cebf4610b0dbb2b7a0daaf3fedf}{asm} \hyperlink{system_8h_af55a5e48555be7d32ad73e76cf5d4db0}{volatile} (\char`\"{}nop\char`\"{}\+::)
+\item 
+\#define \hyperlink{system_8h_a954b0134ce21d80f0efb22c77e821da3}{hlt}()~\hyperlink{system_8h_a71921cebf4610b0dbb2b7a0daaf3fedf}{asm} \hyperlink{system_8h_af55a5e48555be7d32ad73e76cf5d4db0}{volatile} (\char`\"{}hlt\char`\"{}\+::)
+\item 
+\#define \hyperlink{system_8h_a6eab829c77f5e1d2786863e18547b81b}{iret}()~\hyperlink{system_8h_a71921cebf4610b0dbb2b7a0daaf3fedf}{asm} \hyperlink{system_8h_af55a5e48555be7d32ad73e76cf5d4db0}{volatile} (\char`\"{}iret\char`\"{}\+::)
+\item 
+\#define \hyperlink{system_8h_aeb3dcf3cb65fb9b31c3d6b9ddb576071}{G\+D\+T\+\_\+\+C\+S\+\_\+\+I\+D}~0x01
+\item 
+\#define \hyperlink{system_8h_a90303dd4b4639f2e4106ced8d18fb4a1}{G\+D\+T\+\_\+\+D\+S\+\_\+\+I\+D}~0x02
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef unsigned int \hyperlink{system_8h_a7c94ea6f8948649f8d181ae55911eeaf}{size\+\_\+t}
+\item 
+typedef unsigned char \hyperlink{system_8h_a1026e682ffdadc1701c42cd44ce9efcf}{u8int}
+\item 
+typedef unsigned short \hyperlink{system_8h_a863d9497073aad2b991aeab2211d87af}{u16int}
+\item 
+typedef unsigned long \hyperlink{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{u32int}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{system_8h_abdb09834267dd4a2a0d07d43ca4d230d}{klogv} (const char $\ast$msg)
+\item 
+void \hyperlink{system_8h_aff8473f901d828d76d3548130731c41d}{kpanic} (const char $\ast$msg)
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{system_8h_a71921cebf4610b0dbb2b7a0daaf3fedf}{}\index{system.\+h@{system.\+h}!asm@{asm}}
+\index{asm@{asm}!system.\+h@{system.\+h}}
+\subsubsection[{asm}]{\setlength{\rightskip}{0pt plus 5cm}\#define asm~\+\_\+\+\_\+asm\+\_\+\+\_\+}\label{system_8h_a71921cebf4610b0dbb2b7a0daaf3fedf}
+\hypertarget{system_8h_a68c330e94fe121eba993e5a5973c3162}{}\index{system.\+h@{system.\+h}!cli@{cli}}
+\index{cli@{cli}!system.\+h@{system.\+h}}
+\subsubsection[{cli}]{\setlength{\rightskip}{0pt plus 5cm}\#define cli(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~{\bf asm} {\bf volatile} (\char`\"{}cli\char`\"{}\+::)}\label{system_8h_a68c330e94fe121eba993e5a5973c3162}
+\hypertarget{system_8h_aeb3dcf3cb65fb9b31c3d6b9ddb576071}{}\index{system.\+h@{system.\+h}!G\+D\+T\+\_\+\+C\+S\+\_\+\+I\+D@{G\+D\+T\+\_\+\+C\+S\+\_\+\+I\+D}}
+\index{G\+D\+T\+\_\+\+C\+S\+\_\+\+I\+D@{G\+D\+T\+\_\+\+C\+S\+\_\+\+I\+D}!system.\+h@{system.\+h}}
+\subsubsection[{G\+D\+T\+\_\+\+C\+S\+\_\+\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+D\+T\+\_\+\+C\+S\+\_\+\+I\+D~0x01}\label{system_8h_aeb3dcf3cb65fb9b31c3d6b9ddb576071}
+\hypertarget{system_8h_a90303dd4b4639f2e4106ced8d18fb4a1}{}\index{system.\+h@{system.\+h}!G\+D\+T\+\_\+\+D\+S\+\_\+\+I\+D@{G\+D\+T\+\_\+\+D\+S\+\_\+\+I\+D}}
+\index{G\+D\+T\+\_\+\+D\+S\+\_\+\+I\+D@{G\+D\+T\+\_\+\+D\+S\+\_\+\+I\+D}!system.\+h@{system.\+h}}
+\subsubsection[{G\+D\+T\+\_\+\+D\+S\+\_\+\+I\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\+D\+T\+\_\+\+D\+S\+\_\+\+I\+D~0x02}\label{system_8h_a90303dd4b4639f2e4106ced8d18fb4a1}
+\hypertarget{system_8h_a954b0134ce21d80f0efb22c77e821da3}{}\index{system.\+h@{system.\+h}!hlt@{hlt}}
+\index{hlt@{hlt}!system.\+h@{system.\+h}}
+\subsubsection[{hlt}]{\setlength{\rightskip}{0pt plus 5cm}\#define hlt(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~{\bf asm} {\bf volatile} (\char`\"{}hlt\char`\"{}\+::)}\label{system_8h_a954b0134ce21d80f0efb22c77e821da3}
+\hypertarget{system_8h_a6eab829c77f5e1d2786863e18547b81b}{}\index{system.\+h@{system.\+h}!iret@{iret}}
+\index{iret@{iret}!system.\+h@{system.\+h}}
+\subsubsection[{iret}]{\setlength{\rightskip}{0pt plus 5cm}\#define iret(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~{\bf asm} {\bf volatile} (\char`\"{}iret\char`\"{}\+::)}\label{system_8h_a6eab829c77f5e1d2786863e18547b81b}
+\hypertarget{system_8h_ab3bb695e7817363c7bdb781f214e83a2}{}\index{system.\+h@{system.\+h}!no\+\_\+warn@{no\+\_\+warn}}
+\index{no\+\_\+warn@{no\+\_\+warn}!system.\+h@{system.\+h}}
+\subsubsection[{no\+\_\+warn}]{\setlength{\rightskip}{0pt plus 5cm}\#define no\+\_\+warn(
+\begin{DoxyParamCaption}
+\item[{}]{{\bf p}}
+\end{DoxyParamCaption}
+)~{\bf if} ({\bf p}) while (1) break}\label{system_8h_ab3bb695e7817363c7bdb781f214e83a2}
+\hypertarget{system_8h_a6c92c29fa8e83ab85e05543010e10d7c}{}\index{system.\+h@{system.\+h}!nop@{nop}}
+\index{nop@{nop}!system.\+h@{system.\+h}}
+\subsubsection[{nop}]{\setlength{\rightskip}{0pt plus 5cm}\#define nop(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~{\bf asm} {\bf volatile} (\char`\"{}nop\char`\"{}\+::)}\label{system_8h_a6c92c29fa8e83ab85e05543010e10d7c}
+\hypertarget{system_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}{}\index{system.\+h@{system.\+h}!N\+U\+L\+L@{N\+U\+L\+L}}
+\index{N\+U\+L\+L@{N\+U\+L\+L}!system.\+h@{system.\+h}}
+\subsubsection[{N\+U\+L\+L}]{\setlength{\rightskip}{0pt plus 5cm}\#define N\+U\+L\+L~0}\label{system_8h_a070d2ce7b6bb7e5c05602aa8c308d0c4}
+\hypertarget{system_8h_ac5d15f274bc9b1e96230f3d3c60fd1f8}{}\index{system.\+h@{system.\+h}!sti@{sti}}
+\index{sti@{sti}!system.\+h@{system.\+h}}
+\subsubsection[{sti}]{\setlength{\rightskip}{0pt plus 5cm}\#define sti(
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)~{\bf asm} {\bf volatile} (\char`\"{}sti\char`\"{}\+::)}\label{system_8h_ac5d15f274bc9b1e96230f3d3c60fd1f8}
+\hypertarget{system_8h_af55a5e48555be7d32ad73e76cf5d4db0}{}\index{system.\+h@{system.\+h}!volatile@{volatile}}
+\index{volatile@{volatile}!system.\+h@{system.\+h}}
+\subsubsection[{volatile}]{\setlength{\rightskip}{0pt plus 5cm}\#define volatile~\+\_\+\+\_\+volatile\+\_\+\+\_\+}\label{system_8h_af55a5e48555be7d32ad73e76cf5d4db0}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{system_8h_a7c94ea6f8948649f8d181ae55911eeaf}{}\index{system.\+h@{system.\+h}!size\+\_\+t@{size\+\_\+t}}
+\index{size\+\_\+t@{size\+\_\+t}!system.\+h@{system.\+h}}
+\subsubsection[{size\+\_\+t}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned int {\bf size\+\_\+t}}\label{system_8h_a7c94ea6f8948649f8d181ae55911eeaf}
+\hypertarget{system_8h_a863d9497073aad2b991aeab2211d87af}{}\index{system.\+h@{system.\+h}!u16int@{u16int}}
+\index{u16int@{u16int}!system.\+h@{system.\+h}}
+\subsubsection[{u16int}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned short {\bf u16int}}\label{system_8h_a863d9497073aad2b991aeab2211d87af}
+\hypertarget{system_8h_a757de76cafbcddaac0d1632902fe4cb8}{}\index{system.\+h@{system.\+h}!u32int@{u32int}}
+\index{u32int@{u32int}!system.\+h@{system.\+h}}
+\subsubsection[{u32int}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned long {\bf u32int}}\label{system_8h_a757de76cafbcddaac0d1632902fe4cb8}
+\hypertarget{system_8h_a1026e682ffdadc1701c42cd44ce9efcf}{}\index{system.\+h@{system.\+h}!u8int@{u8int}}
+\index{u8int@{u8int}!system.\+h@{system.\+h}}
+\subsubsection[{u8int}]{\setlength{\rightskip}{0pt plus 5cm}typedef unsigned char {\bf u8int}}\label{system_8h_a1026e682ffdadc1701c42cd44ce9efcf}
+
+
+\subsection{Function Documentation}
+\hypertarget{system_8h_abdb09834267dd4a2a0d07d43ca4d230d}{}\index{system.\+h@{system.\+h}!klogv@{klogv}}
+\index{klogv@{klogv}!system.\+h@{system.\+h}}
+\subsubsection[{klogv(const char $\ast$msg)}]{\setlength{\rightskip}{0pt plus 5cm}void klogv (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{msg}
+\end{DoxyParamCaption}
+)}\label{system_8h_abdb09834267dd4a2a0d07d43ca4d230d}
+\hypertarget{system_8h_aff8473f901d828d76d3548130731c41d}{}\index{system.\+h@{system.\+h}!kpanic@{kpanic}}
+\index{kpanic@{kpanic}!system.\+h@{system.\+h}}
+\subsubsection[{kpanic(const char $\ast$msg)}]{\setlength{\rightskip}{0pt plus 5cm}void kpanic (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{msg}
+\end{DoxyParamCaption}
+)}\label{system_8h_aff8473f901d828d76d3548130731c41d}

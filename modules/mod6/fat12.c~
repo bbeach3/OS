@@ -1,0 +1,210 @@
+#include "fat12.h"
+
+//Printing boot sector info
+//1. Print out the value of the boot sector's variables - simple.
+
+//Printing root directory
+//The root directory will have a list consisting of entries, files and directories alike - We print the name (And extension for file) for each
+
+//Change directory
+//We'll have a pointer directing towards the current directory - This will find the directory requested, and return it
+
+//List directory
+//If the parameter is null, then we serial_println the appropriate information (file name, extension, logical size of file, starting logical cluster string) for each file. If If a specific filename is listed, then we just check the contents of the directory (Both name and extension) against the given parameter. If just an extension with a wildcard filename is given, then we do the same as above - just with the extension, not the name.
+
+//Type
+//Given an appropriate file (.txt, .bat, .c), the file is searched out (Directory entry) and we progress through the ->data area->FAT table-> cycle, tracking how many characters we print - After a set amount (~25 lines worth, preferrably at a space) we have to pause for the user to input any character.
+
+//Rename
+//Given the old filename, we simply modify the entry's name/extension variables - Unless a file path is given, we will search only the current directory
+
+//MOD 6 IS INDEPENDENT - Envoked from command line, uses 1 or 2 commands - Will be using gcc directly
+
+
+bootsector *boot;
+entry maindirectory[14];//Already known for FAT12
+entry *curr;
+char fat1[576];
+char fat2[576];
+void sectorinfo();
+int main(int argc, char **argv)
+{
+	//Before we get started, we should get the boot sector intialized, variable values and all
+	boot = (void *)malloc(sizeof(bootsector));
+	strcpy(boot->nobytes, "512");
+	boot->clustercount = '1';
+	strcpy(boot->reserved, "1");
+	strcpy(boot->maxroots, "14");
+	strcpy(boot->sectorcount, "2880");
+	strcpy(boot->fatsectors, "9");
+	//boot->trackcount is not used
+	//boot->noheads is Not used
+	strcpy(boot->totalsectors, "0");
+	boot->bootsig = 0x29;
+	//boot->volumeid = ; //Combination of the current date and time into a 32-bit value
+	strcpy(boot->volumelabel, "NO NAME   ");
+	strcpy(boot->systemtype, "FAT12");
+	int x = 1;
+	if(argc == 1){
+			printf("Did not give the required disk image name \n");
+			x = 0; //disk image file name must be given, so exit.
+		}
+//no check for 2, as that's the standard case.
+		if(argc == 3){
+			printf("We need code to dump the file (argument 2) to std output with no padding or formatting. Do not display menu. \n");
+			x = 0; //so we don't display menu.
+		}
+	if(argc < 1 || argc > 3){
+		printf("invalid number of command line arguments \n");
+		x = 0; //so we exit
+	}
+	//if argc was 2, we get to the menu
+	while(x == 1)
+	{
+		int input;
+		char onefile[13];//This is assuming an 8 character filename, a period, a 3 character extensions, and a terminating character - Probably adjust this and just cut filenames short as necessary
+		char twofile[13];//Same as onefile
+		printf("Select an option (Number):\n");
+		printf("1. Print boot sector info\n");
+		printf("2. Print Root Directory\n");
+		printf("3. Change Current Directory\n");
+		printf("4. List Directory Information\n");
+		printf("5. Print File\n");
+		printf("6. Rename File\n");
+		printf("7. Exit\n");
+
+		input = getchar();
+
+		//putchar(input);
+		//printf("\n");
+
+		switch(input)
+		{
+			case '1': printf("Enter the first file:\n");
+				 // scanf("%s", onefile);
+				 // printf("%s\n", onefile);
+				 // printf("Enter the second file:\n");
+				 // scanf("%s", twofile);
+				 // printf("%s\n", twofile);
+				  //Then we can put them both into whatever function we want - Repeat this with one or both files when needed (Not this one, actually - Printing sector information requires no extrenal info)
+				sectorinfo();
+			break;	
+			
+			case '2': printf("Choice 2: Print Root Directory\n");
+			break;
+
+			case '3': printf("Choice 3: Change Current Directory\n");
+			break;
+
+			case '4': printf("Choice 4: List Directory Information\n");
+			break;
+
+			case '5': printf("Choice 5: Print File\n");
+			break;
+
+			case '6': printf("Choice 6: Rename File\n");
+			break;
+
+			case '7': printf("EXIT\n");
+			x = 0;
+			break;
+
+			
+		}
+	}
+
+	return 0;
+}
+
+void sectorinfo()
+{
+printf("Printing Boot Sector \n");
+printf("Number of bytes:%s\n",boot->nobytes);
+printf("Cluster Count:%c\n",boot->clustercount);
+printf("Reserved:%s\n",boot->reserved);
+printf("fatcopies:%c\n",boot->fatcopies);
+printf("maxroots:%s\n",boot->maxroots);
+printf("sectorcount:%s\n",boot->sectorcount);
+printf("fatsectors:%s\n",boot->fatsectors);
+printf("totalsectors:%s\n",boot->totalsectors);
+printf("bootsig: %c\n",boot->bootsig);
+printf("volumelabel: %s\n",boot->volumelabel);
+printf("systemtype: %s\n",boot->systemtype);
+		
+}
+
+void printroot()
+{
+	int i = 0;
+	for(i = 0; i < boot->maxroots; i++)
+	{
+		if((maindirectory + i)->name != NULL)
+		{
+			printf("%s", (maindirectory + i)->name);
+			
+			if((maindirectory + i)->extension != NULL)
+			{
+				printf(".%s", (maindirectory + i)->extension);
+			}
+		}
+
+		printf("\n");
+	}
+}
+
+void changecurr(char newfile[])//Should we strtok the filename strings into the name and extension before we use it in methods, or after in the method itself?
+{
+	
+}
+
+void listcurr()
+{
+	int i = 0;
+	for(i = 0; i < boot->maxroots; i++)
+	{
+		if((curr + i)->name != NULL)
+		{
+			printf("%s", (curr + i)->name);
+			
+			if((curr + i)->extension != NULL)
+			{
+				printf(".%s", (curr + i)->extension);
+			}
+		}
+
+		printf("\n");
+	}
+}
+// this had to be renamed as you can't overload functions so easily in C
+void listcurrFile(char file[])//List directory can be called with or without a file - We'll handle the wildcard case here as well
+{
+	char *name = strtok(file, ".");
+	char *ext = strtok(NULL, ".");
+
+	int i = 0;
+	for(i = 0; i < boot->maxroots; i++)
+	{
+		if(name == "*")
+		{
+			if((curr + i)->extension == ext)
+			{
+				printf("%s.%s\n", (curr + i)->name, (curr + i)->extension);
+			}
+		}
+
+		if((curr + i)->name == name & (curr + i)->extension == ext)
+		{
+			printf("%s.%s\n", (curr + i)->name, (curr + i)->extension);
+		}
+	}
+}
+
+void printfile(char file[])
+{
+
+}
+
+void renamefile(char oldname[], char newfile[])
+{
+	
+}
