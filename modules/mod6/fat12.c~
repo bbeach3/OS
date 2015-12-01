@@ -52,6 +52,16 @@ int main(int argc, char **argv)
 //no check for 2, as that's the standard case.
 		if(argc == 3){
 			printf("We need code to dump the file (argument 2) to std output with no padding or formatting. Do not display menu. \n");
+			FILE * file;
+			char a;
+			file = fopen(argv[2],"r");
+			while(1)
+			{
+			a = fgetc(file);
+			if(feof(file)
+			break;
+			printf("%c",a);
+			}
 			x = 0; //so we don't display menu.
 		}
 	if(argc < 1 || argc > 3){
