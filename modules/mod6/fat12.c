@@ -59,19 +59,19 @@ int main()
 				  //Then we can put them both into whatever function we want - Repeat this with one or both files when needed (Not this one, actually - Printing sector information requires no extrenal info)
 			break;
 			
-			case '2': printf("Choice 2\n");
+			case '2': printf("Choice 2: Print Root Directory\n");
 			break;
 
-			case '3': printf("Choice 3\n");
+			case '3': printf("Choice 3: Change Current Directory\n");
 			break;
 
-			case '4': printf("Choice 4\n");
+			case '4': printf("Choice 4: List Directory Information\n");
 			break;
 
-			case '5': printf("Choice 5\n");
+			case '5': printf("Choice 5: Print File\n");
 			break;
 
-			case '6': printf("Choice 6\n");
+			case '6': printf("Choice 6: Rename File\n");
 			break;
 
 			case '7': printf("EXIT\n");
@@ -104,8 +104,8 @@ void listcurr()
 {
 
 }
-
-void listcurr(char file[])//List directory can be called with or without a file - We'll handle the wildcard case here as well
+// this had to be renamed as you can't overload functions so easily in C
+void listcurrFile(char file[])//List directory can be called with or without a file - We'll handle the wildcard case here as well
 {
 
 }
