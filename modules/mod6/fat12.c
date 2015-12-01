@@ -20,12 +20,13 @@
 
 //MOD 6 IS INDEPENDENT - Envoked from command line, uses 1 or 2 commands - Will be using gcc directly
 
+
 bootsector *boot;
 entry maindirectory[224];//Already known for FAT12
 char fat1[576];
 char fat2[576];
 void sectorinfo();
-int main()
+int main(int argc, char **argv)
 {
 	//Before we get started, we should get the boot sector intialized, variable values and all
 	boot = (void *)malloc(sizeof(bootsector));
@@ -43,6 +44,20 @@ int main()
 	strcpy(boot->volumelabel, "NO NAME   ");
 	strcpy(boot->systemtype, "FAT12");
 	int x = 1;
+	if(argc == 1){
+			printf("Did not give the required disk image name \n");
+			x = 0; //disk image file name must be given, so exit.
+		}
+//no check for 2, as that's the standard case.
+		if(argc == 3){
+			printf("We need code to dump the file (argument 2) to std output with no padding or formatting. Do not display menu. \n");
+			x = 0; //so we don't display menu.
+		}
+	if(argc < 1 || argc > 3){
+		printf("invalid number of command line arguments \n");
+		x = 0; //so we exit
+	}
+	//if argc was 2, we get to the menu
 	while(x == 1)
 	{
 		int input;
