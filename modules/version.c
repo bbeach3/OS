@@ -14,5 +14,5 @@
 */
 void version()
 {
-serial_println("This is version 3 of MPX");
+serial_println("This is version 5 of MPX");
 }
