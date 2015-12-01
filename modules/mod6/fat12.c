@@ -24,7 +24,7 @@ bootsector *boot;
 entry maindirectory[224];//Already known for FAT12
 char fat1[];//fat1 and fat2 are both character (8 each) arrays that hold the bits that make up the 12-bit data entries, but I'm still not sure how many elements each one will have - fat2 is identical to fat1, but how many is fat1 allowed? 
 char fat2[];
-
+void sectorinfo();
 int main()
 {
 	//Before we get started, we should get the boot sector intialized, variable values and all
@@ -51,13 +51,14 @@ int main()
 		switch(input)
 		{
 			case '1': printf("Enter the first file:\n");
-				  scanf("%s", onefile);
-				  printf("%s\n", onefile);
-				  printf("Enter the second file:\n");
-				  scanf("%s", twofile);
-				  printf("%s\n", twofile);
+				 // scanf("%s", onefile);
+				 // printf("%s\n", onefile);
+				 // printf("Enter the second file:\n");
+				 // scanf("%s", twofile);
+				 // printf("%s\n", twofile);
 				  //Then we can put them both into whatever function we want - Repeat this with one or both files when needed (Not this one, actually - Printing sector information requires no extrenal info)
-			break;
+				sectorinfo();
+			break;	
 			
 			case '2': printf("Choice 2: Print Root Directory\n");
 			break;
@@ -87,6 +88,21 @@ int main()
 
 void sectorinfo()
 {
+printf("Printing Boot Sector \n");
+printf("Number of bytes:%s\n",boot->nobytes);
+printf("Cluster Count:%c\n",boot->clustercount);
+printf("Reserved:%s\n",boot->reserved);
+printf("fatcopies:%c\n",boot->fatcopies);
+printf("maxroots:%s\n",boot->maxroots);
+printf("sectorcount:%s\n",boot->sectorcount);
+printf("fatsectors:%s\n",boot->fatsectors);
+printf("trackcount:%s\n",boot->trackcount);
+printf("noheads:%s\n",boot->noheads);
+printf("totalsectors:%s\n",boot->totalsectors);
+printf("bootsig: %c\n",boot->bootsig);
+printf("volumeid: %s\n",boot->volumeid);
+printf("volumelabel: %s\n",boot->volumelabel);
+printf("systemtype: %s\n",boot->systemtype);
 		
 }
 
