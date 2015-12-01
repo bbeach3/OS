@@ -22,7 +22,8 @@
 
 
 bootsector *boot;
-entry maindirectory[224];//Already known for FAT12
+entry maindirectory[14];//Already known for FAT12
+entry *curr;
 char fat1[576];
 char fat2[576];
 void sectorinfo();
@@ -134,7 +135,21 @@ printf("systemtype: %s\n",boot->systemtype);
 
 void printroot()
 {
+	int i = 0;
+	for(i = 0; i < atoi(boot->maxroots); i++)
+	{
+		if((maindirectory + i)->name != NULL)
+		{
+			printf("%s", (maindirectory + i)->name);
+			
+			if((maindirectory + i)->extension != NULL)
+			{
+				printf(".%s", (maindirectory + i)->extension);
+			}
+		}
 
+		printf("\n");
+	}
 }
 
 void changecurr(char newfile[])//Should we strtok the filename strings into the name and extension before we use it in methods, or after in the method itself?
@@ -144,12 +159,44 @@ void changecurr(char newfile[])//Should we strtok the filename strings into the 
 
 void listcurr()
 {
+	int i = 0;
+	for(i = 0; i < atoi(boot->maxroots); i++)
+	{
+		if((curr + i)->name != NULL)
+		{
+			printf("%s", (curr + i)->name);
+			
+			if((curr + i)->extension != NULL)
+			{
+				printf(".%s", (curr + i)->extension);
+			}
+		}
 
+		printf("\n");
+	}
 }
 // this had to be renamed as you can't overload functions so easily in C
 void listcurrFile(char file[])//List directory can be called with or without a file - We'll handle the wildcard case here as well
 {
+	char *name = strtok(file, ".");
+	char *ext = strtok(NULL, ".");
 
+	int i = 0;
+	for(i = 0; i < atoi(boot->maxroots); i++)
+	{
+		if(name == "*")
+		{
+			if((curr + i)->extension == ext)
+			{
+				printf("%s.%s\n", (curr + i)->name, (curr + i)->extension);
+			}
+		}
+
+		if((curr + i)->name == name & (curr + i)->extension == ext)
+		{
+			printf("%s.%s\n", (curr + i)->name, (curr + i)->extension);
+		}
+	}
 }
 
 void printfile(char file[])
